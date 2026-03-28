@@ -1,0 +1,7 @@
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/marketi_icon_1024.png"
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "assets/images/marketi_icon_1024.PNG"
