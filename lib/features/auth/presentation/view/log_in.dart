@@ -30,94 +30,98 @@ class _LogInState extends State<LogIn> {
             horizontal: 15.w,
             vertical: 10.h,
           ),
-          child: Column(
-            children: [
-              // Back button and logo
-              SizedBox(height: 40.h),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: CustomButton(
-                  onPressed: () {},
-                  text: 'Skip',
-                  width: 100.w,
-                  height: 45.h,
-                  backgroundColor: MarketiColors.whiteColor,
-                  textColor: MarketiColors.lightBlue900Color,
-                ),
-              ),
-              Image.asset(MarketiImages.logoLogin),
-
-              // Email Text Field
-              CustomTextField(
-                controller: _emailController,
-                hintText: 'Email',
-                prefixIcon: Image.asset(
-                  MarketiIcons.emailIcon,
-                  scale: 0.8,
-                ),
-                keyboardType: TextInputType.emailAddress,
-              ),
-              // Password Text Field
-              // textFieldTitle(text: 'Password'),
-              SizedBox(height: 15.h),
-              CustomTextField(
-                controller: _passwordController,
-                hintText: 'Password',
-                prefixIcon: const Icon(Icons.lock_outline),
-                suffixIcon: const Icon(Icons.visibility_off),
-                keyboardType: TextInputType.visiblePassword,
-              ),
-              // Forgot Password Button
-              _forgotPasswordPart(),
-              SizedBox(height: 10.h),
-              // Log In Button
-              CustomButton(
-                onPressed: () {},
-                text: 'Sign Up',
-                width: double.infinity,
-                height: 50.h,
-                backgroundColor: MarketiColors.lightBlue900Color,
-                textColor: MarketiColors.whiteColor,
-              ),
-
-              SizedBox(height: 15.h),
-              // Or sign up with social media
-              Center(
-                child: TextApp(
-                  text: 'Or Continue with',
-                  theme: MarketiTextStyles.textStyle12.copyWith(
-                    color: MarketiColors.greyColor,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                // Back button and logo
+                SizedBox(height: 40.h),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: CustomButton(
+                    onPressed: () {
+                      // context.pushNamed(AppRoutes.home);
+                    },
+                    text: 'Skip',
+                    width: 100.w,
+                    height: 45.h,
+                    backgroundColor: MarketiColors.whiteColor,
+                    textColor: MarketiColors.lightBlue900Color,
                   ),
                 ),
-              ),
-              SizedBox(height: 10.h),
-              // Social media buttons
-              const AuthenticationWithSocialMedia(),
+                Image.asset(MarketiImages.logoLogin),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TextApp(
-                    text: 'Are you new in Marketi? ',
+                // Email Text Field
+                CustomTextField(
+                  controller: _emailController,
+                  hintText: 'UserName or Email',
+                  prefixIcon: Image.asset(
+                    MarketiIcons.emailIcon,
+                    scale: 0.8,
+                  ),
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                // Password Text Field
+                // textFieldTitle(text: 'Password'),
+                SizedBox(height: 15.h),
+                CustomTextField(
+                  controller: _passwordController,
+                  hintText: 'Password',
+                  prefixIcon: const Icon(Icons.lock_outline),
+                  suffixIcon: const Icon(Icons.visibility_off),
+                  keyboardType: TextInputType.visiblePassword,
+                ),
+                // Forgot Password Button
+                _forgotPasswordPart(),
+                SizedBox(height: 10.h),
+                // Log In Button
+                CustomButton(
+                  onPressed: () {},
+                  text: 'Log In',
+                  width: double.infinity,
+                  height: 50.h,
+                  backgroundColor: MarketiColors.lightBlue900Color,
+                  textColor: MarketiColors.whiteColor,
+                ),
+
+                SizedBox(height: 15.h),
+                // Or sign up with social media
+                Center(
+                  child: TextApp(
+                    text: 'Or Continue with',
                     theme: MarketiTextStyles.textStyle12.copyWith(
                       color: MarketiColors.greyColor,
                     ),
                   ),
-                  TextButton(
-                    onPressed: () {
-                      // Navigate to Sign Up screen
-                      context.pushNamed(AppRoutes.signUp);
-                    },
-                    child: TextApp(
-                      text: 'Sign Up',
+                ),
+                SizedBox(height: 10.h),
+                // Social media buttons
+                const AuthenticationWithSocialMedia(),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextApp(
+                      text: 'Are you new in Marketi? ',
                       theme: MarketiTextStyles.textStyle12.copyWith(
-                        color: MarketiColors.lightBlue900Color,
+                        color: MarketiColors.greyColor,
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                    TextButton(
+                      onPressed: () {
+                        // Navigate to Sign Up screen
+                        context.pushNamed(AppRoutes.signUp);
+                      },
+                      child: TextApp(
+                        text: 'Sign Up',
+                        theme: MarketiTextStyles.textStyle12.copyWith(
+                          color: MarketiColors.lightBlue900Color,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -142,7 +146,9 @@ class _LogInState extends State<LogIn> {
         const Spacer(),
 
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            context.pushNamed(AppRoutes.forgotPasswordWithPhone);
+          },
           child: TextApp(
             text: 'Forgot Password?',
             theme: MarketiTextStyles.textStyle12.copyWith(

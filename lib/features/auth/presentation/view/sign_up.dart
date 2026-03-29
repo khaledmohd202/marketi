@@ -9,6 +9,7 @@ import 'package:marketi/core/themes/colors/marketi_colors.dart';
 import 'package:marketi/core/themes/styles/marketi_text_styles.dart';
 import 'package:marketi/features/auth/presentation/widgets/auth_upper_part.dart';
 import 'package:marketi/features/auth/presentation/widgets/authentication_with_social_media.dart';
+import 'package:marketi/features/auth/presentation/widgets/phone_text_field.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -29,9 +30,9 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+          child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -62,7 +63,7 @@ class _SignUpState extends State<SignUp> {
                 ),
                 // Phone Number Text Field
                 textFieldTitle(text: 'Phone Number'),
-                _phoneTextField(),
+                PhoneTextField(phoneController: _phoneController, onTap: () {}),
                 // Email Text Field
                 textFieldTitle(text: 'Email'),
                 CustomTextField(
@@ -121,34 +122,6 @@ class _SignUpState extends State<SignUp> {
           ),
         ),
       ),
-    );
-  }
-
-  CustomTextField _phoneTextField() {
-    return CustomTextField(
-      controller: _phoneController,
-      hintText: '+20 1060040675',
-      prefixIcon: Padding(
-        padding: EdgeInsets.only(left: 15.w),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Image.asset(
-              MarketiIcons.phoneIcon,
-              scale: 0.8,
-            ),
-            SizedBox(width: 5.w),
-            InkWell(
-              onTap: () {},
-              child: Image.asset(
-                MarketiIcons.arrowIcon,
-                scale: 0.8,
-              ),
-            ),
-          ],
-        ),
-      ),
-      keyboardType: TextInputType.phone,
     );
   }
 
