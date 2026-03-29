@@ -4,6 +4,7 @@ import 'package:marketi/core/common/widgets/custom_elevated_button.dart';
 import 'package:marketi/core/common/widgets/custom_text_field.dart';
 import 'package:marketi/core/common/widgets/text_app.dart';
 import 'package:marketi/core/const/icons/marketi_icons.dart';
+import 'package:marketi/core/const/images/marketi_images.dart';
 import 'package:marketi/core/themes/colors/marketi_colors.dart';
 import 'package:marketi/core/themes/styles/marketi_text_styles.dart';
 import 'package:marketi/features/auth/presentation/widgets/auth_upper_part.dart';
@@ -36,7 +37,10 @@ class _SignUpState extends State<SignUp> {
               children: [
                 // Back button and logo
                 SizedBox(height: 15.h),
-                const AuthUpperPart(),
+                AuthUpperPart(
+                  icon: Image.asset(MarketiIcons.backButton),
+                  logo: MarketiImages.logoSignUp,
+                ),
                 // Full Name Text Field
                 textFieldTitle(text: 'Full Name'),
                 CustomTextField(

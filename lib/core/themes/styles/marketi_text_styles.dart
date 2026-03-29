@@ -47,13 +47,13 @@ class MarketiTextStyles {
 
   static const TextStyle textStyle14 = TextStyle(
     fontSize: 14,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w300,
     fontFamily: fontFamily,
   );
 
   static const TextStyle textStyle12 = TextStyle(
     fontSize: 12,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w300,
     fontFamily: fontFamily,
   );
 

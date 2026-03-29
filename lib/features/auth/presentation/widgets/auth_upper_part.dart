@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:marketi/core/const/icons/marketi_icons.dart';
-import 'package:marketi/core/const/images/marketi_images.dart';
+import 'package:marketi/core/extensions/navigation_extensions.dart';
 
 class AuthUpperPart extends StatelessWidget {
   const AuthUpperPart({
+    required this.icon,
+    required this.logo,
     super.key,
   });
+  final Widget icon;
+  final String logo;
 
   @override
   Widget build(BuildContext context) {
@@ -13,10 +16,12 @@ class AuthUpperPart extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         IconButton(
-          onPressed: () {},
-          icon: Image.asset(MarketiIcons.backButton),
+          onPressed: () {
+            context.pop();
+          },
+          icon: icon,
         ),
-        Image.asset(MarketiImages.logoSignUp),
+        Image.asset(logo),
       ],
     );
   }
