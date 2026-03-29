@@ -6,8 +6,8 @@ class MarketiImages {
   static const String onboarding3 = 'assets/images/onboarding/onboarding_3.png';
 
   // Auth images
-  static const String logoLogin = 'assets/images/auth/logo_log_in.png';
-  static const String logoSignUp = 'assets/images/auth/logo_sign_up.png';
+  static const String logoLogin = 'assets/images/auth/log_in_logo.png';
+  static const String logoSignUp = 'assets/images/auth/sign_up_logo.png';
   static const String forgotPasswordWithEmail = 'assets/images/auth/forgot_password_with_email.png';
   static const String forgotPasswordWithPhone = 'assets/images/auth/forgot_password_with_phone.png';
   static const String createNewPassword = 'assets/images/auth/create_new_password.png';

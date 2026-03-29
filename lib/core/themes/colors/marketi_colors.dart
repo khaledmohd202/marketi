@@ -28,4 +28,5 @@ class MarketiColors {
   static const Color greyScaleColor = Color(0xFF7993C5);
   static const Color greyColor = Color(0xFF8C99B2);
   static const Color whiteColor = Color(0xFFFFFFFF);
+  static const Color blackColor = Color(0xFF000000);
 }

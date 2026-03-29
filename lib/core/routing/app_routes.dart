@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:marketi/core/routing/base_routes.dart';
+import 'package:marketi/features/auth/presentation/view/log_in.dart';
+import 'package:marketi/features/auth/presentation/view/sign_up.dart';
 import 'package:marketi/features/onboarding/presentation/view/onboarding.dart';
 
 class AppRoutes {
@@ -15,6 +17,14 @@ class AppRoutes {
       case onboarding:
         return BaseRoutes(
           page: const Onboarding(),
+        );
+      case login:
+        return BaseRoutes(
+          page: const LogIn(),
+        );
+      case signUp:
+        return BaseRoutes(
+          page: const SignUp(),
         );
       default:
         return BaseRoutes(
