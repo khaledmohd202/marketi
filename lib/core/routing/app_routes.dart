@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:marketi/core/routing/base_routes.dart';
+import 'package:marketi/features/auth/presentation/view/create_new_password.dart';
 import 'package:marketi/features/auth/presentation/view/forgot_password_with_email.dart';
 import 'package:marketi/features/auth/presentation/view/forgot_password_with_phone.dart';
 import 'package:marketi/features/auth/presentation/view/log_in.dart';
+import 'package:marketi/features/auth/presentation/view/reset_password_done.dart';
 import 'package:marketi/features/auth/presentation/view/sign_up.dart';
 import 'package:marketi/features/auth/presentation/view/verification_code_with_email.dart';
 import 'package:marketi/features/auth/presentation/view/verification_code_with_phone.dart';
@@ -16,6 +18,9 @@ class AppRoutes {
   static const String forgotPasswordWithPhone = '/forgot-password-with-phone';
   static const String verificationCodeWithEmail = '/verification-code-with-email';
   static const String verificationCodeWithPhone = '/verification-code-with-phone';
+  static const String createNewPassword = '/create-new-password';
+  static const String resetPasswordDone = '/reset-password-done';
+  static const String home = '/home';
   static Route<void> onGenerateRoute(RouteSettings settings) {
     //
     //ignore: unused_local_variable
@@ -49,6 +54,18 @@ class AppRoutes {
         return BaseRoutes(
           page: const VerificationCodeWithPhone(),
         );
+      case createNewPassword:
+        return BaseRoutes(
+          page: const CreateNewPassword(),
+        );
+      case resetPasswordDone:
+        return BaseRoutes(
+          page: const ResetPasswordDone(),
+        );
+      // case home:
+      //   return BaseRoutes(
+      //     page: const VerificationCodeWithPhone(),
+      //   );
       default:
         return BaseRoutes(
           page: const Scaffold(

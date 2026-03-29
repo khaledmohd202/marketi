@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/core/common/widgets/custom_elevated_button.dart';
 import 'package:marketi/core/const/images/marketi_images.dart';
+import 'package:marketi/core/extensions/navigation_extensions.dart';
+import 'package:marketi/core/routing/app_routes.dart';
 import 'package:marketi/core/themes/colors/marketi_colors.dart';
 import 'package:marketi/features/auth/presentation/widgets/custom_marketi_app_bar.dart';
 import 'package:pinput/pinput.dart';
@@ -69,7 +71,9 @@ class VerificationCodeWithEmail extends StatelessWidget {
               SizedBox(height: 25.h),
               // Verify Button
               CustomButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.pushNamed(AppRoutes.createNewPassword);
+                },
                 text: 'Verify Code',
                 width: double.infinity,
                 height: 50.0.h,

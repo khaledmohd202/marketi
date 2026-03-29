@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/core/common/widgets/custom_elevated_button.dart';
 import 'package:marketi/core/const/images/marketi_images.dart';
 import 'package:marketi/core/extensions/navigation_extensions.dart';
+import 'package:marketi/core/routing/app_routes.dart';
 import 'package:marketi/core/themes/colors/marketi_colors.dart';
 import 'package:marketi/features/auth/presentation/widgets/custom_marketi_app_bar.dart';
 import 'package:pinput/pinput.dart';
@@ -71,7 +72,7 @@ class VerificationCodeWithPhone extends StatelessWidget {
               // Verify Button
               CustomButton(
                 onPressed: () {
-                  context.pushNamed(routeName)
+                  context.pushNamed(AppRoutes.createNewPassword);
                 },
                 text: 'Verify Code',
                 width: double.infinity,

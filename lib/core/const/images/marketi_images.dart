@@ -14,5 +14,6 @@ class MarketiImages {
   static const String loginValidation = 'assets/images/auth/log_in_validation.png';
   static const String verificationCodeWithEmail = 'assets/images/auth/verification_code_with_email.png';
   static const String verificationCodeWithPhone = 'assets/images/auth/verification_code_with_phone.png';
+  static const String resetPasswordDone = 'assets/images/auth/reset_password_done.png';
 
 }
