@@ -42,53 +42,57 @@ class _ForgotPasswordWithPhoneState extends State<ForgotPasswordWithPhone> {
           horizontal: 20.0.w,
           vertical: 40.0.h,
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Image
-            Image.asset(MarketiImages.forgotPasswordWithPhone),
-            SizedBox(height: 20.0.h),
-            // Description
-            TextApp(
-              text:
-                  'Please enter your phone number to receive a verification code',
-              theme: MarketiTextStyles.textStyle16.copyWith(
-                color: Colors.black38,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Image
+              Image.asset(MarketiImages.forgotPasswordWithPhone),
+              SizedBox(height: 20.0.h),
+              // Description
+              TextApp(
+                text:
+                    '''Please enter your phone number to receive a verification code''',
+                theme: MarketiTextStyles.textStyle16.copyWith(
+                  color: Colors.black38,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 15.0.h),
-            // Phone Number Text Field
-            textFieldTitle(text: 'Phone Number'),
-            PhoneTextField(phoneController: _phoneController, onTap: () {}),
-            SizedBox(height: 22.0.h),
-            // Send Code Button
-            CustomButton(
-              onPressed: () {},
-              text: 'Send Code',
-              width: double.infinity,
-              height: 50.0.h,
-              textColor: MarketiColors.whiteColor,
-              backgroundColor: MarketiColors.lightBlue900Color,
-            ),
-            SizedBox(height: 15.0.h),
-            // Try another way "With Email"
-            Align(
-              child: GestureDetector(
-                onTap: () {
-                  // Navigator.pop(context);
-                  context.pushNamed(AppRoutes.forgotPasswordWithEmail);
+              SizedBox(height: 15.0.h),
+              // Phone Number Text Field
+              textFieldTitle(text: 'Phone Number'),
+              PhoneTextField(phoneController: _phoneController, onTap: () {}),
+              SizedBox(height: 22.0.h),
+              // Send Code Button
+              CustomButton(
+                onPressed: () {
+                  context.pushNamed(AppRoutes.verificationCodeWithPhone);
                 },
-                child: TextApp(
-                  text: 'Try another way',
-                  theme: MarketiTextStyles.textStyle14.copyWith(
-                    color: MarketiColors.lightBlue900Color,
+                text: 'Send Code',
+                width: double.infinity,
+                height: 50.0.h,
+                textColor: MarketiColors.whiteColor,
+                backgroundColor: MarketiColors.lightBlue900Color,
+              ),
+              SizedBox(height: 15.0.h),
+              // Try another way "With Email"
+              Align(
+                child: GestureDetector(
+                  onTap: () {
+                    // Navigator.pop(context);
+                    context.pushNamed(AppRoutes.forgotPasswordWithEmail);
+                  },
+                  child: TextApp(
+                    text: 'Try another way',
+                    theme: MarketiTextStyles.textStyle14.copyWith(
+                      color: MarketiColors.lightBlue900Color,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                  textAlign: TextAlign.center,
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

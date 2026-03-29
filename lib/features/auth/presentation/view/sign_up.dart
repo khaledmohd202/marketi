@@ -68,7 +68,7 @@ class _SignUpState extends State<SignUp> {
                 textFieldTitle(text: 'Email'),
                 CustomTextField(
                   controller: _emailController,
-                  hintText: 'Email',
+                  hintText: 'you@gmail.com',
                   prefixIcon: Image.asset(
                     MarketiIcons.emailIcon,
                     scale: 0.8,

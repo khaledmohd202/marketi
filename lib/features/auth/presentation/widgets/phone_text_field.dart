@@ -17,7 +17,7 @@ class PhoneTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomTextField(
       controller: phoneController,
-      hintText: '+20 1060040675',
+      hintText: '+20 106 004 0675',
       prefixIcon: Padding(
         padding: EdgeInsets.only(left: 15.w),
         child: Row(
