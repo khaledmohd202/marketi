@@ -20,7 +20,6 @@ class PasswordTextField extends StatelessWidget {
       controller: passwordController,
       hintText: 'Password',
       prefixIcon: const Icon(Icons.lock_outline),
-      // suffixIcon: const Icon(Icons.visibility_off),
       suffixIcon: GestureDetector(
         onTap: onTap,
         child: Icon(

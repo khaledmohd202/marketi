@@ -58,6 +58,22 @@ class _SignUpState extends State<SignUp> {
     return BlocConsumer<SignUpCubit, SignUpState>(
       listener: (context, state) {
         if (state is SignUpSuccess) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                state.signUpResponseModel.message,
+                style: const TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              behavior: SnackBarBehavior.floating,
+              margin: EdgeInsets.only(
+                top:
+                    MediaQuery.of(context).size.height - 100.h,
+              ),
+              backgroundColor: MarketiColors.darkBlue100Color,
+            ),
+          );
           context.pushNamedAndRemoveUntil(AppRoutes.login);
         } else if (state is SignUpFailure) {
           ScaffoldMessenger.of(

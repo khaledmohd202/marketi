@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:marketi/core/errors/exceptions.dart';
+import 'package:marketi/core/errors/server_exceptions.dart';
 import 'package:marketi/core/network/api_consumer.dart';
 import 'package:marketi/core/network/api_interceptors.dart';
 import 'package:marketi/core/network/end_points.dart';

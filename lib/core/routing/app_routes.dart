@@ -5,13 +5,14 @@ import 'package:marketi/core/routing/base_routes.dart';
 import 'package:marketi/features/auth/presentation/view/create_new_password.dart';
 import 'package:marketi/features/auth/presentation/view/forgot_password_with_email.dart';
 import 'package:marketi/features/auth/presentation/view/forgot_password_with_phone.dart';
-import 'package:marketi/features/auth/presentation/view/log_in.dart';
 import 'package:marketi/features/auth/presentation/view/reset_password_done.dart';
+import 'package:marketi/features/auth/presentation/view/sign_in.dart';
 import 'package:marketi/features/auth/presentation/view/sign_up.dart';
 import 'package:marketi/features/auth/presentation/view/verification_code_with_email.dart';
 import 'package:marketi/features/auth/presentation/view/verification_code_with_phone.dart';
 import 'package:marketi/features/auth/presentation/view_model/sign_in_cubit.dart';
 import 'package:marketi/features/auth/presentation/view_model/sign_up_cubit.dart';
+import 'package:marketi/features/home/presentation/view/home.dart';
 import 'package:marketi/features/onboarding/presentation/view/onboarding.dart';
 
 class AppRoutes {
@@ -40,7 +41,7 @@ class AppRoutes {
         return BaseRoutes(
           page: BlocProvider(
             create: (context) => sl<SignInCubit>(),
-            child: const LogIn(),
+            child: const SignIn(),
           ),
         );
       case signUp:
@@ -74,10 +75,10 @@ class AppRoutes {
         return BaseRoutes(
           page: const ResetPasswordDone(),
         );
-      // case home:
-      //   return BaseRoutes(
-      //     page: const VerificationCodeWithPhone(),
-      //   );
+      case home:
+        return BaseRoutes(
+          page: const Home(),
+        );
       default:
         return BaseRoutes(
           page: const Scaffold(
