@@ -1,15 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/core/common/widgets/custom_elevated_button.dart';
-import 'package:marketi/core/common/widgets/custom_text_field.dart';
 import 'package:marketi/core/common/widgets/text_app.dart';
 import 'package:marketi/core/const/icons/marketi_icons.dart';
 import 'package:marketi/core/const/images/marketi_images.dart';
+import 'package:marketi/core/const/strings/marketi_strings.dart';
+import 'package:marketi/core/extensions/navigation_extensions.dart';
+import 'package:marketi/core/routing/app_routes.dart';
 import 'package:marketi/core/themes/colors/marketi_colors.dart';
 import 'package:marketi/core/themes/styles/marketi_text_styles.dart';
+import 'package:marketi/features/auth/data/model/sign_up_request_model.dart';
+import 'package:marketi/features/auth/presentation/view_model/sign_up_cubit.dart';
 import 'package:marketi/features/auth/presentation/widgets/auth_upper_part.dart';
 import 'package:marketi/features/auth/presentation/widgets/authentication_with_social_media.dart';
+import 'package:marketi/features/auth/presentation/widgets/confirm_password_text_field.dart';
+import 'package:marketi/features/auth/presentation/widgets/email_text_field.dart';
+import 'package:marketi/features/auth/presentation/widgets/name_text_field.dart';
+import 'package:marketi/features/auth/presentation/widgets/password_text_field.dart';
 import 'package:marketi/features/auth/presentation/widgets/phone_text_field.dart';
+import 'package:marketi/features/auth/presentation/widgets/user_name_text_field.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -19,6 +29,8 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -26,102 +38,152 @@ class _SignUpState extends State<SignUp> {
       TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
+
+  bool _isPasswordVisible = false;
+  bool _isConfirmPasswordVisible = false;
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    _phoneController.dispose();
+    _usernameController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Back button and logo
-                SizedBox(height: 15.h),
-                AuthUpperPart(
-                  icon: Image.asset(MarketiIcons.backButton),
-                  logo: MarketiImages.logoSignUp,
-                ),
-                // Full Name Text Field
-                textFieldTitle(text: 'Full Name'),
-                CustomTextField(
-                  controller: _nameController,
-                  hintText: 'Full Name',
-                  prefixIcon: Image.asset(
-                    MarketiIcons.nameIcon,
-                    scale: 0.8,
-                  ),
-                  keyboardType: TextInputType.name,
-                ),
-                // UserName Text Field
-                textFieldTitle(text: 'User Name'),
-                CustomTextField(
-                  controller: _usernameController,
-                  hintText: 'User Name',
-                  prefixIcon: const Icon(Icons.person_outline),
-                  keyboardType: TextInputType.name,
-                ),
-                // Phone Number Text Field
-                textFieldTitle(text: 'Phone Number'),
-                PhoneTextField(phoneController: _phoneController, onTap: () {}),
-                // Email Text Field
-                textFieldTitle(text: 'Email'),
-                CustomTextField(
-                  controller: _emailController,
-                  hintText: 'you@gmail.com',
-                  prefixIcon: Image.asset(
-                    MarketiIcons.emailIcon,
-                    scale: 0.8,
-                  ),
-                  keyboardType: TextInputType.emailAddress,
-                ),
-                // Password Text Field
-                textFieldTitle(text: 'Password'),
-                CustomTextField(
-                  controller: _passwordController,
-                  hintText: 'Password',
-                  prefixIcon: const Icon(Icons.lock_outline),
-                  suffixIcon: const Icon(Icons.visibility_off),
-                  keyboardType: TextInputType.visiblePassword,
-                ),
-                // Confirm Password Text Field
-                textFieldTitle(text: 'Confirm Password'),
-                CustomTextField(
-                  controller: _confirmPasswordController,
-                  hintText: 'Confirm Password',
-                  prefixIcon: const Icon(Icons.lock_outline),
-                  suffixIcon: const Icon(Icons.visibility_off),
-                  keyboardType: TextInputType.visiblePassword,
-                ),
-                SizedBox(height: 15.h),
-                // Sign Up Button
-                CustomButton(
-                  onPressed: () {},
-                  text: 'Sign Up',
-                  width: double.infinity,
-                  height: 50.h,
-                  backgroundColor: MarketiColors.lightBlue900Color,
-                  textColor: MarketiColors.whiteColor,
-                ),
+    return BlocConsumer<SignUpCubit, SignUpState>(
+      listener: (context, state) {
+        if (state is SignUpSuccess) {
+          context.pushNamedAndRemoveUntil(AppRoutes.login);
+        } else if (state is SignUpFailure) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.errorMessage)));
+        }
+      },
+      builder: (context, state) {
+        return Scaffold(
+          body: SafeArea(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+              child: Form(
+                key: _formKey,
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Back button and logo
+                      SizedBox(height: 15.h),
+                      AuthUpperPart(
+                        icon: Image.asset(MarketiIcons.backButton),
+                        logo: MarketiImages.logoSignUp,
+                      ),
+                      // Full Name Text Field
+                      textFieldTitle(text: MarketiStrings.name),
+                      NameTextField(nameController: _nameController),
+                      // UserName Text Field
+                      textFieldTitle(text: MarketiStrings.userName),
+                      UserNameTextField(
+                        usernameController: _usernameController,
+                      ),
+                      // Phone Number Text Field
+                      textFieldTitle(text: MarketiStrings.phoneNumber),
+                      PhoneTextField(
+                        phoneController: _phoneController,
+                        onTap: () {},
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return MarketiStrings.phoneIsRequired;
+                          }
+                          return null;
+                        },
+                      ),
+                      // Email Text Field
+                      textFieldTitle(text: MarketiStrings.email),
+                      EmailTextField(emailController: _emailController),
+                      // Password Text Field
+                      textFieldTitle(text: MarketiStrings.password),
+                      PasswordTextField(
+                        passwordController: _passwordController,
+                        isPasswordVisible: _isPasswordVisible,
+                        onTap: () {
+                          setState(() {
+                            _isPasswordVisible = !_isPasswordVisible;
+                          });
+                        },
+                      ),
+                      // Confirm Password Text Field
+                      textFieldTitle(text: MarketiStrings.confirmPassword),
+                      ConfirmPasswordTextField(
+                        confirmPasswordController: _confirmPasswordController,
+                        passwordController: _passwordController,
+                        isPasswordVisible: _isConfirmPasswordVisible,
+                        onTap: () {
+                          setState(() {
+                            _isConfirmPasswordVisible =
+                                !_isConfirmPasswordVisible;
+                          });
+                        },
+                      ),
+                      SizedBox(height: 15.h),
+                      // Sign Up Button
+                      if (state is SignUpLoading)
+                        const Center(
+                          child: CircularProgressIndicator(
+                            color: MarketiColors.lightBlue900Color,
+                          ),
+                        )
+                      else
+                        _signUpButton(context),
 
-                SizedBox(height: 5.h),
-                // Or sign up with social media
-                Center(
-                  child: TextApp(
-                    text: 'Or Continue with',
-                    theme: MarketiTextStyles.textStyle12.copyWith(
-                      color: MarketiColors.greyColor,
-                    ),
+                      SizedBox(height: 5.h),
+                      // Or sign up with social media
+                      Center(
+                        child: TextApp(
+                          text: MarketiStrings.orContinueWith,
+                          theme: MarketiTextStyles.textStyle12.copyWith(
+                            color: MarketiColors.greyColor,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 10.h),
+                      // Social media buttons
+                      const AuthenticationWithSocialMedia(),
+                    ],
                   ),
                 ),
-                SizedBox(height: 10.h),
-                // Social media buttons
-                const AuthenticationWithSocialMedia(),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      },
+    );
+  }
+
+  CustomButton _signUpButton(BuildContext context) {
+    return CustomButton(
+      onPressed: () {
+        if (_formKey.currentState!.validate()) {
+          context.read<SignUpCubit>().signUp(
+            signUpRequestModel: SignUpRequestModel(
+              name: _nameController.text,
+              email: _emailController.text,
+              password: _passwordController.text,
+              confirmPassword: _confirmPasswordController.text,
+              phone: _phoneController.text,
+            ),
+          );
+        }
+      },
+      text: 'Sign Up',
+      width: double.infinity,
+      height: 50.h,
+      backgroundColor: MarketiColors.lightBlue900Color,
+      textColor: MarketiColors.whiteColor,
     );
   }
 

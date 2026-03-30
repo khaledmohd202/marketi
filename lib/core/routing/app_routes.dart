@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:marketi/core/di/dependency_injection.dart';
 import 'package:marketi/core/routing/base_routes.dart';
 import 'package:marketi/features/auth/presentation/view/create_new_password.dart';
 import 'package:marketi/features/auth/presentation/view/forgot_password_with_email.dart';
@@ -8,6 +10,8 @@ import 'package:marketi/features/auth/presentation/view/reset_password_done.dart
 import 'package:marketi/features/auth/presentation/view/sign_up.dart';
 import 'package:marketi/features/auth/presentation/view/verification_code_with_email.dart';
 import 'package:marketi/features/auth/presentation/view/verification_code_with_phone.dart';
+import 'package:marketi/features/auth/presentation/view_model/sign_in_cubit.dart';
+import 'package:marketi/features/auth/presentation/view_model/sign_up_cubit.dart';
 import 'package:marketi/features/onboarding/presentation/view/onboarding.dart';
 
 class AppRoutes {
@@ -16,8 +20,10 @@ class AppRoutes {
   static const String signUp = '/sign-up';
   static const String forgotPasswordWithEmail = '/forgot-password-with-email';
   static const String forgotPasswordWithPhone = '/forgot-password-with-phone';
-  static const String verificationCodeWithEmail = '/verification-code-with-email';
-  static const String verificationCodeWithPhone = '/verification-code-with-phone';
+  static const String verificationCodeWithEmail =
+      '/verification-code-with-email';
+  static const String verificationCodeWithPhone =
+      '/verification-code-with-phone';
   static const String createNewPassword = '/create-new-password';
   static const String resetPasswordDone = '/reset-password-done';
   static const String home = '/home';
@@ -32,11 +38,17 @@ class AppRoutes {
         );
       case login:
         return BaseRoutes(
-          page: const LogIn(),
+          page: BlocProvider(
+            create: (context) => sl<SignInCubit>(),
+            child: const LogIn(),
+          ),
         );
       case signUp:
         return BaseRoutes(
-          page: const SignUp(),
+          page: BlocProvider(
+            create: (context) => sl<SignUpCubit>(),
+            child: const SignUp(),
+          ),
         );
       case forgotPasswordWithEmail:
         return BaseRoutes(

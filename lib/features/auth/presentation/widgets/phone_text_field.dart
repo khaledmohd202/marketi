@@ -7,11 +7,13 @@ class PhoneTextField extends StatelessWidget {
   const PhoneTextField({
     required this.phoneController,
     required this.onTap,
+    this.validator,
     super.key,
   });
 
   final TextEditingController phoneController;
   final void Function()? onTap;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +41,7 @@ class PhoneTextField extends StatelessWidget {
         ),
       ),
       keyboardType: TextInputType.phone,
+      validator: validator,
     );
   }
 }
