@@ -22,12 +22,12 @@ class DioConsumer extends ApiConsumer {
     String path, {
     dynamic data,
     Map<String, dynamic>? queryParameters,
-    bool isFromData = false,
+    bool isFormData = false,
   }) async {
     try {
       final response = await dio.delete<dynamic>(
         path,
-        data: isFromData
+        data: isFormData
             ? FormData.fromMap(data as Map<String, dynamic>)
             : data,
         queryParameters: queryParameters,
@@ -61,12 +61,12 @@ class DioConsumer extends ApiConsumer {
     String path, {
     dynamic data,
     Map<String, dynamic>? queryParameters,
-    bool isFromData = false,
+    bool isFormData = false,
   }) async {
     try {
       final response = await dio.patch<dynamic>(
         path,
-        data: isFromData
+        data: isFormData
             ? FormData.fromMap(data as Map<String, dynamic>)
             : data,
         queryParameters: queryParameters,
@@ -82,12 +82,12 @@ class DioConsumer extends ApiConsumer {
     String path, {
     dynamic data,
     Map<String, dynamic>? queryParameters,
-    bool isFromData = false,
+    bool isFormData = false,
   }) async {
     try {
       final response = await dio.post<dynamic>(
         path,
-        data: isFromData
+        data: isFormData
             ? FormData.fromMap(data as Map<String, dynamic>)
             : data,
         queryParameters: queryParameters,
