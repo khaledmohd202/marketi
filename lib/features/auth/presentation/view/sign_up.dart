@@ -68,8 +68,7 @@ class _SignUpState extends State<SignUp> {
               ),
               behavior: SnackBarBehavior.floating,
               margin: EdgeInsets.only(
-                top:
-                    MediaQuery.of(context).size.height - 100.h,
+                top: MediaQuery.of(context).size.height - 100.h,
               ),
               backgroundColor: MarketiColors.darkBlue100Color,
             ),
@@ -78,7 +77,25 @@ class _SignUpState extends State<SignUp> {
         } else if (state is SignUpFailure) {
           ScaffoldMessenger.of(
             context,
-          ).showSnackBar(SnackBar(content: Text(state.errorMessage)));
+          ).showSnackBar(
+            SnackBar(
+              content: Text(
+                state.errorMessage,
+                style: const TextStyle(
+                  color: Colors.red,
+                ),
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.r),
+              ),
+              margin: EdgeInsets.only(
+                bottom: MediaQuery.of(context).size.height - 150.h,
+                left: 50.w,
+                right: 50.w,
+              ),
+              backgroundColor: Colors.white,
+            ),
+          );
         }
       },
       builder: (context, state) {
