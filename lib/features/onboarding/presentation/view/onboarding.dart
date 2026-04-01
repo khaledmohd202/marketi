@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:marketi/core/extensions/navigation_extensions.dart';
+import 'package:marketi/core/routing/app_routes.dart';
 import 'package:marketi/core/themes/colors/marketi_colors.dart';
 import 'package:marketi/core/themes/styles/marketi_text_styles.dart';
 import 'package:marketi/features/onboarding/data/model/onboarding_model.dart';
@@ -75,35 +77,37 @@ class _OnboardingState extends State<Onboarding> {
             // Next Button
             Padding(
               padding: EdgeInsets.all(20.dg),
-              child: ElevatedButton(
-                onPressed: () {
-                  if (currentIndex == onboardingList.length - 1) {
-                    // context.pushNamed(routeName:);
-                  } else {
-                    _pageController.nextPage(
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeIn,
-                    );
-                  }
-                },
-                style: ElevatedButton.styleFrom(
-                  minimumSize: Size(double.infinity, 55.w),
-                  backgroundColor: MarketiColors.lightBlue900Color,
-                  foregroundColor: MarketiColors.whiteColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16.r),
-                  ),
-                ),
-                child: Text(
-                  currentIndex == onboardingList.length - 1
-                      ? 'Get Started'
-                      : 'Next',
-                  style: MarketiTextStyles.textStyle16,
-                ),
-              ),
+              child: nextButton(),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  ElevatedButton nextButton() {
+    return ElevatedButton(
+      onPressed: () {
+        if (currentIndex == onboardingList.length - 1) {
+          context.pushNamedAndRemoveUntil(AppRoutes.login);
+        } else {
+          _pageController.nextPage(
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeIn,
+          );
+        }
+      },
+      style: ElevatedButton.styleFrom(
+        minimumSize: Size(double.infinity, 55.w),
+        backgroundColor: MarketiColors.lightBlue900Color,
+        foregroundColor: MarketiColors.whiteColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16.r),
+        ),
+      ),
+      child: Text(
+        currentIndex == onboardingList.length - 1 ? 'Get Started' : 'Next',
+        style: MarketiTextStyles.textStyle16,
       ),
     );
   }

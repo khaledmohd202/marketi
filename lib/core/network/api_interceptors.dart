@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:marketi/core/network/end_points.dart';
-import 'package:marketi/core/services/cache/shared_preferences.dart';
+import 'package:marketi/core/services/cache/cache_helper.dart';
 
 class ApiInterceptor extends Interceptor {
   @override
