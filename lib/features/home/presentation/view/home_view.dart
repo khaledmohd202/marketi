@@ -51,6 +51,24 @@ class _HomeViewState extends State<HomeView> {
                 onPressed: () {},
               ),
             ),
+            SliverToBoxAdapter(
+              child: HomeSectionTitle(
+                sectionTitle: 'Best For You',
+                onPressed: () {},
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: HomeSectionTitle(
+                sectionTitle: 'Brands',
+                onPressed: () {},
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: HomeSectionTitle(
+                sectionTitle: 'Buy Again',
+                onPressed: () {},
+              ),
+            ),
           ],
         ),
       ),

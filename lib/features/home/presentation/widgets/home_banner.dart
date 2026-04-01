@@ -15,6 +15,7 @@ class HomeBanner extends StatefulWidget {
 class _HomeBannerState extends State<HomeBanner> {
   final PageController _pageController = PageController();
   int _currentIndex = 0;
+  Timer? _timer;
 
   final List<String> _bannerImages = [
     MarketiImages.banner1,
@@ -25,13 +26,14 @@ class _HomeBannerState extends State<HomeBanner> {
   @override
   void dispose() {
     _pageController.dispose();
+    _timer?.cancel();
     super.dispose();
   }
 
   @override
   void initState() {
     super.initState();
-    Timer.periodic(
+    _timer = Timer.periodic(
       const Duration(seconds: 5),
       (timer) {
         if (_currentIndex < _bannerImages.length - 1) {
