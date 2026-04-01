@@ -59,42 +59,12 @@ class _SignUpState extends State<SignUp> {
       listener: (context, state) {
         if (state is SignUpSuccess) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                state.signUpResponseModel.message,
-                style: const TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-              behavior: SnackBarBehavior.floating,
-              margin: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height - 100.h,
-              ),
-              backgroundColor: MarketiColors.darkBlue100Color,
-            ),
+            _successSnackBar(state, context),
           );
           context.pushNamedAndRemoveUntil(AppRoutes.login);
         } else if (state is SignUpFailure) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(
-            SnackBar(
-              content: Text(
-                state.errorMessage,
-                style: const TextStyle(
-                  color: Colors.red,
-                ),
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.r),
-              ),
-              margin: EdgeInsets.only(
-                bottom: MediaQuery.of(context).size.height - 150.h,
-                left: 50.w,
-                right: 50.w,
-              ),
-              backgroundColor: Colors.white,
-            ),
+          ScaffoldMessenger.of(context).showSnackBar(
+            _errorSnackBar(state, context),
           );
         }
       },
@@ -137,7 +107,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                       // Email Text Field
                       textFieldTitle(text: MarketiStrings.email),
-                      EmailTextField(emailController: _emailController),
+                      EmailTextField(emailController: _emailController, hintText: 'you@gmail.com',),
                       // Password Text Field
                       textFieldTitle(text: MarketiStrings.password),
                       PasswordTextField(
@@ -195,6 +165,42 @@ class _SignUpState extends State<SignUp> {
         );
       },
     );
+  }
+
+  SnackBar _errorSnackBar(SignUpFailure state, BuildContext context) {
+    return SnackBar(
+            content: Text(
+              state.errorMessage,
+              style: const TextStyle(
+                color: Colors.red,
+              ),
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.r),
+            ),
+            margin: EdgeInsets.only(
+              bottom: MediaQuery.of(context).size.height - 150.h,
+              left: 50.w,
+              right: 50.w,
+            ),
+            backgroundColor: Colors.white,
+          );
+  }
+
+  SnackBar _successSnackBar(SignUpSuccess state, BuildContext context) {
+    return SnackBar(
+            content: Text(
+              state.signUpResponseModel.message,
+              style: const TextStyle(
+                color: Colors.white,
+              ),
+            ),
+            behavior: SnackBarBehavior.floating,
+            margin: EdgeInsets.only(
+              top: MediaQuery.of(context).size.height - 100.h,
+            ),
+            backgroundColor: MarketiColors.darkBlue100Color,
+          );
   }
 
   CustomButton _signUpButton(BuildContext context) {

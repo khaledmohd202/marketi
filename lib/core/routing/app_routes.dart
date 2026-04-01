@@ -12,7 +12,11 @@ import 'package:marketi/features/auth/presentation/view/verification_code_with_e
 import 'package:marketi/features/auth/presentation/view/verification_code_with_phone.dart';
 import 'package:marketi/features/auth/presentation/view_model/sign_in_cubit.dart';
 import 'package:marketi/features/auth/presentation/view_model/sign_up_cubit.dart';
-import 'package:marketi/features/home/presentation/view/home.dart';
+import 'package:marketi/features/cart/data/repo/view/cart_view.dart';
+import 'package:marketi/features/favorites/presentation/view/favorites_view.dart';
+import 'package:marketi/features/home/presentation/view/home_view.dart';
+import 'package:marketi/features/main/presentation/view/main_view.dart';
+import 'package:marketi/features/menu/presentation/view/menu_view.dart';
 import 'package:marketi/features/onboarding/presentation/view/onboarding.dart';
 
 class AppRoutes {
@@ -28,6 +32,10 @@ class AppRoutes {
   static const String createNewPassword = '/create-new-password';
   static const String resetPasswordDone = '/reset-password-done';
   static const String home = '/home';
+  static const String cart = '/cart';
+  static const String favorites = '/favorites';
+  static const String menu = '/menu';
+  static const String main = '/main';
   static Route<void> onGenerateRoute(RouteSettings settings) {
     //
     //ignore: unused_local_variable
@@ -75,9 +83,26 @@ class AppRoutes {
         return BaseRoutes(
           page: const ResetPasswordDone(),
         );
+      case main:
+        return BaseRoutes(
+          page: const MainView(),
+        );
       case home:
         return BaseRoutes(
-          page: const Home(),
+          page: const HomeView(),
+        );
+
+      case cart:
+        return BaseRoutes(
+          page: const CartView(),
+        );
+      case favorites:
+        return BaseRoutes(
+          page: const FavoritesView(),
+        );
+      case menu:
+        return BaseRoutes(
+          page: const MenuView(),
         );
       default:
         return BaseRoutes(

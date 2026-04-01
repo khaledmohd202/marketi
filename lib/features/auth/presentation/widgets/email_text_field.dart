@@ -5,17 +5,18 @@ import 'package:marketi/core/const/icons/marketi_icons.dart';
 
 class EmailTextField extends StatelessWidget {
   const EmailTextField({
-    required this.emailController,
+    required this.hintText, required this.emailController,
     super.key,
   });
 
   final TextEditingController emailController;
+  final String hintText;
 
   @override
   Widget build(BuildContext context) {
     return CustomTextField(
       controller: emailController,
-      hintText: 'you@gmail.com',
+      hintText: hintText,
       prefixIcon: Image.asset(
         MarketiIcons.emailIcon,
         scale: 0.8,

@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/core/common/widgets/custom_elevated_button.dart';
-import 'package:marketi/core/common/widgets/custom_text_field.dart';
 import 'package:marketi/core/common/widgets/text_app.dart';
-import 'package:marketi/core/const/icons/marketi_icons.dart';
 import 'package:marketi/core/const/images/marketi_images.dart';
 import 'package:marketi/core/extensions/navigation_extensions.dart';
 import 'package:marketi/core/routing/app_routes.dart';
@@ -13,6 +11,8 @@ import 'package:marketi/core/themes/styles/marketi_text_styles.dart';
 import 'package:marketi/features/auth/data/model/sign_in_request_model.dart';
 import 'package:marketi/features/auth/presentation/view_model/sign_in_cubit.dart';
 import 'package:marketi/features/auth/presentation/widgets/authentication_with_social_media.dart';
+import 'package:marketi/features/auth/presentation/widgets/email_text_field.dart';
+import 'package:marketi/features/auth/presentation/widgets/password_text_field.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -41,42 +41,12 @@ class _SignInState extends State<SignIn> {
       listener: (context, state) {
         if (state is SignInSuccess) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                state.signInResponseModel.message,
-                style: const TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-              behavior: SnackBarBehavior.floating,
-              margin: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height - 100.h,
-              ),
-              backgroundColor: MarketiColors.darkBlue100Color,
-            ),
+            _successSnackBar(state, context),
           );
-          context.pushNamedAndRemoveUntil(AppRoutes.home);
+          context.pushNamedAndRemoveUntil(AppRoutes.main);
         } else if (state is SignInFailure) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(
-            SnackBar(
-              content: Text(
-                state.errorMessage,
-                style: const TextStyle(
-                  color: Colors.red,
-                ),
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.r),
-              ),
-              margin: EdgeInsets.only(
-                bottom: MediaQuery.of(context).size.height - 150.h,
-                left: 50.w,
-                right: 50.w,
-              ),
-              backgroundColor: Colors.white,
-            ),
+          ScaffoldMessenger.of(context).showSnackBar(
+            _errorSnackBar(state, context),
           );
         }
       },
@@ -110,46 +80,59 @@ class _SignInState extends State<SignIn> {
                       ),
                       Image.asset(MarketiImages.logoLogin),
                       // Email Text Field
-                      CustomTextField(
-                        controller: _emailController,
+                      // CustomTextField(
+                      //   controller: _emailController,
+                      //   hintText: 'UserName or Email',
+                      //   prefixIcon: Image.asset(
+                      //     MarketiIcons.emailIcon,
+                      //     scale: 0.8,
+                      //   ),
+                      //   keyboardType: TextInputType.emailAddress,
+                      //   validator: (value) {
+                      //     if (value == null || value.isEmpty) {
+                      //       return 'Email is required';
+                      //     }
+                      //     return null;
+                      //   },
+                      // ),
+                      EmailTextField(
+                        emailController: _emailController,
                         hintText: 'UserName or Email',
-                        prefixIcon: Image.asset(
-                          MarketiIcons.emailIcon,
-                          scale: 0.8,
-                        ),
-                        keyboardType: TextInputType.emailAddress,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Email is required';
-                          }
-                          return null;
-                        },
                       ),
                       // Password Text Field
                       SizedBox(height: 15.h),
-                      CustomTextField(
-                        controller: _passwordController,
-                        hintText: 'Password',
-                        prefixIcon: const Icon(Icons.lock_outline),
-                        suffixIcon: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              _isPasswordVisible = !_isPasswordVisible;
-                            });
-                          },
-                          child: Icon(
-                            _isPasswordVisible
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                          ),
-                        ),
-                        obscureText: !_isPasswordVisible,
-                        keyboardType: TextInputType.visiblePassword,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Password is required';
-                          }
-                          return null;
+                      // CustomTextField(
+                      //   controller: _passwordController,
+                      //   hintText: 'Password',
+                      //   prefixIcon: const Icon(Icons.lock_outline),
+                      //   suffixIcon: GestureDetector(
+                      //     onTap: () {
+                      //       setState(() {
+                      //         _isPasswordVisible = !_isPasswordVisible;
+                      //       });
+                      //     },
+                      //     child: Icon(
+                      //       _isPasswordVisible
+                      //           ? Icons.visibility
+                      //           : Icons.visibility_off,
+                      //     ),
+                      //   ),
+                      //   obscureText: !_isPasswordVisible,
+                      //   keyboardType: TextInputType.visiblePassword,
+                      //   validator: (value) {
+                      //     if (value == null || value.isEmpty) {
+                      //       return 'Password is required';
+                      //     }
+                      //     return null;
+                      //   },
+                      // ),
+                      PasswordTextField(
+                        passwordController: _passwordController,
+                        isPasswordVisible: _isPasswordVisible,
+                        onTap: () {
+                          setState(() {
+                            _isPasswordVisible = !_isPasswordVisible;
+                          });
                         },
                       ),
                       // Forgot Password Button
@@ -226,6 +209,42 @@ class _SignInState extends State<SignIn> {
           ),
         );
       },
+    );
+  }
+
+  SnackBar _successSnackBar(SignInSuccess state, BuildContext context) {
+    return SnackBar(
+      content: Text(
+        state.signInResponseModel.message,
+        style: const TextStyle(
+          color: Colors.white,
+        ),
+      ),
+      behavior: SnackBarBehavior.floating,
+      margin: EdgeInsets.only(
+        top: MediaQuery.of(context).size.height - 100.h,
+      ),
+      backgroundColor: MarketiColors.darkBlue100Color,
+    );
+  }
+
+  SnackBar _errorSnackBar(SignInFailure state, BuildContext context) {
+    return SnackBar(
+      content: Text(
+        state.errorMessage,
+        style: const TextStyle(
+          color: Colors.red,
+        ),
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20.r),
+      ),
+      margin: EdgeInsets.only(
+        bottom: MediaQuery.of(context).size.height - 150.h,
+        left: 50.w,
+        right: 50.w,
+      ),
+      backgroundColor: Colors.white,
     );
   }
 
