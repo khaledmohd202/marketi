@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/features/home/presentation/widgets/home_banner.dart';
+import 'package:marketi/features/home/presentation/widgets/home_best_product.dart';
 import 'package:marketi/features/home/presentation/widgets/home_categories.dart';
 import 'package:marketi/features/home/presentation/widgets/home_header.dart';
 import 'package:marketi/features/home/presentation/widgets/home_popular_product.dart';
@@ -60,6 +61,9 @@ class _HomeViewState extends State<HomeView> {
                 sectionTitle: 'Best For You',
                 onPressed: () {},
               ),
+            ),
+            const SliverToBoxAdapter(
+              child: HomeBestProduct(),
             ),
             SliverToBoxAdapter(
               child: HomeSectionTitle(

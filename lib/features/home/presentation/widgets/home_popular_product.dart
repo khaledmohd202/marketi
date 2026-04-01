@@ -8,24 +8,27 @@ class HomePopularProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 220.h,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return ProductCard(
-            discount: _productDiscounts[index],
-            image: _productImages[index],
-            onTap: () {},
-            color: Colors.blue,
-            name: _productNames[index],
-            price: _productPrices[index],
-            rating: _productRates[index],
-            selectedIcon: Icons.favorite,
-          );
-        },
-        separatorBuilder: (context, index) => SizedBox(width: 10.w),
-        itemCount: _productImages.length,
+    return Padding(
+      padding: EdgeInsetsGeometry.symmetric(vertical: 10.h),
+      child: SizedBox(
+        height: 205.h,
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            return ProductCard(
+              discount: _productDiscounts[index],
+              image: _productImages[index],
+              onTap: () {},
+              color: Colors.blue,
+              name: _productNames[index],
+              price: _productPrices[index],
+              rating: _productRates[index],
+              selectedIcon: Icons.favorite,
+            );
+          },
+          separatorBuilder: (context, index) => SizedBox(width: 10.w),
+          itemCount: _productImages.length,
+        ),
       ),
     );
   }

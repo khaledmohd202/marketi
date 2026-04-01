@@ -9,10 +9,12 @@ class HomeCategories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsGeometry.only(top: 10.h),
+      padding: EdgeInsetsGeometry.symmetric(vertical: 10.h),
+
       child: SizedBox(
         height: 300.h,
         child: GridView.builder(
+          shrinkWrap: true,
           padding: EdgeInsets.symmetric(horizontal: 15.w),
           physics: const NeverScrollableScrollPhysics(),
           itemCount: 6,

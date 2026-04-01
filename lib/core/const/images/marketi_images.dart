@@ -35,4 +35,6 @@ class MarketiImages {
   static const String headphones = 'assets/images/home/headphones.png';
   static const String pampers = 'assets/images/home/pampers.png';
   static const String plant = 'assets/images/home/plant.png';
+  static const String airbods = 'assets/images/home/airbods.png';
+  static const String smartTV = 'assets/images/home/smart_tv.png';
 }

@@ -14,6 +14,7 @@ class ProductCard extends StatefulWidget {
     required this.selectedIcon,
     required this.color,
     super.key,
+    this.bottomAddWidget,
   });
   final String image;
   final String discount;
@@ -23,6 +24,7 @@ class ProductCard extends StatefulWidget {
   final String name;
   final String price;
   final double rating;
+  final Widget? bottomAddWidget;
 
   @override
   State<ProductCard> createState() => _ProductCardState();
@@ -39,11 +41,10 @@ class _ProductCardState extends State<ProductCard> {
         // );
       },
       child: Container(
-        width: 160.w,
+        width: 170.w,
         decoration: BoxDecoration(
-          color: MarketiColors.lightBlue100Color,
-
-          borderRadius: BorderRadius.circular(15.r),
+          borderRadius: BorderRadius.circular(20.r),
+          color: Colors.transparent,
           boxShadow: [
             BoxShadow(
               //
@@ -57,127 +58,144 @@ class _ProductCardState extends State<ProductCard> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Stack(
-              // Image, Discount Badge and Favorite Icon.
-              children: [
-                // Product Image
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10.r),
-                  // replaced with Image.network when linking with API
-                  child: Image.asset(
-                    widget.image,
-                    height: 165.h,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                // Discount Badge
-                Positioned(
-                  top: 8.h,
-                  left: 8.w,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 6.w,
-                      vertical: 2.h,
-                    ),
-                    decoration: BoxDecoration(
-                      color: MarketiColors.lightBlue900Color,
-                      borderRadius: BorderRadius.circular(5.r),
-                    ),
-                    child: Text(
-                      widget.discount,
-                      style: MarketiTextStyles.textStyle12.copyWith(
-                        color: Colors.white,
-                        fontSize: 10.sp,
+            // Top Part
+            Container(
+              height: 140.h,
+              decoration: BoxDecoration(
+                color: MarketiColors.lightBlue100Color,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+              ),
+              child: Stack(
+                // Image, Discount Badge and Favorite Icon.
+                children: [
+                  // Product Image
+                  Center(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10.r),
+                      // replaced with Image.network when linking with API
+                      child: Image.asset(
+                        widget.image,
+                        // height: 140.h,
+                        width: double.infinity,
+                        scale: 0.8,
+                        // fit: BoxFit.fill,
                       ),
                     ),
                   ),
-                ),
-                // Favorite Icon
-                Positioned(
-                  top: 8.h,
-                  right: 8.w,
-                  child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _isFavorite = !_isFavorite;
-                      });
-                    },
+                  // Discount Badge
+                  Positioned(
+                    top: 8.h,
+                    left: 8.w,
                     child: Container(
-                      padding: EdgeInsets.all(4.r),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            //
-                            // ignore: deprecated_member_use
-                            color: Colors.grey.withOpacity(0.2),
-                            blurRadius: 5,
-                          ),
-                        ],
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 6.w,
+                        vertical: 2.h,
                       ),
-                      child: Icon(
-                        _isFavorite ? Icons.favorite : Icons.favorite_outline,
-                        size: 20.r,
-                        color: _isFavorite
-                            ? MarketiColors.darkBlue100Color
-                            : MarketiColors.greyColor,
+                      decoration: BoxDecoration(
+                        color: MarketiColors.lightBlue900Color,
+                        borderRadius: BorderRadius.circular(5.r),
+                      ),
+                      child: Text(
+                        widget.discount,
+                        style: MarketiTextStyles.textStyle12.copyWith(
+                          color: Colors.white,
+                          fontSize: 10.sp,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            // Price, Name and Rate.
-            ColoredBox(
-              color: Colors.white,
-
-              child: Padding(
-                padding: EdgeInsets.all(8.r),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Price and Raring
-                    Row(
-                      children: [
-                        // Price
-                        Text(
-                          '${widget.price} LE',
-                          style: MarketiTextStyles.textStyle12.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: MarketiColors.darkBlue900Color,
-                          ),
+                  // Favorite Icon
+                  Positioned(
+                    top: 8.h,
+                    right: 8.w,
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _isFavorite = !_isFavorite;
+                        });
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(4.r),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              //
+                              // ignore: deprecated_member_use
+                              color: Colors.grey.withOpacity(0.2),
+                              blurRadius: 5,
+                            ),
+                          ],
                         ),
-                        const Spacer(),
-
-                        // Rating
-                        Icon(
-                          Icons.star,
-                          size: 14.r,
-                          color: Colors.amber,
+                        child: Icon(
+                          _isFavorite ? Icons.favorite : Icons.favorite_outline,
+                          size: 20.r,
+                          color: _isFavorite
+                              ? MarketiColors.darkBlue100Color
+                              : MarketiColors.greyColor,
                         ),
-                        SizedBox(width: 4.w),
-                        Text(
-                          widget.rating.toString(),
-                          style: MarketiTextStyles.textStyle12.copyWith(
-                            color: MarketiColors.greyColor,
-                          ),
-                        ),
-                      ],
-                    ),
-                    // tile
-                    Text(
-                      widget.name,
-                      style: MarketiTextStyles.textStyle12.copyWith(
-                        color: MarketiColors.greyColor,
                       ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
                     ),
-                    SizedBox(height: 4.h),
-                  ],
+                  ),
+                ],
+              ),
+            ),
+            // Bottom Part
+            // Price, Name and Rate.
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.all(10.r),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(
+                  bottom: Radius.circular(20.r),
                 ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Price and Raring
+                  Row(
+                    children: [
+                      // Price
+                      Text(
+                        '${widget.price} LE',
+                        style: MarketiTextStyles.textStyle14.copyWith(
+                          color: MarketiColors.darkBlue900Color,
+                        ),
+                      ),
+                      const Spacer(),
+
+                      // Rating
+                      Icon(
+                        Icons.star,
+                        size: 20.r,
+                        color: Colors.amber,
+                      ),
+                      SizedBox(width: 4.w),
+                      Text(
+                        widget.rating.toString(),
+                        style: MarketiTextStyles.textStyle12.copyWith(
+                          color: MarketiColors.greyColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                  // tile
+                  Text(
+                    widget.name,
+                    style: MarketiTextStyles.textStyle12.copyWith(
+                      color: MarketiColors.greyColor,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+
+                  if (widget.bottomAddWidget != null) ...[
+                    widget.bottomAddWidget!,
+                  ],
+                ],
               ),
             ),
           ],
