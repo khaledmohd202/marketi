@@ -27,4 +27,7 @@ class MarketiImages {
   static const String banner1 = 'assets/images/home/banner1.png';
   static const String banner2 = 'assets/images/home/banner2.png';
   static const String banner3 = 'assets/images/home/banner3.png';
+  static const String iphone11Pro = 'assets/images/home/iphone_11_pro.png';
+  static const String smartWatch = 'assets/images/home/smart_watch.png';
+  static const String motorilla = 'assets/images/home/motorilla.png';
 }

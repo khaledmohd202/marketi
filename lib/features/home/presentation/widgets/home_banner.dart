@@ -56,7 +56,7 @@ class _HomeBannerState extends State<HomeBanner> {
       child: Column(
         children: [
           SizedBox(
-            height: 130.h,
+            height: 140.h,
             child: PageView.builder(
               controller: _pageController,
               onPageChanged: (index) {

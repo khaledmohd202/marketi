@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/features/home/presentation/widgets/home_banner.dart';
 import 'package:marketi/features/home/presentation/widgets/home_header.dart';
+import 'package:marketi/features/home/presentation/widgets/home_popular_product.dart';
 import 'package:marketi/features/home/presentation/widgets/home_search_bar.dart';
+import 'package:marketi/features/home/presentation/widgets/home_section_title.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -29,8 +31,25 @@ class _HomeViewState extends State<HomeView> {
               child: HomeSearchBar(controller: _controller),
             ),
             // Banner Bar
-            SliverToBoxAdapter(
+            const SliverToBoxAdapter(
               child: HomeBanner(),
+            ),
+            // Popular Products
+            SliverToBoxAdapter(
+              child: HomeSectionTitle(
+                sectionTitle: 'Popular Products',
+                onPressed: () {},
+              ),
+            ),
+            const SliverToBoxAdapter(
+              child: HomePopularProduct(),
+            ),
+            // Categories
+            SliverToBoxAdapter(
+              child: HomeSectionTitle(
+                sectionTitle: 'Categories',
+                onPressed: () {},
+              ),
             ),
           ],
         ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:marketi/core/common/widgets/text_app.dart';
 import 'package:marketi/core/const/icons/marketi_icons.dart';
 import 'package:marketi/core/themes/colors/marketi_colors.dart';
 import 'package:marketi/core/themes/styles/marketi_text_styles.dart';
@@ -15,7 +14,6 @@ class HomeSearchBar extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 14.h),
       child: Container(
         padding: EdgeInsets.only(left: 10.w),
-        height: 45.h,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15.r),
           border: BoxBorder.all(
