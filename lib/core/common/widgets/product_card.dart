@@ -9,7 +9,7 @@ class ProductCard extends StatefulWidget {
     required this.price,
     required this.rating,
     required this.onTap,
-    required this.discount,
+    this.discount,
     required this.image,
     required this.selectedIcon,
     required this.color,
@@ -17,7 +17,7 @@ class ProductCard extends StatefulWidget {
     this.bottomAddWidget,
   });
   final String image;
-  final String discount;
+  final String? discount;
   final VoidCallback onTap;
   final IconData? selectedIcon;
   final Color? color;
@@ -83,6 +83,7 @@ class _ProductCardState extends State<ProductCard> {
                     ),
                   ),
                   // Discount Badge
+                  if( widget.discount != null )
                   Positioned(
                     top: 8.h,
                     left: 8.w,
@@ -96,7 +97,7 @@ class _ProductCardState extends State<ProductCard> {
                         borderRadius: BorderRadius.circular(5.r),
                       ),
                       child: Text(
-                        widget.discount,
+                        widget.discount!,
                         style: MarketiTextStyles.textStyle12.copyWith(
                           color: Colors.white,
                           fontSize: 10.sp,

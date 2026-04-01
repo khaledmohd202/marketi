@@ -6,8 +6,8 @@ import 'package:marketi/core/const/images/marketi_images.dart';
 import 'package:marketi/core/themes/colors/marketi_colors.dart';
 import 'package:marketi/core/themes/styles/marketi_text_styles.dart';
 
-class HomeBestProduct extends StatelessWidget {
-  const HomeBestProduct({super.key});
+class HomeBuyAgain extends StatelessWidget {
+  const HomeBuyAgain({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class HomeBestProduct extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
             return ProductCard(
-              discount: _productDiscounts[index],
+              // discount: _productDiscounts[index],
               image: _productImages[index],
               onTap: () {},
               color: Colors.blue,
@@ -43,7 +43,7 @@ class HomeBestProduct extends StatelessWidget {
                       ),
                     ),
                   ),
-                  child: TextApp(
+                  child: const TextApp(
                     text: 'Add',
                     theme: MarketiTextStyles.textStyle16,
                   ),
@@ -60,26 +60,26 @@ class HomeBestProduct extends StatelessWidget {
 }
 
 final List<String> _productImages = [
-  MarketiImages.airbods,
-  MarketiImages.smartTV,
+  MarketiImages.headphones,
+  MarketiImages.laptop,
   MarketiImages.motorilla,
 ];
 
 final List<String> _productPrices = [
-  '799',
-  '13999',
+  '399',
+  '14999',
   '8562',
 ];
 final List<String> _productNames = [
-  'Black JBL Airbods',
-  'Sony Smart TV 55 inch',
+  'Black Sony Headphone',
+  'HP Chromebook laptop',
   'Motorilla',
 ];
 
 final List<double> _productRates = [4.9, 4.8, 3.2];
 
-final List<String> _productDiscounts = [
-  '10%',
-  '5%',
-  '60%',
-];
+// final List<String> _productDiscounts = [
+//   '',
+//   '',
+//   '',
+// ];

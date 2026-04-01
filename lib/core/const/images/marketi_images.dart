@@ -37,4 +37,8 @@ class MarketiImages {
   static const String plant = 'assets/images/home/plant.png';
   static const String airbods = 'assets/images/home/airbods.png';
   static const String smartTV = 'assets/images/home/smart_tv.png';
+  static const String laptop = 'assets/images/home/laptop.png';
+  static const String townTeamLogo = 'assets/images/home/town_team_logo.png';
+  static const String jblLogo = 'assets/images/home/jbl_logo.png';
+  static const String sonyLogo = 'assets/images/home/sony_logo.png';
 }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/features/home/presentation/widgets/home_banner.dart';
 import 'package:marketi/features/home/presentation/widgets/home_best_product.dart';
+import 'package:marketi/features/home/presentation/widgets/home_brands.dart';
+import 'package:marketi/features/home/presentation/widgets/home_buy_again.dart';
 import 'package:marketi/features/home/presentation/widgets/home_categories.dart';
 import 'package:marketi/features/home/presentation/widgets/home_header.dart';
 import 'package:marketi/features/home/presentation/widgets/home_popular_product.dart';
@@ -71,11 +73,17 @@ class _HomeViewState extends State<HomeView> {
                 onPressed: () {},
               ),
             ),
+            const SliverToBoxAdapter(
+              child: HomeBrands(),
+            ),
             SliverToBoxAdapter(
               child: HomeSectionTitle(
                 sectionTitle: 'Buy Again',
                 onPressed: () {},
               ),
+            ),
+            const SliverToBoxAdapter(
+              child: HomeBuyAgain(),
             ),
           ],
         ),
