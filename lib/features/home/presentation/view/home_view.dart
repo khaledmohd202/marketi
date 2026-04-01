@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/features/home/presentation/widgets/home_banner.dart';
+import 'package:marketi/features/home/presentation/widgets/home_categories.dart';
 import 'package:marketi/features/home/presentation/widgets/home_header.dart';
 import 'package:marketi/features/home/presentation/widgets/home_popular_product.dart';
 import 'package:marketi/features/home/presentation/widgets/home_search_bar.dart';
@@ -50,6 +51,9 @@ class _HomeViewState extends State<HomeView> {
                 sectionTitle: 'Categories',
                 onPressed: () {},
               ),
+            ),
+            const SliverToBoxAdapter(
+              child: HomeCategories(),
             ),
             SliverToBoxAdapter(
               child: HomeSectionTitle(

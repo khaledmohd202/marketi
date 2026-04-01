@@ -30,4 +30,9 @@ class MarketiImages {
   static const String iphone11Pro = 'assets/images/home/iphone_11_pro.png';
   static const String smartWatch = 'assets/images/home/smart_watch.png';
   static const String motorilla = 'assets/images/home/motorilla.png';
+  static const String fashion = 'assets/images/home/fashion.png';
+  static const String food = 'assets/images/home/food.png';
+  static const String headphones = 'assets/images/home/headphones.png';
+  static const String pampers = 'assets/images/home/pampers.png';
+  static const String plant = 'assets/images/home/plant.png';
 }
