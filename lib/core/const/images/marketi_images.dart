@@ -23,5 +23,5 @@ class MarketiImages {
       'assets/images/auth/reset_password_done.png';
 
   // Home Images
-  static const String khaled = 'assets/images/khaled.jpeg';
+  static const String khaled = 'assets/images/home/khaled.jpeg';
 }

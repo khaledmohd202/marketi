@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/features/home/presentation/widgets/home_header.dart';
+import 'package:marketi/features/home/presentation/widgets/home_search_bar.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -10,22 +11,22 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  final TextEditingController _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 14.h),
-        child: const CustomScrollView(
+        child: CustomScrollView(
           slivers: [
             // Home Header
-            SliverToBoxAdapter(
+            const SliverToBoxAdapter(
               child: HomeHeader(),
             ),
-
             // Search Bar
-            // SliverToBoxAdapter(
-            //   child: ,
-            // ),
+            SliverToBoxAdapter(
+              child: HomeSearchBar(controller: _controller),
+            ),
           ],
         ),
       ),

@@ -14,13 +14,29 @@ class HomeHeader extends StatelessWidget {
     return Row(
       // crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        CircleAvatar(
-          radius: 25.r,
-          backgroundImage: const AssetImage(MarketiImages.khaled),
-          // backgroundImage: NetworkImage(
-          //   CacheHelper().getDataString(key: ApiKey.image) ??
-          //       MarketiImages.khaled,
-          // ),
+        Container(
+          height: 60.h,
+          width: 60.w,
+          decoration: BoxDecoration(
+            // color: MarketiColors.lightBlue500Color,
+            // color: Colors.red,
+            borderRadius: BorderRadius.circular(30.r),
+            border: BoxBorder.all(
+              color: MarketiColors.lightBlue500Color,
+              width: 3.w,
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(2),
+            child: CircleAvatar(
+              radius: 25.r,
+              backgroundImage: const AssetImage(MarketiImages.khaled),
+              // backgroundImage: NetworkImage(
+              //   CacheHelper().getDataString(key: ApiKey.image) ??
+              //       MarketiImages.khaled,
+              // ),
+            ),
+          ),
         ),
         SizedBox(width: 10.w),
         TextApp(
