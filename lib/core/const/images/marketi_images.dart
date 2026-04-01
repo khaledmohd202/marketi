@@ -24,4 +24,7 @@ class MarketiImages {
 
   // Home Images
   static const String khaled = 'assets/images/home/khaled.jpeg';
+  static const String banner1 = 'assets/images/home/banner1.png';
+  static const String banner2 = 'assets/images/home/banner2.png';
+  static const String banner3 = 'assets/images/home/banner3.png';
 }

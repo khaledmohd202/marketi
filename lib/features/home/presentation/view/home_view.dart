@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:marketi/features/home/presentation/widgets/home_banner.dart';
 import 'package:marketi/features/home/presentation/widgets/home_header.dart';
 import 'package:marketi/features/home/presentation/widgets/home_search_bar.dart';
 
@@ -26,6 +27,10 @@ class _HomeViewState extends State<HomeView> {
             // Search Bar
             SliverToBoxAdapter(
               child: HomeSearchBar(controller: _controller),
+            ),
+            // Banner Bar
+            SliverToBoxAdapter(
+              child: HomeBanner(),
             ),
           ],
         ),
