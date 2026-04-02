@@ -22,6 +22,8 @@ class HomeBrands extends StatelessWidget {
               borderRadius: BorderRadius.circular(15.r),
               boxShadow: [
                 BoxShadow(
+                  //
+                  // ignore: deprecated_member_use
                   color: Colors.grey.withOpacity(0.1),
                   blurRadius: 10.r,
                 ),

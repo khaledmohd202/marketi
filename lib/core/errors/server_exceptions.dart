@@ -10,15 +10,18 @@ void handleDioExceptions(DioException e) {
   switch (e.type) {
     // case DioExceptionType.connectionTimeout:
     //   throw ServerException(
-    //     errModel: ErrorModel.fromJson(e.response!.data as Map<String, dynamic>),
+    //     errModel: ErrorModel.fromJson(e.response!.data as Map<String,
+    // dynamic>),
     //   );
     // case DioExceptionType.sendTimeout:
     //   throw ServerException(
-    //     errModel: ErrorModel.fromJson(e.response!.data as Map<String, dynamic>),
+    //     errModel: ErrorModel.fromJson(e.response!.data as Map<String,
+    // dynamic>),
     //   );
     // case DioExceptionType.receiveTimeout:
     //   throw ServerException(
-    //     errModel: ErrorModel.fromJson(e.response!.data as Map<String, dynamic>),
+    //     errModel: ErrorModel.fromJson(e.response!.data as Map<String,
+    // dynamic>),
     //   );
     case DioExceptionType.connectionTimeout:
     case DioExceptionType.sendTimeout:

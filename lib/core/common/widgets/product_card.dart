@@ -9,10 +9,10 @@ class ProductCard extends StatefulWidget {
     required this.price,
     required this.rating,
     required this.onTap,
-    this.discount,
     required this.image,
     required this.selectedIcon,
     required this.color,
+    this.discount,
     super.key,
     this.bottomAddWidget,
   });
