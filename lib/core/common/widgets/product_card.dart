@@ -12,7 +12,7 @@ class ProductCard extends StatefulWidget {
     required this.onTap,
     required this.image,
     required this.selectedIcon,
-    required this.color,
+    // required this.color,
     this.discount,
     super.key,
     this.bottomAddWidget,
@@ -21,7 +21,7 @@ class ProductCard extends StatefulWidget {
   final String? discount;
   final VoidCallback onTap;
   final IconData? selectedIcon;
-  final Color? color;
+  // final Color? color;
   final String name;
   final String price;
   final double rating;
@@ -105,18 +105,22 @@ class _ProductCardState extends State<ProductCard> {
                       ),
                     ),
                   // Favorite Icon
-                  FavoritesIcon(
-                    onTap: () {
-                      setState(() {
-                        _isFavorite = !_isFavorite;
-                      });
-                    },
-                    iconWidget: Icon(
-                      widget.selectedIcon,
-                      size: 20.r,
-                      color: _isFavorite
-                          ? MarketiColors.lightBlue900Color
-                          : MarketiColors.greyColor.withValues(alpha: 0.3),
+                  Positioned(
+                    top: 8.h,
+                    right: 8.w,
+                    child: FavoritesIcon(
+                      onTap: () {
+                        setState(() {
+                          _isFavorite = !_isFavorite;
+                        });
+                      },
+                      iconWidget: Icon(
+                        widget.selectedIcon,
+                        size: 20.r,
+                        color: _isFavorite
+                            ? MarketiColors.lightBlue900Color
+                            : MarketiColors.greyColor.withValues(alpha: 0.3),
+                      ),
                     ),
                   ),
                 ],

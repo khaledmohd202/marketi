@@ -21,7 +21,7 @@ class _CartViewState extends State<CartView> {
         child: Column(
           children: [
             // Header
-            const CartAndFavoriteHeader(
+            const CommonHeader(
               title: 'My Cart',
             ),
             SizedBox(height: 10.h),

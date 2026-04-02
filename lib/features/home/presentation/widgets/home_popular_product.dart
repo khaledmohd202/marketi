@@ -19,7 +19,7 @@ class HomePopularProduct extends StatelessWidget {
               discount: _productDiscounts[index],
               image: _productImages[index],
               onTap: () {},
-              color: Colors.blue,
+              // color: Colors.blue,
               name: _productNames[index],
               price: _productPrices[index],
               rating: _productRates[index],

@@ -14,10 +14,7 @@ class FavoritesIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      top: 8.h,
-      right: 8.w,
-      child: GestureDetector(
+    return GestureDetector(
         onTap: onTap,
         child: Container(
           padding: EdgeInsets.all(4.r),
@@ -35,7 +32,6 @@ class FavoritesIcon extends StatelessWidget {
           ),
           child: iconWidget,
         ),
-      ),
-    );
+      );
   }
 }

@@ -33,7 +33,7 @@ class HomeSearchBar extends StatelessWidget {
                 textAlignVertical: TextAlignVertical.center,
                 decoration: InputDecoration(
                   hintText: 'What are you looking for ?',
-                  hintStyle: MarketiTextStyles.textStyle12.copyWith(
+                  hintStyle: MarketiTextStyles.textStyle14.copyWith(
                     color: MarketiColors.greyColor,
                   ),
                   border: InputBorder.none,
