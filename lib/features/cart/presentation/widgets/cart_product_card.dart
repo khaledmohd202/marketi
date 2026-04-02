@@ -53,8 +53,8 @@ class _CartProductCardState extends State<CartProductCard> {
             child: Image.asset(
               widget.image,
               width: 100.w,
-              height: 100.h,
-              fit: BoxFit.cover,
+              height: 115.h,
+              fit: BoxFit.fill,
             ),
           ),
           SizedBox(width: 10.w),

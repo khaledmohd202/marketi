@@ -24,6 +24,7 @@ class _CartViewState extends State<CartView> {
             const CartAndFavoriteHeader(
               title: 'My Cart',
             ),
+            SizedBox(height: 10.h),
             // Products List
             Expanded(
               child: ListView.separated(
