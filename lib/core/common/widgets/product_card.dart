@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:marketi/core/common/widgets/favorites_icon.dart';
 import 'package:marketi/core/themes/colors/marketi_colors.dart';
 import 'package:marketi/core/themes/styles/marketi_text_styles.dart';
 
@@ -47,9 +48,7 @@ class _ProductCardState extends State<ProductCard> {
           color: Colors.transparent,
           boxShadow: [
             BoxShadow(
-              //
-              // ignore: deprecated_member_use
-              color: Colors.grey.withOpacity(0.1),
+              color: MarketiColors.greyColor.withValues(alpha: 0.1),
               blurRadius: 10,
               offset: const Offset(0, 5),
             ),
@@ -83,60 +82,41 @@ class _ProductCardState extends State<ProductCard> {
                     ),
                   ),
                   // Discount Badge
-                  if( widget.discount != null )
-                  Positioned(
-                    top: 8.h,
-                    left: 8.w,
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 6.w,
-                        vertical: 2.h,
-                      ),
-                      decoration: BoxDecoration(
-                        color: MarketiColors.lightBlue900Color,
-                        borderRadius: BorderRadius.circular(5.r),
-                      ),
-                      child: Text(
-                        widget.discount!,
-                        style: MarketiTextStyles.textStyle12.copyWith(
-                          color: Colors.white,
-                          fontSize: 10.sp,
+                  if (widget.discount != null)
+                    Positioned(
+                      top: 8.h,
+                      left: 8.w,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 6.w,
+                          vertical: 2.h,
+                        ),
+                        decoration: BoxDecoration(
+                          color: MarketiColors.lightBlue900Color,
+                          borderRadius: BorderRadius.circular(5.r),
+                        ),
+                        child: Text(
+                          widget.discount!,
+                          style: MarketiTextStyles.textStyle12.copyWith(
+                            color: Colors.white,
+                            fontSize: 10.sp,
+                          ),
                         ),
                       ),
                     ),
-                  ),
                   // Favorite Icon
-                  Positioned(
-                    top: 8.h,
-                    right: 8.w,
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _isFavorite = !_isFavorite;
-                        });
-                      },
-                      child: Container(
-                        padding: EdgeInsets.all(4.r),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                          boxShadow: [
-                            BoxShadow(
-                              //
-                              // ignore: deprecated_member_use
-                              color: Colors.grey.withOpacity(0.2),
-                              blurRadius: 5,
-                            ),
-                          ],
-                        ),
-                        child: Icon(
-                          _isFavorite ? Icons.favorite : Icons.favorite_outline,
-                          size: 20.r,
-                          color: _isFavorite
-                              ? MarketiColors.darkBlue100Color
-                              : MarketiColors.greyColor,
-                        ),
-                      ),
+                  FavoritesIcon(
+                    onTap: () {
+                      setState(() {
+                        _isFavorite = !_isFavorite;
+                      });
+                    },
+                    iconWidget: Icon(
+                      widget.selectedIcon,
+                      size: 20.r,
+                      color: _isFavorite
+                          ? MarketiColors.lightBlue900Color
+                          : MarketiColors.greyColor.withValues(alpha: 0.3),
                     ),
                   ),
                 ],
@@ -183,7 +163,7 @@ class _ProductCardState extends State<ProductCard> {
                       ),
                     ],
                   ),
-                  // tile
+                  // title
                   Text(
                     widget.name,
                     style: MarketiTextStyles.textStyle12.copyWith(

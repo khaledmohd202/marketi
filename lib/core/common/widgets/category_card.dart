@@ -29,7 +29,7 @@ class CategoryCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(10.r),
               //
               // ignore: deprecated_member_use
-              // color: MarketiColors.greyColor.withOpacity(0.1),
+              // color:Colors.grey.withValues(alpha: 0.1)
               border: Border.all(
                 color: MarketiColors.lightBlue100Color,
                 // color: Colors.transparent,

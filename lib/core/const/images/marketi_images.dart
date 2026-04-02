@@ -41,4 +41,9 @@ class MarketiImages {
   static const String townTeamLogo = 'assets/images/home/town_team_logo.png';
   static const String jblLogo = 'assets/images/home/jbl_logo.png';
   static const String sonyLogo = 'assets/images/home/sony_logo.png';
+
+  // Cart Images
+  static const String pampersCart1 = 'assets/images/cart/pampers_cart1.png';
+  static const String pampersCart2 = 'assets/images/cart/pampers_cart2.png';
+  static const String pampersCart3 = 'assets/images/cart/pampers_cart3.png';
 }

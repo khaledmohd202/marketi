@@ -12,7 +12,7 @@ import 'package:marketi/features/auth/presentation/view/verification_code_with_e
 import 'package:marketi/features/auth/presentation/view/verification_code_with_phone.dart';
 import 'package:marketi/features/auth/presentation/view_model/sign_in_cubit.dart';
 import 'package:marketi/features/auth/presentation/view_model/sign_up_cubit.dart';
-import 'package:marketi/features/cart/data/repo/view/cart_view.dart';
+import 'package:marketi/features/cart/presentation/view/cart_view.dart';
 import 'package:marketi/features/favorites/presentation/view/favorites_view.dart';
 import 'package:marketi/features/home/presentation/view/home_view.dart';
 import 'package:marketi/features/main/presentation/view/main_view.dart';

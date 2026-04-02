@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/core/const/images/marketi_images.dart';
+import 'package:marketi/core/themes/colors/marketi_colors.dart';
 
 class HomeBrands extends StatelessWidget {
   const HomeBrands({super.key});
@@ -22,9 +23,7 @@ class HomeBrands extends StatelessWidget {
               borderRadius: BorderRadius.circular(15.r),
               boxShadow: [
                 BoxShadow(
-                  //
-                  // ignore: deprecated_member_use
-                  color: Colors.grey.withOpacity(0.1),
+                  color: MarketiColors.greyColor.withValues(alpha: 0.2),
                   blurRadius: 10.r,
                 ),
               ],

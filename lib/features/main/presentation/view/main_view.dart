@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:marketi/features/cart/data/repo/view/cart_view.dart';
+import 'package:marketi/core/themes/colors/marketi_colors.dart';
+import 'package:marketi/features/cart/presentation/view/cart_view.dart';
 import 'package:marketi/features/favorites/presentation/view/favorites_view.dart';
 import 'package:marketi/features/home/presentation/view/home_view.dart';
 import 'package:marketi/features/main/presentation/widgets/bottom_nav_item.dart';
@@ -36,7 +37,7 @@ class _MainViewState extends State<MainView> {
             ),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withAlpha(2),
+                color: MarketiColors.greyColor.withValues(alpha: 0.2),
                 blurRadius: 10,
                 offset: const Offset(0, -5),
               ),
