@@ -14,7 +14,12 @@ import 'package:marketi/features/auth/presentation/view_model/sign_in_cubit.dart
 import 'package:marketi/features/auth/presentation/view_model/sign_up_cubit.dart';
 import 'package:marketi/features/cart/presentation/view/cart_view.dart';
 import 'package:marketi/features/favorites/presentation/view/favorites_view.dart';
+import 'package:marketi/features/home/presentation/view/best_products.dart';
+import 'package:marketi/features/home/presentation/view/brands.dart';
+import 'package:marketi/features/home/presentation/view/buy_again.dart';
+import 'package:marketi/features/home/presentation/view/categories.dart';
 import 'package:marketi/features/home/presentation/view/home_view.dart';
+import 'package:marketi/features/home/presentation/view/popular_products.dart';
 import 'package:marketi/features/main/presentation/view/main_view.dart';
 import 'package:marketi/features/menu/presentation/view/menu_view.dart';
 import 'package:marketi/features/onboarding/presentation/view/onboarding.dart';
@@ -31,11 +36,16 @@ class AppRoutes {
       '/verification-code-with-phone';
   static const String createNewPassword = '/create-new-password';
   static const String resetPasswordDone = '/reset-password-done';
-  static const String home = '/home';
   static const String cart = '/cart';
   static const String favorites = '/favorites';
   static const String menu = '/menu';
   static const String main = '/main';
+  static const String home = '/home';
+  static const String popularProducts = '/popular-products';
+  static const String categories = '/categories';
+  static const String bestProducts = '/best-products';
+  static const String brands = '/brands';
+  static const String buyAgain = '/buy-again';
   static Route<void> onGenerateRoute(RouteSettings settings) {
     //
     //ignore: unused_local_variable
@@ -87,11 +97,6 @@ class AppRoutes {
         return BaseRoutes(
           page: const MainView(),
         );
-      case home:
-        return BaseRoutes(
-          page: const HomeView(),
-        );
-
       case cart:
         return BaseRoutes(
           page: const CartView(),
@@ -103,6 +108,30 @@ class AppRoutes {
       case menu:
         return BaseRoutes(
           page: const MenuView(),
+        );
+      case home:
+        return BaseRoutes(
+          page: const HomeView(),
+        );
+      case popularProducts:
+        return BaseRoutes(
+          page: const PopularProducts(),
+        );
+      case categories:
+        return BaseRoutes(
+          page: const Categories(),
+        );
+      case bestProducts:
+        return BaseRoutes(
+          page: const BestProducts(),
+        );
+      case brands:
+        return BaseRoutes(
+          page: const Brands(),
+        );
+      case buyAgain:
+        return BaseRoutes(
+          page: const BuyAgain(),
         );
       default:
         return BaseRoutes(

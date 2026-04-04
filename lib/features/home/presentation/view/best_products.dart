@@ -5,41 +5,47 @@ import 'package:marketi/core/common/widgets/text_app.dart';
 import 'package:marketi/core/const/images/marketi_images.dart';
 import 'package:marketi/core/themes/colors/marketi_colors.dart';
 import 'package:marketi/core/themes/styles/marketi_text_styles.dart';
+import 'package:marketi/features/home/presentation/widgets/custom_view_all_app_bar.dart';
 
-class HomeBuyAgain extends StatelessWidget {
-  const HomeBuyAgain({super.key});
+class BestProducts extends StatelessWidget {
+  const BestProducts({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsetsGeometry.symmetric(vertical: 10.h),
-      child: SizedBox(
-        height: 255.h,
-        child: ListView.separated(
-          scrollDirection: Axis.horizontal,
+    return Scaffold(
+      appBar: const CustomViewAllAppBar(title: 'Best For You'),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 14.h),
+        child: GridView.builder(
+          shrinkWrap: true,
+          itemCount: _productImages.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 5.w,
+            crossAxisSpacing: 10.h,
+            // childAspectRatio: 0.7,
+            mainAxisExtent: 250.h,
+          ),
           itemBuilder: (context, index) {
             return ProductCard(
-              // discount: _productDiscounts[index],
-              image: _productImages[index],
-              onTap: () {},
-              // color: Colors.blue,
               name: _productNames[index],
               price: _productPrices[index],
               rating: _productRates[index],
+              onTap: () {},
+              image: _productImages[index],
               selectedIcon: Icons.favorite,
               bottomAddWidget: Center(
                 child: ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     minimumSize: Size(double.infinity, 35.h),
-                    foregroundColor: Colors.white,
-                    backgroundColor: MarketiColors.lightBlue700Color,
+                    backgroundColor: Colors.white,
+                    foregroundColor: MarketiColors.lightBlue700Color,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.r),
-
                       side: BorderSide(
                         color: MarketiColors.lightBlue700Color,
-                        width: 2.w,
+                        width: 1.w,
                       ),
                     ),
                   ),
@@ -51,35 +57,47 @@ class HomeBuyAgain extends StatelessWidget {
               ),
             );
           },
-          separatorBuilder: (context, index) => SizedBox(width: 10.w),
-          itemCount: _productImages.length,
         ),
       ),
     );
   }
 }
 
-final List<String> _productImages = [
-  MarketiImages.headphones,
-  MarketiImages.laptop,
-  MarketiImages.motorilla,
+final List<String> _productNames = [
+  'Wireless Headphones',
+  'Sony Smart TV',
+  'Laptop',
+  'iPhone 11 Pro',
+  'Motorola G Power',
+  'AirPods Pro',
 ];
 
 final List<String> _productPrices = [
-  '399',
-  '14999',
-  '8562',
-];
-final List<String> _productNames = [
-  'Black Sony Headphone',
-  'HP Chromebook laptop',
-  'Motorilla',
+  '499',
+  '19800',
+  '8579',
+  '499',
+  '19800',
+  '8579',
+  '499',
+  '19800',
+  '8579',
 ];
 
-final List<double> _productRates = [4.9, 4.8, 3.2];
+final List<double> _productRates = [
+  4.5,
+  4.0,
+  4.8,
+  4.2,
+  4.6,
+  4.3,
+];
 
-// final List<String> _productDiscounts = [
-//   '',
-//   '',
-//   '',
-// ];
+final List<String> _productImages = [
+  MarketiImages.headphones,
+  MarketiImages.smartTV,
+  MarketiImages.laptop,
+  MarketiImages.iphone11Pro,
+  MarketiImages.motorilla,
+  MarketiImages.airbods,
+];

@@ -64,14 +64,13 @@ class _FavoritesViewState extends State<FavoritesView> {
                           foregroundColor: MarketiColors.lightBlue700Color,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20.r),
-
                             side: BorderSide(
                               color: MarketiColors.lightBlue700Color,
                               width: 1.w,
                             ),
                           ),
                         ),
-                        child: const TextApp(
+                        child: TextApp(
                           text: 'Add',
                           theme: MarketiTextStyles.textStyle16,
                         ),
@@ -134,7 +133,8 @@ final List<double> _productRates = [
   4.5,
   3.2,
 ];
-
+//
+// ignore: unused_element
 final List<String> _productDiscounts = [
   '40%',
   '0.5%',

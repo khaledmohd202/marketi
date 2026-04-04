@@ -43,7 +43,7 @@ class HomeBestProduct extends StatelessWidget {
                       ),
                     ),
                   ),
-                  child: const TextApp(
+                  child: TextApp(
                     text: 'Add',
                     theme: MarketiTextStyles.textStyle16,
                   ),

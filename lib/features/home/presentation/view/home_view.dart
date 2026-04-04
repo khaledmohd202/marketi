@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:marketi/core/extensions/navigation_extensions.dart';
+import 'package:marketi/core/routing/app_routes.dart';
 import 'package:marketi/features/home/presentation/widgets/home_banner.dart';
 import 'package:marketi/features/home/presentation/widgets/home_best_product.dart';
 import 'package:marketi/features/home/presentation/widgets/home_brands.dart';
@@ -23,7 +25,7 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 14.h),
+        padding: EdgeInsets.only(left: 14.w, right: 14.w, top: 10.h),
         child: CustomScrollView(
           slivers: [
             // Home Header
@@ -42,7 +44,7 @@ class _HomeViewState extends State<HomeView> {
             SliverToBoxAdapter(
               child: HomeSectionTitle(
                 sectionTitle: 'Popular Products',
-                onPressed: () {},
+                onPressed: () => context.pushNamed(AppRoutes.popularProducts),
               ),
             ),
             const SliverToBoxAdapter(
@@ -52,7 +54,7 @@ class _HomeViewState extends State<HomeView> {
             SliverToBoxAdapter(
               child: HomeSectionTitle(
                 sectionTitle: 'Categories',
-                onPressed: () {},
+                onPressed: () => context.pushNamed(AppRoutes.categories),
               ),
             ),
             const SliverToBoxAdapter(
@@ -61,7 +63,7 @@ class _HomeViewState extends State<HomeView> {
             SliverToBoxAdapter(
               child: HomeSectionTitle(
                 sectionTitle: 'Best For You',
-                onPressed: () {},
+                onPressed: () => context.pushNamed(AppRoutes.bestProducts),
               ),
             ),
             const SliverToBoxAdapter(
@@ -70,7 +72,7 @@ class _HomeViewState extends State<HomeView> {
             SliverToBoxAdapter(
               child: HomeSectionTitle(
                 sectionTitle: 'Brands',
-                onPressed: () {},
+                onPressed: () => context.pushNamed(AppRoutes.brands),
               ),
             ),
             const SliverToBoxAdapter(
@@ -79,7 +81,7 @@ class _HomeViewState extends State<HomeView> {
             SliverToBoxAdapter(
               child: HomeSectionTitle(
                 sectionTitle: 'Buy Again',
-                onPressed: () {},
+                onPressed: () => context.pushNamed(AppRoutes.buyAgain),
               ),
             ),
             const SliverToBoxAdapter(

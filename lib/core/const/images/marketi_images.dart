@@ -41,6 +41,15 @@ class MarketiImages {
   static const String townTeamLogo = 'assets/images/home/town_team_logo.png';
   static const String jblLogo = 'assets/images/home/jbl_logo.png';
   static const String sonyLogo = 'assets/images/home/sony_logo.png';
+  static const String furniture = 'assets/images/home/furniture.png';
+  static const String gaming = 'assets/images/home/gaming.png';
+  static const String pampersLogo = 'assets/images/home/pampers_logo.png';
+  static const String canonLogo = 'assets/images/home/canon_logo.png';
+  static const String appleLogo = 'assets/images/home/apple_logo.png';
+  static const String adidasLogo = 'assets/images/home/adidas_logo.png';
+  static const String lacosteLogo = 'assets/images/home/lacoste_logo.png';
+  static const String toshibaLogo = 'assets/images/home/toshiba_logo.png';
+  static const String hpLogo = 'assets/images/home/hp_logo.png';
 
   // Cart Images
   static const String pampersCart1 = 'assets/images/cart/pampers_cart1.png';
