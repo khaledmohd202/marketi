@@ -23,4 +23,7 @@ extension NavigationExtensions on BuildContext {
   }
 
   void pop() => Navigator.of(this).pop();
+
+  void popUntil(bool Function(Route<dynamic>) predicate) =>
+      Navigator.of(this).popUntil(predicate);
 }

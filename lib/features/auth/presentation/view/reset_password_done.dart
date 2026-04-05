@@ -47,7 +47,7 @@ class ResetPasswordDone extends StatelessWidget {
             SizedBox(height: 25.h),
             CustomButton(
               onPressed: () {
-                context.pushNamedAndRemoveUntil(AppRoutes.login);
+                context.pushNamedAndRemoveUntil(AppRoutes.signIn);
               },
               text: 'Login',
               width: double.infinity,

@@ -61,7 +61,7 @@ class _SignUpState extends State<SignUp> {
           ScaffoldMessenger.of(context).showSnackBar(
             _successSnackBar(state, context),
           );
-          context.pushNamedAndRemoveUntil(AppRoutes.login);
+          context.pushNamedAndRemoveUntil(AppRoutes.signIn);
         } else if (state is SignUpFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
             _errorSnackBar(state, context),

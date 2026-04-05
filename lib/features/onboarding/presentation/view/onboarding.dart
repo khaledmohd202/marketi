@@ -89,7 +89,7 @@ class _OnboardingState extends State<Onboarding> {
     return ElevatedButton(
       onPressed: () {
         if (currentIndex == onboardingList.length - 1) {
-          context.pushNamedAndRemoveUntil(AppRoutes.login);
+          context.pushNamedAndRemoveUntil(AppRoutes.signIn);
         } else {
           _pageController.nextPage(
             duration: const Duration(milliseconds: 300),

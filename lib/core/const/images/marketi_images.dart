@@ -56,4 +56,5 @@ class MarketiImages {
   static const String pampersCart2 = 'assets/images/cart/pampers_cart2.png';
   static const String pampersCart3 = 'assets/images/cart/pampers_cart3.png';
   static const String address = 'assets/images/cart/address.png';
+  static const String successOrder = 'assets/images/cart/success_order.png';
 }

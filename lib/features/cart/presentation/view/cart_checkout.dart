@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:marketi/core/common/widgets/custom_text_field.dart';
 import 'package:marketi/core/common/widgets/dashed_divider.dart';
 import 'package:marketi/core/common/widgets/text_app.dart';
 import 'package:marketi/core/const/icons/marketi_icons.dart';
@@ -8,7 +7,7 @@ import 'package:marketi/core/const/images/marketi_images.dart';
 import 'package:marketi/core/themes/colors/marketi_colors.dart';
 import 'package:marketi/core/themes/styles/marketi_text_styles.dart';
 import 'package:marketi/features/cart/presentation/view/cart_view.dart';
-import 'package:marketi/features/cart/presentation/widgets/cart_bottom.dart';
+import 'package:marketi/features/cart/presentation/view/successful_order.dart';
 import 'package:marketi/features/home/presentation/widgets/custom_view_all_app_bar.dart';
 
 class CartCheckout extends StatelessWidget {
@@ -52,7 +51,12 @@ class CartCheckout extends StatelessWidget {
               SizedBox(height: 20.h),
               ElevatedButton(
                 onPressed: () {
-                  // Handle checkout logic here
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (context) => const SuccessfulOrder(),
+                    ),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size(double.infinity, 50.h),
@@ -184,19 +188,19 @@ class VoucherCode extends StatelessWidget {
               ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(14.r),
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: MarketiColors.darkBlue100Color,
                 ),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(14.r),
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: MarketiColors.darkBlue100Color,
                 ),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(14.r),
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: MarketiColors.darkBlue100Color,
                 ),
               ),

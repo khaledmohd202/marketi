@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketi/core/di/dependency_injection.dart';
@@ -27,7 +28,7 @@ import 'package:marketi/features/onboarding/presentation/view/onboarding.dart';
 
 class AppRoutes {
   static const String onboarding = '/onboarding';
-  static const String login = '/login';
+  static const String signIn = '/login';
   static const String signUp = '/sign-up';
   static const String forgotPasswordWithEmail = '/forgot-password-with-email';
   static const String forgotPasswordWithPhone = '/forgot-password-with-phone';
@@ -58,7 +59,8 @@ class AppRoutes {
         return BaseRoutes(
           page: const Onboarding(),
         );
-      case login:
+      case '/':
+      case signIn:
         return BaseRoutes(
           page: BlocProvider(
             create: (context) => sl<SignInCubit>(),
@@ -141,13 +143,15 @@ class AppRoutes {
           page: const CartCheckout(),
         );
       default:
-        return BaseRoutes(
-          page: const Scaffold(
-            body: Center(
-              child: Text('Page not found'),
-            ),
-          ),
-        );
+        return kDebugMode
+            ? BaseRoutes(
+                page: Scaffold(
+                  body: Center(
+                    child: Text('Page not found ${settings.name}'),
+                  ),
+                ),
+              )
+            : BaseRoutes(page: const MainView());
       // default:
       //   return BaseRoutes(page: const PageUnderBuildScreen());
     }
