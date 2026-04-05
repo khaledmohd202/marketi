@@ -34,7 +34,8 @@ class _FavoritesViewState extends State<FavoritesView> {
             const CommonHeader(
               title: 'My Favorites',
             ),
-            HomeSearchBar(controller: _controller),
+            // HomeSearchBar(controller: _controller),
+            SizedBox(height: 10.h),
             Expanded(
               child: GridView.builder(
                 shrinkWrap: true,

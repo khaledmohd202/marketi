@@ -36,11 +36,7 @@ class _ProductCardState extends State<ProductCard> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        // context.pushNamed(
-        //   AppRoutes.productDetails,
-        // );
-      },
+      onTap: widget.onTap,
       child: Container(
         width: 170.w,
         decoration: BoxDecoration(

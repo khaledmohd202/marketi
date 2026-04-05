@@ -5,6 +5,7 @@ import 'package:marketi/core/common/widgets/text_app.dart';
 import 'package:marketi/core/const/images/marketi_images.dart';
 import 'package:marketi/core/themes/colors/marketi_colors.dart';
 import 'package:marketi/core/themes/styles/marketi_text_styles.dart';
+import 'package:marketi/features/product_details/presentation/view/product_details.dart';
 
 class HomeBuyAgain extends StatelessWidget {
   const HomeBuyAgain({super.key});
@@ -21,7 +22,14 @@ class HomeBuyAgain extends StatelessWidget {
             return ProductCard(
               // discount: _productDiscounts[index],
               image: _productImages[index],
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (context) => const ProductDetails(),
+                  ),
+                );
+              },
               // color: Colors.blue,
               name: _productNames[index],
               price: _productPrices[index],

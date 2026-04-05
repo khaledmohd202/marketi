@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/core/common/widgets/product_card.dart';
 import 'package:marketi/core/const/images/marketi_images.dart';
+import 'package:marketi/features/product_details/presentation/view/product_details.dart';
 
 class HomePopularProduct extends StatelessWidget {
   const HomePopularProduct({super.key});
@@ -18,7 +19,14 @@ class HomePopularProduct extends StatelessWidget {
             return ProductCard(
               discount: _productDiscounts[index],
               image: _productImages[index],
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (context) => const ProductDetails(),
+                  ),
+                );
+              },
               // color: Colors.blue,
               name: _productNames[index],
               price: _productPrices[index],
