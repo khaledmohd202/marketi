@@ -9,4 +9,6 @@ class MarketiIcons {
   static const String facebookIcon = 'assets/icons/facebook_icon.png';
   static const String notificationsIcon = 'assets/icons/notifications_icon.png';
   static const String filterIcon = 'assets/icons/filter_icon.png';
+  static const String deliveryIcon = 'assets/icons/delivery_icon.png';
+  static const String cashIcon = 'assets/icons/cash_icon.png';
 }

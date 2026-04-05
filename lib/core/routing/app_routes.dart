@@ -12,6 +12,7 @@ import 'package:marketi/features/auth/presentation/view/verification_code_with_e
 import 'package:marketi/features/auth/presentation/view/verification_code_with_phone.dart';
 import 'package:marketi/features/auth/presentation/view_model/sign_in_cubit.dart';
 import 'package:marketi/features/auth/presentation/view_model/sign_up_cubit.dart';
+import 'package:marketi/features/cart/presentation/view/cart_checkout.dart';
 import 'package:marketi/features/cart/presentation/view/cart_view.dart';
 import 'package:marketi/features/favorites/presentation/view/favorites_view.dart';
 import 'package:marketi/features/home/presentation/view/best_products.dart';
@@ -46,6 +47,8 @@ class AppRoutes {
   static const String bestProducts = '/best-products';
   static const String brands = '/brands';
   static const String buyAgain = '/buy-again';
+  static const String cartCheckout = '/cart-checkout';
+
   static Route<void> onGenerateRoute(RouteSettings settings) {
     //
     //ignore: unused_local_variable
@@ -132,6 +135,10 @@ class AppRoutes {
       case buyAgain:
         return BaseRoutes(
           page: const BuyAgain(),
+        );
+      case cartCheckout:
+        return BaseRoutes(
+          page: const CartCheckout(),
         );
       default:
         return BaseRoutes(

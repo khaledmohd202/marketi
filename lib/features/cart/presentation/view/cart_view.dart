@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/core/const/images/marketi_images.dart';
+import 'package:marketi/core/extensions/navigation_extensions.dart';
+import 'package:marketi/core/routing/app_routes.dart';
 import 'package:marketi/features/cart/presentation/widgets/cart_bottom.dart';
 import 'package:marketi/features/cart/presentation/widgets/cart_header.dart';
 import 'package:marketi/features/cart/presentation/widgets/cart_product_card.dart';
@@ -28,15 +30,15 @@ class _CartViewState extends State<CartView> {
             // Products List
             Expanded(
               child: ListView.separated(
-                itemCount: _productImages.length,
+                itemCount: productImages.length,
                 separatorBuilder: (context, index) => SizedBox(height: 10.h),
                 itemBuilder: (context, index) {
                   return CartProductCard(
-                    image: _productImages[index],
-                    productTitle: _productNames[index],
-                    description: _productDescriptions[index],
-                    price: _productPrices[index],
-                    rating: _productRatings[index],
+                    image: productImages[index],
+                    productTitle: productNames[index],
+                    description: productDescriptions[index],
+                    price: productPrices[index],
+                    rating: productRatings[index],
                     selectedIcon: Icons.favorite,
                   );
                 },
@@ -44,11 +46,9 @@ class _CartViewState extends State<CartView> {
             ),
             // Checkout Button
             CartBottom(
-              totalItems: _productImages.length.toString(),
-              totalPrice: _totalPrice.toStringAsFixed(2),
-              onPressed: () {
-                // Handle checkout logic here
-              },
+              totalItems: productImages.length.toString(),
+              totalPrice: totalPrice.toStringAsFixed(2),
+              onPressed: () => context.pushNamed(AppRoutes.cartCheckout),
             ),
           ],
         ),
@@ -57,11 +57,11 @@ class _CartViewState extends State<CartView> {
   }
 }
 
-double get _totalPrice {
-  return _productPrices.fold(0, (sum, price) => sum + double.parse(price));
+double get totalPrice {
+  return productPrices.fold(0, (sum, price) => sum + double.parse(price));
 }
 
-final List<String> _productImages = [
+final List<String> productImages = [
   MarketiImages.pampersCart1,
   MarketiImages.pampersCart2,
   MarketiImages.pampersCart3,
@@ -70,7 +70,7 @@ final List<String> _productImages = [
   MarketiImages.pampersCart3,
 ];
 
-final List<String> _productNames = [
+final List<String> productNames = [
   'Pampers Swaddlers Diapers',
   'Seventh Generation Diapers',
   'Pampers Swaddlers Diapers',
@@ -79,7 +79,7 @@ final List<String> _productNames = [
   'Pampers Swaddlers Diapers',
 ];
 
-final List<String> _productDescriptions = [
+final List<String> productDescriptions = [
   '84 Diapers',
   '24 Diapers',
   '152 Diapers',
@@ -88,7 +88,7 @@ final List<String> _productDescriptions = [
   '152 Diapers',
 ];
 
-final List<String> _productPrices = [
+final List<String> productPrices = [
   '345.00',
   '88.00',
   '599.00',
@@ -97,7 +97,7 @@ final List<String> _productPrices = [
   '599.00',
 ];
 
-final List<String> _productRatings = [
+final List<String> productRatings = [
   '4.9',
   '4.6',
   '4.6',
