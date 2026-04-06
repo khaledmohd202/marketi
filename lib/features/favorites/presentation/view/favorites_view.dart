@@ -6,7 +6,6 @@ import 'package:marketi/core/const/images/marketi_images.dart';
 import 'package:marketi/core/themes/colors/marketi_colors.dart';
 import 'package:marketi/core/themes/styles/marketi_text_styles.dart';
 import 'package:marketi/features/cart/presentation/widgets/cart_header.dart';
-import 'package:marketi/features/home/presentation/widgets/home_search_bar.dart';
 
 class FavoritesView extends StatefulWidget {
   const FavoritesView({super.key});

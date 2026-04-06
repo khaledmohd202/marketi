@@ -7,7 +7,8 @@ import 'package:marketi/core/themes/colors/marketi_colors.dart';
 import 'package:marketi/core/themes/styles/marketi_text_styles.dart';
 
 class ProductAppBar extends StatelessWidget {
-  const ProductAppBar({super.key});
+  const ProductAppBar({required this.title, super.key});
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class ProductAppBar extends StatelessWidget {
           onPressed: () => context.pop(),
           icon: Image.asset(MarketiIcons.backButton),
         ),
-        TextApp(text: 'Product Details', theme: MarketiTextStyles.textStyle20),
+        TextApp(text: title, theme: MarketiTextStyles.textStyle20),
         IconButton(
           onPressed: () => context.pop(),
           icon: Icon(

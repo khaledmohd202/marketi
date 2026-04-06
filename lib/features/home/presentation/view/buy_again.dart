@@ -13,11 +13,11 @@ class BuyAgain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomViewAllAppBar(title: 'Buy Again'),
+      appBar: const CustomViewAllAppBar(title: 'Buy Again'),
       body: Padding(
         padding: EdgeInsetsGeometry.symmetric(
-          horizontal: 14,
-          vertical: 14,
+          horizontal: 14.w,
+          vertical: 14.h,
         ),
         child:  GridView.builder(
           shrinkWrap: true,

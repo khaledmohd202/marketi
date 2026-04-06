@@ -3,6 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/core/common/widgets/custom_circle_avatar.dart';
 import 'package:marketi/core/common/widgets/text_app.dart';
 import 'package:marketi/core/const/icons/marketi_icons.dart';
+import 'package:marketi/core/const/images/marketi_images.dart';
+import 'package:marketi/core/extensions/navigation_extensions.dart';
+import 'package:marketi/core/routing/app_routes.dart';
 import 'package:marketi/core/themes/colors/marketi_colors.dart';
 import 'package:marketi/core/themes/styles/marketi_text_styles.dart';
 
@@ -13,7 +16,13 @@ class HomeHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CustomCircleAvatar(onTap: () {}),
+        CustomCircleAvatar(
+          onTap: () => context.pushNamed(AppRoutes.profile),
+          width: 60.w,
+          height: 60.h,
+          radius: 30.r,
+          imageUrl: MarketiImages.khaled,
+        ),
         SizedBox(width: 10.w),
         TextApp(
           text: 'Hi Khaled! 🤍',
