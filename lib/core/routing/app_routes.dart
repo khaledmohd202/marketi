@@ -26,6 +26,7 @@ import 'package:marketi/features/main/presentation/view/main_view.dart';
 import 'package:marketi/features/menu/presentation/view/menu_view.dart';
 import 'package:marketi/features/onboarding/presentation/view/onboarding.dart';
 import 'package:marketi/features/profile/presentation/view/profile_view.dart';
+import 'package:marketi/features/search/presentation/views/search_view.dart';
 
 class AppRoutes {
   static const String onboarding = '/onboarding';
@@ -51,6 +52,7 @@ class AppRoutes {
   static const String buyAgain = '/buy-again';
   static const String cartCheckout = '/cart-checkout';
   static const String profile = '/profile';
+  static const String search = '/search';
 
   static Route<void> onGenerateRoute(RouteSettings settings) {
     //
@@ -147,6 +149,10 @@ class AppRoutes {
       case profile:
         return BaseRoutes(
           page: const ProfileView(),
+        );
+      case search:
+        return BaseRoutes(
+          page: const SearchView(),
         );
       default:
         return kDebugMode

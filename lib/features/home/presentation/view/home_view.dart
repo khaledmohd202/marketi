@@ -34,7 +34,10 @@ class _HomeViewState extends State<HomeView> {
             ),
             // Search Bar
             SliverToBoxAdapter(
-              child: HomeSearchBar(controller: _controller),
+              child: HomeSearchBar(
+                controller: _controller,
+                onTap: () => context.pushNamed(AppRoutes.search),
+              ),
             ),
             // Banner Bar
             const SliverToBoxAdapter(
