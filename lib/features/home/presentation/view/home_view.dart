@@ -48,67 +48,189 @@ class _HomeViewState extends State<HomeView> {
             const SliverToBoxAdapter(
               child: HomeBanner(),
             ),
+            // the first solution
             // Popular Products
+            // SliverToBoxAdapter(
+            //   child: BlocProvider(
+            //     create: (context) =>
+            //         sl<ProductsCubit>()..getAllProducts(limit: 9),
+            //     child: Column(
+            //       children: [
+            //         // Popular Products
+            //         HomeSectionTitle(
+            //           sectionTitle: 'Popular Products',
+            //           onPressed: () =>
+            //               context.pushNamed(AppRoutes.popularProducts),
+            //         ),
+            //         const HomePopularProduct(),
+            //         // Categories
+            //         BlocProvider(
+            //         create: (_) => sl<CategoriesCubit>()..getAllCategories(),
+            //           child: Column(
+            //             children: [
+            //               HomeSectionTitle(
+            //                 sectionTitle: 'Categories',
+            //                 onPressed: () =>
+            //                     context.pushNamed(AppRoutes.categories),
+            //               ),
+            //               const HomeCategories(),
+            //             ],
+            //           ),
+            //         ),
+            //         // Best Product
+            //         HomeSectionTitle(
+            //           sectionTitle: 'Best For You',
+            //           onPressed: () =>
+            //               // context.pushNamed(AppRoutes.bestProducts),
+            //               context.pushNamed(AppRoutes.popularProducts),
+            //         ),
+            //         const HomeBestProduct(),
+
+            //         // Brands
+            //         BlocProvider(
+            //           create: (_) => sl<BrandsCubit>()..getAllBrands(),
+            //           child: Column(
+            //             children: [
+            //               HomeSectionTitle(
+            //                 sectionTitle: 'Brands',
+            //                 onPressed: () =>
+            //                     context.pushNamed(AppRoutes.brands),
+            //               ),
+            //               const HomeBrands(),
+            //             ],
+            //           ),
+            //         ),
+            //         // Buy Again
+            //         HomeSectionTitle(
+            //           sectionTitle: 'Buy Again',
+            //           onPressed: () =>
+            //               context.pushNamed(AppRoutes.popularProducts),
+            //           // context.pushNamed(AppRoutes.buyAgain),
+            //         ),
+            //         const HomeBuyAgain(),
+            //       ],
+            //     ),
+            //   ),
+            // ),
+
+
+            // Popular Products
+            // the second solution but we continued
             SliverToBoxAdapter(
               child: BlocProvider(
-                create: (context) =>
-                    sl<ProductsCubit>()..getAllProducts(limit: 9),
+                create: (context) {
+                  final cubit = sl<ProductsCubit>();
+                  if (cubit.products.isEmpty) {
+                    cubit.getAllProducts(limit: 9);
+                  }
+                  return cubit;
+                },
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Popular Products
                     HomeSectionTitle(
                       sectionTitle: 'Popular Products',
                       onPressed: () =>
                           context.pushNamed(AppRoutes.popularProducts),
                     ),
                     const HomePopularProduct(),
-                    // Categories
-                    BlocProvider(
-                      create: (_) => sl<CategoriesCubit>()..getAllCategories(),
-                      child: Column(
-                        children: [
-                          HomeSectionTitle(
-                            sectionTitle: 'Categories',
-                            onPressed: () =>
-                                context.pushNamed(AppRoutes.categories),
-                          ),
-                          const HomeCategories(),
-                        ],
-                      ),
-                    ),
-                    // Best Product
-                    HomeSectionTitle(
-                      sectionTitle: 'Best For You',
-                      onPressed: () =>
-                          // context.pushNamed(AppRoutes.bestProducts),
-                          context.pushNamed(AppRoutes.popularProducts),
-                    ),
-                    const HomeBestProduct(),
-
-                    // Brands
-                    BlocProvider(
-                      create: (_) => sl<BrandsCubit>()..getAllBrands(),
-                      child: Column(
-                        children: [
-                          HomeSectionTitle(
-                            sectionTitle: 'Brands',
-                            onPressed: () =>
-                                context.pushNamed(AppRoutes.brands),
-                          ),
-                          const HomeBrands(),
-                        ],
-                      ),
-                    ),
-                    // Buy Again
-                    HomeSectionTitle(
-                      sectionTitle: 'Buy Again',
-                      onPressed: () =>
-                          context.pushNamed(AppRoutes.popularProducts),
-                      // context.pushNamed(AppRoutes.buyAgain),
-                    ),
-                    const HomeBuyAgain(),
                   ],
                 ),
+              ),
+            ),
+
+            // Categories
+            SliverToBoxAdapter(
+              child: BlocProvider(
+                create: (context) {
+                  final cubit = sl<CategoriesCubit>();
+                  if (cubit.state is CategoriesInitial) {
+                    cubit.getAllCategories();
+                  }
+                  return cubit;
+                },
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    HomeSectionTitle(
+                      sectionTitle: 'Categories',
+                      onPressed: () =>
+                          context.pushNamed(AppRoutes.categories),
+                    ),
+                    const HomeCategories(),
+                  ],
+                ),
+              ),
+            ),
+
+            // Best For You
+            SliverToBoxAdapter(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  HomeSectionTitle(
+                    sectionTitle: 'Best For You',
+                    onPressed: () =>
+                        context.pushNamed(AppRoutes.popularProducts),
+                  ),
+                  BlocProvider(
+                    create: (context) {
+                      final cubit = sl<ProductsCubit>();
+                      if (cubit.products.isEmpty) {
+                        cubit.getAllProducts(limit: 9);
+                      }
+                      return cubit;
+                    },
+                    child: const HomeBestProduct(),
+                  ),
+                ],
+              ),
+            ),
+
+            // Brands
+            SliverToBoxAdapter(
+              child: BlocProvider(
+                create: (context) {
+                  final cubit = sl<BrandsCubit>();
+                  if (cubit.state is BrandsInitial) {
+                    cubit.getAllBrands();
+                  }
+                  return cubit;
+                },
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    HomeSectionTitle(
+                      sectionTitle: 'Brands',
+                      onPressed: () => context.pushNamed(AppRoutes.brands),
+                    ),
+                    const HomeBrands(),
+                  ],
+                ),
+              ),
+            ),
+
+            // Buy Again
+            SliverToBoxAdapter(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  HomeSectionTitle(
+                    sectionTitle: 'Buy Again',
+                    onPressed: () =>
+                        context.pushNamed(AppRoutes.popularProducts),
+                  ),
+                  BlocProvider(
+                    create: (context) {
+                      final cubit = sl<ProductsCubit>();
+                      if (cubit.products.isEmpty) {
+                        cubit.getAllProducts(limit: 9);
+                      }
+                      return cubit;
+                    },
+                    child: const HomeBuyAgain(),
+                  ),
+                ],
               ),
             ),
           ],

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:marketi/core/common/widgets/loading/loading_shimmer.dart';
 import 'package:marketi/core/common/widgets/product_card.dart';
-import 'package:marketi/core/loading/loading_shimmer.dart';
 import 'package:marketi/features/home/presentation/view_model/products/products_cubit.dart';
 import 'package:marketi/features/product_details/presentation/view/product_details.dart';
 

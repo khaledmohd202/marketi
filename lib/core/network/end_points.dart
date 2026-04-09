@@ -6,6 +6,9 @@ class EndPoint {
   static String products = 'home/products';
   static String categories = 'home/categories';
   static String brands = 'home/brands';
+  static String getCart = 'user/getCart';
+  static String addToCart = 'user/addCart';
+  static String deleteFromCart = 'user/deleteCart';
 }
 
 class ApiKey {
@@ -43,4 +46,6 @@ class ApiKey {
 
   static String location = 'location';
   static String profilePic = 'profilePic';
+
+  static String productId = 'productId';
 }

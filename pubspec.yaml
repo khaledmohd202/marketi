@@ -29,6 +29,8 @@ dependencies:
   flutter_zoom_drawer: ^3.2.0
   fluttertoast: ^9.0.0
   get_it: ^9.2.1
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
   image_picker: ^1.2.1
   intl: ^0.20.2
   jwt_decoder: ^2.0.1
@@ -39,6 +41,7 @@ dependencies:
   shimmer: ^3.0.0
   smooth_page_indicator: ^2.0.1
   very_good_analysis: ^9.0.0
+
 
 dev_dependencies:
   flutter_lints: ^6.0.0
@@ -83,3 +86,7 @@ flutter:
           weight: 500
         - asset: assets/fonts/arabic/Cairo-Regular.ttf
           weight: 400
+
+
+dependency_overrides:
+  objective_c: 8.0.0

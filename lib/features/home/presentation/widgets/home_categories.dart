@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/core/common/widgets/category_card.dart';
-import 'package:marketi/core/loading/loading_shimmer.dart';
+import 'package:marketi/core/common/widgets/loading/loading_shimmer.dart';
 import 'package:marketi/features/home/presentation/view_model/categories/categories_cubit.dart';
 
 class HomeCategories extends StatelessWidget {

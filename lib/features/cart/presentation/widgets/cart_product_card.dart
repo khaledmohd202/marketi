@@ -7,6 +7,10 @@ import 'package:marketi/core/themes/styles/marketi_text_styles.dart';
 
 class CartProductCard extends StatefulWidget {
   const CartProductCard({
+    required this.onDecrement,
+    required this.onDelete,
+    required this.onIncrement,
+    required this.quantity,
     required this.rating,
     required this.price,
     required this.description,
@@ -22,6 +26,10 @@ class CartProductCard extends StatefulWidget {
   final String price;
   final String rating;
   final IconData selectedIcon;
+  final VoidCallback onDelete;
+  final int quantity;
+  final VoidCallback onIncrement;
+  final VoidCallback onDecrement;
 
   @override
   State<CartProductCard> createState() => _CartProductCardState();
@@ -29,7 +37,6 @@ class CartProductCard extends StatefulWidget {
 
 class _CartProductCardState extends State<CartProductCard> {
   bool _isFavorite = false;
-  int _quantity = 1;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -50,7 +57,7 @@ class _CartProductCardState extends State<CartProductCard> {
           // Product Image
           ClipRRect(
             borderRadius: BorderRadius.circular(10.r),
-            child: Image.asset(
+            child: Image.network(
               widget.image,
               width: 100.w,
               height: 115.h,
@@ -129,32 +136,31 @@ class _CartProductCardState extends State<CartProductCard> {
                   children: [
                     // Decrease Button
                     GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          if (_quantity > 1) {
-                            _quantity--;
-                          }
-                        });
-                      },
+                      onTap: widget.quantity == 1
+                          ? widget.onDelete
+                          : widget.onDecrement,
                       child: Container(
                         height: 40.h,
                         width: 40.w,
                         decoration: BoxDecoration(
-                          color: _quantity == 1
+                          color: widget.quantity == 1
                               ? Colors.red.withValues(alpha: 0.5)
                               : MarketiColors.greyColor.withValues(alpha: 0.2),
                           borderRadius: BorderRadius.circular(10.r),
                         ),
                         child: Icon(
-                          _quantity == 1 ? Icons.delete_outline : Icons.remove,
+                          widget.quantity == 1
+                              ? Icons.delete_outline
+                              : Icons.remove,
                           size: 16.r,
-                          color: _quantity == 1
+                          color: widget.quantity == 1
                               ? Colors.red
                               : MarketiColors.greyColor,
                         ),
                       ),
                     ),
                     SizedBox(width: 15.w),
+                    // Quantity
                     Container(
                       height: 40.h,
                       width: 100.w,
@@ -166,7 +172,7 @@ class _CartProductCardState extends State<CartProductCard> {
                         ),
                       ),
                       child: TextApp(
-                        text: _quantity.toString(),
+                        text: widget.quantity.toString(),
                         theme: MarketiTextStyles.textStyle14.copyWith(
                           fontWeight: FontWeight.bold,
                           color: MarketiColors.darkBlue900Color,
@@ -176,11 +182,7 @@ class _CartProductCardState extends State<CartProductCard> {
                     SizedBox(width: 15.w),
                     // Plus
                     GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _quantity++;
-                        });
-                      },
+                      onTap: widget.onIncrement,
                       child: Container(
                         height: 40.h,
                         width: 40.w,

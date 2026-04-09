@@ -8,6 +8,8 @@ import 'package:marketi/features/auth/data/repo/user_repo.dart';
 import 'package:marketi/features/auth/presentation/view_model/sign_in_cubit.dart';
 import 'package:marketi/features/auth/presentation/view_model/sign_up_cubit.dart';
 import 'package:marketi/features/auth/presentation/view_model/user_data_cubit.dart';
+import 'package:marketi/features/cart/data/repo/cart_repo.dart';
+import 'package:marketi/features/cart/presentation/view_model/cart_cubit.dart';
 import 'package:marketi/features/home/data/repo/brands_repo.dart';
 import 'package:marketi/features/home/data/repo/categories_repo.dart';
 import 'package:marketi/features/home/data/repo/products_repo.dart';
@@ -25,6 +27,7 @@ Future<void> setupInjector() async {
   await _initProducts();
   await _initCategories();
   await _initBrands();
+  await _initCart();
 }
 
 Future<void> _initCore() async {
@@ -67,4 +70,10 @@ Future<void> _initBrands() async {
   sl
     ..registerLazySingleton(() => BrandsRepo(sl()))
     ..registerFactory(() => BrandsCubit(sl()));
+}
+
+Future<void> _initCart() async {
+  sl
+    ..registerLazySingleton(() => CartRepo(sl()))
+    ..registerFactory(() => CartCubit(sl()));
 }

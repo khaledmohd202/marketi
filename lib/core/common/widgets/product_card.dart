@@ -67,14 +67,6 @@ class _ProductCardState extends State<ProductCard> {
                   Center(
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10.r),
-                      // replaced with Image.network when linking with API
-                      // child: Image.asset(
-                      //   widget.image,
-                      //   // height: 140.h,
-                      //   width: double.infinity,
-                      //   scale: 0.8,
-                      //   // fit: BoxFit.fill,
-                      // ),
                       child: Image.network(
                         widget.image,
                         fit: BoxFit.fill,
@@ -98,7 +90,7 @@ class _ProductCardState extends State<ProductCard> {
                           borderRadius: BorderRadius.circular(5.r),
                         ),
                         child: Text(
-                          widget.discount!,
+                          '${widget.discount!} %',
                           style: MarketiTextStyles.textStyle12.copyWith(
                             color: Colors.white,
                             fontSize: 10.sp,
