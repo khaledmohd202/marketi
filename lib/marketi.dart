@@ -20,8 +20,7 @@ class MarketiApp extends StatelessWidget {
           theme: ThemeData(
             scaffoldBackgroundColor: MarketiColors.whiteColor,
           ),
-          initialRoute: AppRoutes.main,
-          // initialRoute: startRoute,
+          initialRoute: startRoute,
           onGenerateRoute: AppRoutes.onGenerateRoute,
         );
       },

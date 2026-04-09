@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:marketi/core/di/dependency_injection.dart';
 import 'package:marketi/core/extensions/navigation_extensions.dart';
 import 'package:marketi/core/routing/app_routes.dart';
+import 'package:marketi/features/home/presentation/view_model/brands/brands_cubit.dart';
+import 'package:marketi/features/home/presentation/view_model/categories/categories_cubit.dart';
+import 'package:marketi/features/home/presentation/view_model/products/products_cubit.dart';
 import 'package:marketi/features/home/presentation/widgets/home_banner.dart';
 import 'package:marketi/features/home/presentation/widgets/home_best_product.dart';
 import 'package:marketi/features/home/presentation/widgets/home_brands.dart';
@@ -45,50 +50,66 @@ class _HomeViewState extends State<HomeView> {
             ),
             // Popular Products
             SliverToBoxAdapter(
-              child: HomeSectionTitle(
-                sectionTitle: 'Popular Products',
-                onPressed: () => context.pushNamed(AppRoutes.popularProducts),
+              child: BlocProvider(
+                create: (context) =>
+                    sl<ProductsCubit>()..getAllProducts(limit: 9),
+                child: Column(
+                  children: [
+                    // Popular Products
+                    HomeSectionTitle(
+                      sectionTitle: 'Popular Products',
+                      onPressed: () =>
+                          context.pushNamed(AppRoutes.popularProducts),
+                    ),
+                    const HomePopularProduct(),
+                    // Categories
+                    BlocProvider(
+                      create: (_) => sl<CategoriesCubit>()..getAllCategories(),
+                      child: Column(
+                        children: [
+                          HomeSectionTitle(
+                            sectionTitle: 'Categories',
+                            onPressed: () =>
+                                context.pushNamed(AppRoutes.categories),
+                          ),
+                          const HomeCategories(),
+                        ],
+                      ),
+                    ),
+                    // Best Product
+                    HomeSectionTitle(
+                      sectionTitle: 'Best For You',
+                      onPressed: () =>
+                          // context.pushNamed(AppRoutes.bestProducts),
+                          context.pushNamed(AppRoutes.popularProducts),
+                    ),
+                    const HomeBestProduct(),
+
+                    // Brands
+                    BlocProvider(
+                      create: (_) => sl<BrandsCubit>()..getAllBrands(),
+                      child: Column(
+                        children: [
+                          HomeSectionTitle(
+                            sectionTitle: 'Brands',
+                            onPressed: () =>
+                                context.pushNamed(AppRoutes.brands),
+                          ),
+                          const HomeBrands(),
+                        ],
+                      ),
+                    ),
+                    // Buy Again
+                    HomeSectionTitle(
+                      sectionTitle: 'Buy Again',
+                      onPressed: () =>
+                          context.pushNamed(AppRoutes.popularProducts),
+                      // context.pushNamed(AppRoutes.buyAgain),
+                    ),
+                    const HomeBuyAgain(),
+                  ],
+                ),
               ),
-            ),
-            const SliverToBoxAdapter(
-              child: HomePopularProduct(),
-            ),
-            // Categories
-            SliverToBoxAdapter(
-              child: HomeSectionTitle(
-                sectionTitle: 'Categories',
-                onPressed: () => context.pushNamed(AppRoutes.categories),
-              ),
-            ),
-            const SliverToBoxAdapter(
-              child: HomeCategories(),
-            ),
-            SliverToBoxAdapter(
-              child: HomeSectionTitle(
-                sectionTitle: 'Best For You',
-                onPressed: () => context.pushNamed(AppRoutes.bestProducts),
-              ),
-            ),
-            const SliverToBoxAdapter(
-              child: HomeBestProduct(),
-            ),
-            SliverToBoxAdapter(
-              child: HomeSectionTitle(
-                sectionTitle: 'Brands',
-                onPressed: () => context.pushNamed(AppRoutes.brands),
-              ),
-            ),
-            const SliverToBoxAdapter(
-              child: HomeBrands(),
-            ),
-            SliverToBoxAdapter(
-              child: HomeSectionTitle(
-                sectionTitle: 'Buy Again',
-                onPressed: () => context.pushNamed(AppRoutes.buyAgain),
-              ),
-            ),
-            const SliverToBoxAdapter(
-              child: HomeBuyAgain(),
             ),
           ],
         ),

@@ -27,18 +27,13 @@ class CategoryCard extends StatelessWidget {
             width: 100.w,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.r),
-              //
-              // ignore: deprecated_member_use
-              // color:Colors.grey.withValues(alpha: 0.1)
               border: Border.all(
                 color: MarketiColors.lightBlue100Color,
-                // color: Colors.transparent,
               ),
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(15.r),
-              // child: Image.network(image, fit: BoxFit.cover),
-              child: Image.asset(image, scale: 0.5, fit: BoxFit.fill),
+              child: Image.network(image, fit: BoxFit.fill, scale: 0.5),
             ),
           ),
           SizedBox(height: 5.h),

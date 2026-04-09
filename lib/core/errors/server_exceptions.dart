@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:marketi/core/errors/error_model.dart';
 
 class ServerException implements Exception {
@@ -7,6 +8,11 @@ class ServerException implements Exception {
 }
 
 void handleDioExceptions(DioException e) {
+  debugPrint(
+    //
+    // ignore: lines_longer_than_80_chars
+    '🌐 DioException: ${e.type} | ${e.response?.statusCode} | ${e.response?.data}',
+  );
   switch (e.type) {
     // case DioExceptionType.connectionTimeout:
     //   throw ServerException(
@@ -67,7 +73,7 @@ void handleDioExceptions(DioException e) {
           throw ServerException(
             errModel: ErrorModel.fromJson(
               e.response!.data as Map<String, dynamic>,
-              statusCode: e.response?.statusCode, // ✅
+              statusCode: e.response?.statusCode,
             ),
           );
         // case 400: // Bad request

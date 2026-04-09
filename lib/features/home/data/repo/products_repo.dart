@@ -2,22 +2,25 @@ import 'package:dartz/dartz.dart';
 import 'package:marketi/core/errors/server_exceptions.dart';
 import 'package:marketi/core/network/api_consumer.dart';
 import 'package:marketi/core/network/end_points.dart';
-import 'package:marketi/features/auth/data/model/user_model.dart';
+import 'package:marketi/features/home/data/models/products/products_response_model.dart';
 
-class UserRepo {
-  UserRepo({required this.api});
+class ProductsRepo {
+  ProductsRepo(this.api);
 
   final ApiConsumer api;
 
-  Future<Either<String, UserModel>> getUserData() async {
+  Future<Either<String, ProductsResponseModel>> getAllProducts({
+    required int skip,
+    int limit = 10,
+  }) async {
     try {
       final response =
           await api.get(
-                EndPoint.userData,
+                EndPoint.products,
+                queryParameters: {'skip': skip, 'limit': limit},
               )
               as Map<String, dynamic>;
-
-      return Right(UserModel.fromJson(response));
+      return Right(ProductsResponseModel.fromJson(response));
     } on ServerException catch (e) {
       return Left(e.errModel.errorMessage);
     }

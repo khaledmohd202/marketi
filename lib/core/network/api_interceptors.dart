@@ -5,9 +5,9 @@ import 'package:marketi/core/services/cache/cache_helper.dart';
 class ApiInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    options.headers[ApiKey.token] =
+    options.headers[ApiKey.authorization] =
         CacheHelper().getData(key: ApiKey.token) != null
-            ? 'FI ${CacheHelper().getData(key: ApiKey.token)}'
+            ? 'Bearer ${CacheHelper().getData(key: ApiKey.token)}'
             : null;
     super.onRequest(options, handler);
   }

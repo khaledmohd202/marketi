@@ -216,13 +216,13 @@ class _SignInState extends State<SignIn> {
     return SnackBar(
       content: Text(
         state.signInResponseModel.message,
-        style: const TextStyle(
-          color: Colors.white,
-        ),
+        style: const TextStyle(color: Colors.white),
       ),
       behavior: SnackBarBehavior.floating,
       margin: EdgeInsets.only(
-        top: MediaQuery.of(context).size.height - 100.h,
+        bottom: 20.h,
+        left: 16.w,
+        right: 16.w,
       ),
       backgroundColor: MarketiColors.darkBlue100Color,
     );
@@ -232,15 +232,14 @@ class _SignInState extends State<SignIn> {
     return SnackBar(
       content: Text(
         state.errorMessage,
-        style: const TextStyle(
-          color: Colors.red,
-        ),
+        style: const TextStyle(color: Colors.red),
       ),
+      behavior: SnackBarBehavior.floating,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20.r),
       ),
       margin: EdgeInsets.only(
-        bottom: MediaQuery.of(context).size.height - 150.h,
+        bottom: 20.h,
         left: 50.w,
         right: 50.w,
       ),

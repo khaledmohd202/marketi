@@ -8,6 +8,12 @@ import 'package:marketi/features/auth/data/repo/user_repo.dart';
 import 'package:marketi/features/auth/presentation/view_model/sign_in_cubit.dart';
 import 'package:marketi/features/auth/presentation/view_model/sign_up_cubit.dart';
 import 'package:marketi/features/auth/presentation/view_model/user_data_cubit.dart';
+import 'package:marketi/features/home/data/repo/brands_repo.dart';
+import 'package:marketi/features/home/data/repo/categories_repo.dart';
+import 'package:marketi/features/home/data/repo/products_repo.dart';
+import 'package:marketi/features/home/presentation/view_model/brands/brands_cubit.dart';
+import 'package:marketi/features/home/presentation/view_model/categories/categories_cubit.dart';
+import 'package:marketi/features/home/presentation/view_model/products/products_cubit.dart';
 
 final GetIt sl = GetIt.instance;
 
@@ -16,6 +22,9 @@ Future<void> setupInjector() async {
   await _initSignIn();
   await _initSignUp();
   await _initUserData();
+  await _initProducts();
+  await _initCategories();
+  await _initBrands();
 }
 
 Future<void> _initCore() async {
@@ -40,4 +49,22 @@ Future<void> _initUserData() async {
   sl
     ..registerLazySingleton(() => UserRepo(api: sl()))
     ..registerFactory(() => UserDataCubit(sl()));
+}
+
+Future<void> _initProducts() async {
+  sl
+    ..registerLazySingleton(() => ProductsRepo(sl()))
+    ..registerFactory(() => ProductsCubit(sl()));
+}
+
+Future<void> _initCategories() async {
+  sl
+    ..registerLazySingleton(() => CategoriesRepo(sl()))
+    ..registerFactory(() => CategoriesCubit(sl()));
+}
+
+Future<void> _initBrands() async {
+  sl
+    ..registerLazySingleton(() => BrandsRepo(sl()))
+    ..registerFactory(() => BrandsCubit(sl()));
 }

@@ -68,12 +68,18 @@ class _ProductCardState extends State<ProductCard> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10.r),
                       // replaced with Image.network when linking with API
-                      child: Image.asset(
+                      // child: Image.asset(
+                      //   widget.image,
+                      //   // height: 140.h,
+                      //   width: double.infinity,
+                      //   scale: 0.8,
+                      //   // fit: BoxFit.fill,
+                      // ),
+                      child: Image.network(
                         widget.image,
-                        // height: 140.h,
-                        width: double.infinity,
+                        fit: BoxFit.fill,
                         scale: 0.8,
-                        // fit: BoxFit.fill,
+                        width: double.infinity,
                       ),
                     ),
                   ),

@@ -22,6 +22,9 @@ import 'package:marketi/features/home/presentation/view/buy_again.dart';
 import 'package:marketi/features/home/presentation/view/categories.dart';
 import 'package:marketi/features/home/presentation/view/home_view.dart';
 import 'package:marketi/features/home/presentation/view/popular_products.dart';
+import 'package:marketi/features/home/presentation/view_model/brands/brands_cubit.dart';
+import 'package:marketi/features/home/presentation/view_model/categories/categories_cubit.dart';
+import 'package:marketi/features/home/presentation/view_model/products/products_cubit.dart';
 import 'package:marketi/features/main/presentation/view/main_view.dart';
 import 'package:marketi/features/menu/presentation/view/menu_view.dart';
 import 'package:marketi/features/onboarding/presentation/view/onboarding.dart';
@@ -124,23 +127,38 @@ class AppRoutes {
         );
       case popularProducts:
         return BaseRoutes(
-          page: const PopularProducts(),
-        );
-      case categories:
-        return BaseRoutes(
-          page: const Categories(),
-        );
-      case bestProducts:
-        return BaseRoutes(
-          page: const BestProducts(),
-        );
-      case brands:
-        return BaseRoutes(
-          page: const Brands(),
+          page: BlocProvider(
+            create: (context) => sl<ProductsCubit>(),
+            child: const PopularProducts(),
+          ),
         );
       case buyAgain:
         return BaseRoutes(
-          page: const BuyAgain(),
+          page: BlocProvider(
+            create: (context) => sl<ProductsCubit>(),
+            child: const BuyAgain(),
+          ),
+        );
+      case bestProducts:
+        return BaseRoutes(
+          page: BlocProvider(
+            create: (context) => sl<ProductsCubit>(),
+            child: const BestProducts(),
+          ),
+        );
+      case categories:
+        return BaseRoutes(
+          page: BlocProvider(
+            create: (context) => sl<CategoriesCubit>()..getAllCategories(),
+            child: const Categories(),
+          ),
+        );
+      case brands:
+        return BaseRoutes(
+          page: BlocProvider(
+            create: (context) => sl<BrandsCubit>()..getAllBrands(),
+            child: const Brands(),
+          ),
         );
       case cartCheckout:
         return BaseRoutes(

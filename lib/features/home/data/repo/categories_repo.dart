@@ -2,22 +2,19 @@ import 'package:dartz/dartz.dart';
 import 'package:marketi/core/errors/server_exceptions.dart';
 import 'package:marketi/core/network/api_consumer.dart';
 import 'package:marketi/core/network/end_points.dart';
-import 'package:marketi/features/auth/data/model/user_model.dart';
+import 'package:marketi/features/home/data/models/categories/categories_response_model.dart';
 
-class UserRepo {
-  UserRepo({required this.api});
+class CategoriesRepo {
+  CategoriesRepo(this.api);
 
   final ApiConsumer api;
 
-  Future<Either<String, UserModel>> getUserData() async {
+  Future<Either<String, CategoriesResponseModel>> getAllCategories() async {
     try {
       final response =
-          await api.get(
-                EndPoint.userData,
-              )
-              as Map<String, dynamic>;
+          await api.get(EndPoint.categories) as Map<String, dynamic>;
 
-      return Right(UserModel.fromJson(response));
+      return Right(CategoriesResponseModel.fromJson(response));
     } on ServerException catch (e) {
       return Left(e.errModel.errorMessage);
     }
