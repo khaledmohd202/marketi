@@ -11,10 +11,14 @@ class CategoriesRepo {
 
   Future<Either<String, CategoriesResponseModel>> getAllCategories() async {
     try {
-      final response =
-          await api.get(EndPoint.categories) as Map<String, dynamic>;
+      final response = await api.get(EndPoint.categories);
 
-      return Right(CategoriesResponseModel.fromJson(response));
+      if (response == null) return const Left('No data received');
+
+
+      return Right(
+        CategoriesResponseModel.fromJson(response as Map<String, dynamic>),
+      );
     } on ServerException catch (e) {
       return Left(e.errModel.errorMessage);
     }

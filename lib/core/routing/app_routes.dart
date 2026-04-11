@@ -17,6 +17,7 @@ import 'package:marketi/features/cart/presentation/view/cart_checkout.dart';
 import 'package:marketi/features/cart/presentation/view/cart_view.dart';
 import 'package:marketi/features/cart/presentation/view_model/cart_cubit.dart';
 import 'package:marketi/features/favorites/presentation/view/favorites_view.dart';
+import 'package:marketi/features/favorites/presentation/view_model/favorite_cubit.dart';
 import 'package:marketi/features/home/presentation/view/best_products.dart';
 import 'package:marketi/features/home/presentation/view/brands.dart';
 import 'package:marketi/features/home/presentation/view/buy_again.dart';
@@ -108,8 +109,15 @@ class AppRoutes {
         );
       case main:
         return BaseRoutes(
-          page: BlocProvider(
-            create: (context) => sl<CartCubit>(),
+          page: MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (_) => sl<CartCubit>(),
+              ),
+              BlocProvider(
+                create: (_) => sl<FavoriteCubit>(),
+              ),
+            ],
             child: const MainView(),
           ),
         );

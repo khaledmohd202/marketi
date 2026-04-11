@@ -11,9 +11,13 @@ class BrandsRepo {
 
   Future<Either<String, BrandsResponseModel>> getAllBrands() async {
     try {
-      final response = await api.get(EndPoint.brands) as Map<String, dynamic>;
+      final response = await api.get(EndPoint.brands);
 
-      return Right(BrandsResponseModel.fromJson(response));
+      if (response == null) return const Left('No data received');
+
+      return Right(
+        BrandsResponseModel.fromJson(response as Map<String, dynamic>),
+      );
     } on ServerException catch (e) {
       return Left(e.errModel.errorMessage);
     }

@@ -6,6 +6,8 @@ import 'package:marketi/core/common/widgets/product_card.dart';
 import 'package:marketi/core/common/widgets/text_app.dart';
 import 'package:marketi/core/themes/colors/marketi_colors.dart';
 import 'package:marketi/core/themes/styles/marketi_text_styles.dart';
+import 'package:marketi/features/cart/presentation/view_model/cart_cubit.dart';
+import 'package:marketi/features/favorites/presentation/view_model/favorite_cubit.dart';
 import 'package:marketi/features/home/presentation/view_model/products/products_cubit.dart';
 import 'package:marketi/features/home/presentation/widgets/custom_view_all_app_bar.dart';
 
@@ -95,14 +97,109 @@ class _PopularProductsState extends State<PopularProducts> {
                             width: 170.w,
                           );
                         }
-                        return ProductCard(
-                          name: products[index].title,
-                          price: products[index].price.toString(),
-                          rating: products[index].rating,
-                          image: products[index].thumbnail,
-                          onTap: () {},
-                          selectedIcon: Icons.favorite,
-                          bottomAddWidget: _buildAddButton(),
+                        return BlocBuilder<FavoriteCubit, FavoriteState>(
+                          builder: (context, favState) {
+                            final favCubit = context.read<FavoriteCubit>();
+                            final isFav = favCubit.isInFavorites(
+                              productId: products[index].id,
+                            );
+
+                            return ProductCard(
+                              name: products[index].title,
+                              price: products[index].price.toString(),
+                              rating: products[index].rating,
+                              image: products[index].thumbnail,
+                              onTap: () {},
+                              selectedIcon: Icons.favorite,
+                              isFavorite: isFav,
+                              onFavoriteTap: () => isFav
+                                  ? favCubit.deleteFromFavorites(
+                                      productId: products[index].id.toString(),
+                                    )
+                                  : favCubit.addToFavorites(
+                                      productId: products[index].id.toString(),
+                                    ),
+                              //
+                              // ignore: lines_longer_than_80_chars
+                              bottomAddWidget: BlocConsumer<CartCubit, CartState>(
+                                listener: (context, cartState) {
+                                  if (cartState is AddToCartSuccess) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(cartState.message),
+                                        backgroundColor: Colors.green,
+                                      ),
+                                    );
+                                  }
+                                  if (cartState is AddToCartFailure) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(cartState.errorMessage),
+                                        backgroundColor: Colors.red,
+                                      ),
+                                    );
+                                  }
+                                },
+                                builder: (context, cartState) {
+                                  final cartCubit = context.read<CartCubit>();
+                                  final inCart = cartCubit.isInCart(
+                                    productId: products[index].id,
+                                  );
+                                  final isLoading =
+                                      cartState is AddToCartLoading;
+
+                                  return Center(
+                                    child: ElevatedButton(
+                                      onPressed: (isLoading || inCart)
+                                          ? null
+                                          : () => cartCubit.addToCart(
+                                              productId: products[index].id
+                                                  .toString(),
+                                            ),
+                                      style: ElevatedButton.styleFrom(
+                                        minimumSize: Size(
+                                          double.infinity,
+                                          35.h,
+                                        ),
+                                        backgroundColor: inCart
+                                            ? Colors.grey
+                                            : Colors.white,
+                                        foregroundColor:
+                                            MarketiColors.lightBlue700Color,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                            20.r,
+                                          ),
+                                          side: BorderSide(
+                                            color: inCart
+                                                ? Colors.grey
+                                                : MarketiColors
+                                                      .lightBlue700Color,
+                                            width: 1.w,
+                                          ),
+                                        ),
+                                      ),
+                                      child: isLoading
+                                          ? SizedBox(
+                                              height: 18.h,
+                                              width: 18.w,
+                                              child:
+                                              const CircularProgressIndicator(
+                                                    strokeWidth: 2,
+                                                    color: Colors.white,
+                                                  ),
+                                            )
+                                          : TextApp(
+                                              text: inCart ? 'Added ✓' : 'Add',
+                                              theme:
+                                                  MarketiTextStyles.textStyle16,
+                                            ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            );
+                          },
                         );
                       },
                       childCount: products.length + (cubit.hasMore ? 2 : 0),
@@ -124,27 +221,5 @@ class _PopularProductsState extends State<PopularProducts> {
     );
   }
 
-  Center _buildAddButton() {
-    return Center(
-      child: ElevatedButton(
-        onPressed: () {},
-        style: ElevatedButton.styleFrom(
-          minimumSize: Size(double.infinity, 35.h),
-          backgroundColor: Colors.white,
-          foregroundColor: MarketiColors.lightBlue700Color,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.r),
-            side: BorderSide(
-              color: MarketiColors.lightBlue700Color,
-              width: 1.w,
-            ),
-          ),
-        ),
-        child: TextApp(
-          text: 'Add',
-          theme: MarketiTextStyles.textStyle16,
-        ),
-      ),
-    );
-  }
+  
 }

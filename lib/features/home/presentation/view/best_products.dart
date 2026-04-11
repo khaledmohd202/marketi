@@ -28,6 +28,7 @@ class BestProducts extends StatelessWidget {
           ),
           itemBuilder: (context, index) {
             return ProductCard(
+              isFavorite: false,
               name: _productNames[index],
               price: _productPrices[index],
               rating: _productRates[index],

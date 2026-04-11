@@ -14,13 +14,16 @@ class ProductsRepo {
     int limit = 10,
   }) async {
     try {
-      final response =
-          await api.get(
-                EndPoint.products,
-                queryParameters: {'skip': skip, 'limit': limit},
-              )
-              as Map<String, dynamic>;
-      return Right(ProductsResponseModel.fromJson(response));
+      final response = await api.get(
+        EndPoint.products,
+        queryParameters: {'skip': skip, 'limit': limit},
+      );
+
+      if (response == null) return const Left('No data received');
+
+      return Right(
+        ProductsResponseModel.fromJson(response as Map<String, dynamic>),
+      );
     } on ServerException catch (e) {
       return Left(e.errModel.errorMessage);
     }

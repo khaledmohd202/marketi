@@ -4,7 +4,7 @@ import 'package:marketi/core/common/widgets/favorites_icon.dart';
 import 'package:marketi/core/themes/colors/marketi_colors.dart';
 import 'package:marketi/core/themes/styles/marketi_text_styles.dart';
 
-class ProductCard extends StatefulWidget {
+class ProductCard extends StatelessWidget {
   const ProductCard({
     required this.name,
     required this.price,
@@ -12,31 +12,27 @@ class ProductCard extends StatefulWidget {
     required this.onTap,
     required this.image,
     required this.selectedIcon,
-    // required this.color,
+    required this.isFavorite, // required this.color,
     this.discount,
     super.key,
     this.bottomAddWidget,
+    this.onFavoriteTap,
   });
   final String image;
   final String? discount;
   final VoidCallback onTap;
   final IconData? selectedIcon;
-  // final Color? color;
   final String name;
   final String price;
   final double rating;
   final Widget? bottomAddWidget;
+  final VoidCallback? onFavoriteTap;
+  final bool isFavorite;
 
-  @override
-  State<ProductCard> createState() => _ProductCardState();
-}
-
-class _ProductCardState extends State<ProductCard> {
-  bool _isFavorite = false;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: widget.onTap,
+      onTap: onTap,
       child: Container(
         width: 170.w,
         decoration: BoxDecoration(
@@ -68,15 +64,28 @@ class _ProductCardState extends State<ProductCard> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10.r),
                       child: Image.network(
-                        widget.image,
+                        image,
                         fit: BoxFit.fill,
                         scale: 0.8,
                         width: double.infinity,
+                         errorBuilder: (context, error, stackTrace) => Center(
+                          child: Icon(
+                            Icons.image_not_supported_outlined,
+                            color: Colors.grey,
+                            size: 40.r,
+                          ),
+                        ),
+                        loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress == null) return child;
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
                       ),
                     ),
                   ),
                   // Discount Badge
-                  if (widget.discount != null)
+                  if (discount != null)
                     Positioned(
                       top: 8.h,
                       left: 8.w,
@@ -90,7 +99,7 @@ class _ProductCardState extends State<ProductCard> {
                           borderRadius: BorderRadius.circular(5.r),
                         ),
                         child: Text(
-                          '${widget.discount!} %',
+                          '${discount!} %',
                           style: MarketiTextStyles.textStyle12.copyWith(
                             color: Colors.white,
                             fontSize: 10.sp,
@@ -103,15 +112,11 @@ class _ProductCardState extends State<ProductCard> {
                     top: 8.h,
                     right: 8.w,
                     child: FavoritesIcon(
-                      onTap: () {
-                        setState(() {
-                          _isFavorite = !_isFavorite;
-                        });
-                      },
+                      onTap: onFavoriteTap ?? (){},
                       iconWidget: Icon(
-                        widget.selectedIcon,
+                        selectedIcon,
                         size: 20.r,
-                        color: _isFavorite
+                        color: isFavorite
                             ? MarketiColors.lightBlue900Color
                             : MarketiColors.greyColor.withValues(alpha: 0.3),
                       ),
@@ -139,7 +144,7 @@ class _ProductCardState extends State<ProductCard> {
                     children: [
                       // Price
                       Text(
-                        '${widget.price} LE',
+                        '$price LE',
                         style: MarketiTextStyles.textStyle14.copyWith(
                           color: MarketiColors.darkBlue900Color,
                         ),
@@ -154,7 +159,7 @@ class _ProductCardState extends State<ProductCard> {
                       ),
                       SizedBox(width: 4.w),
                       Text(
-                        widget.rating.toString(),
+                        rating.toString(),
                         style: MarketiTextStyles.textStyle12.copyWith(
                           color: MarketiColors.greyColor,
                         ),
@@ -163,7 +168,7 @@ class _ProductCardState extends State<ProductCard> {
                   ),
                   // title
                   Text(
-                    widget.name,
+                    name,
                     style: MarketiTextStyles.textStyle12.copyWith(
                       color: MarketiColors.greyColor,
                     ),
@@ -171,8 +176,8 @@ class _ProductCardState extends State<ProductCard> {
                     overflow: TextOverflow.ellipsis,
                   ),
 
-                  if (widget.bottomAddWidget != null) ...[
-                    widget.bottomAddWidget!,
+                  if (bottomAddWidget != null) ...[
+                    bottomAddWidget!,
                   ],
                 ],
               ),

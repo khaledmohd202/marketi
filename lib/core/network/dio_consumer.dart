@@ -8,6 +8,9 @@ import 'package:marketi/core/network/end_points.dart';
 class DioConsumer extends ApiConsumer {
   DioConsumer({required this.dio}) {
     dio.options.baseUrl = EndPoint.baseUrl;
+    dio.options.connectTimeout = const Duration(seconds: 30);
+    dio.options.receiveTimeout = const Duration(seconds: 30);
+    dio.options.sendTimeout = const Duration(seconds: 30);
     dio.interceptors.add(ApiInterceptor());
     if (kDebugMode) {
       dio.interceptors.add(

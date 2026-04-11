@@ -37,6 +37,7 @@ class BuyAgain extends StatelessWidget {
               onTap: () {},
               image: _productImages[index],
               selectedIcon: Icons.favorite,
+              isFavorite: false,
               bottomAddWidget: Center(
                 child: ElevatedButton(
                   onPressed: () {},

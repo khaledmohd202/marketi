@@ -9,6 +9,9 @@ class EndPoint {
   static String getCart = 'user/getCart';
   static String addToCart = 'user/addCart';
   static String deleteFromCart = 'user/deleteCart';
+  static String getFavorites = 'user/getFavorite';
+  static String addToFavorites = 'user/addFavorite';
+  static String deleteFromFavorites = 'user/deleteFavorite';
 }
 
 class ApiKey {

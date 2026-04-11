@@ -33,7 +33,22 @@ class CategoryCard extends StatelessWidget {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(15.r),
-              child: Image.network(image, fit: BoxFit.fill, scale: 0.5),
+              child: Image.network(
+                image,
+                fit: BoxFit.fill,
+                scale: 0.5,
+                errorBuilder: (context, error, stackTrace) => Center(
+                  child: Icon(
+                    Icons.image_not_supported_outlined,
+                    color: Colors.grey,
+                    size: 40.r,
+                  ),
+                ),
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) return child;
+                  return const Center(child: CircularProgressIndicator());
+                },
+              ),
             ),
           ),
           SizedBox(height: 5.h),
