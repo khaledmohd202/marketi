@@ -4,9 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/core/common/widgets/text_app.dart';
 import 'package:marketi/core/themes/colors/marketi_colors.dart';
 import 'package:marketi/core/themes/styles/marketi_text_styles.dart';
+import 'package:marketi/features/home/data/models/products/product_model.dart';
 
 class ProductInfo extends StatelessWidget {
-  const ProductInfo({super.key});
+  const ProductInfo({required this.product, super.key});
+
+  final ProductModel product;
 
   // double _rating = 4.0;
 
@@ -43,7 +46,7 @@ class ProductInfo extends StatelessWidget {
               children: [
                 // const Icon(Icons.star, color: Colors.amber, size: 16),
                 RatingBar.builder(
-                  initialRating: 4, // _rating
+                  initialRating: product.rating, // _rating
                   maxRating: 5,
                   itemSize: 16,
                   allowHalfRating: true,
@@ -51,16 +54,11 @@ class ProductInfo extends StatelessWidget {
                     Icons.star,
                     color: Colors.amber,
                   ),
-                  onRatingUpdate: (double value) {
-                    debugPrint('Rating: $value');
-                    // Set(() {
-                    //  _rating = value;
-                    // });
-                  },
+                  onRatingUpdate: (_){},
                 ),
                 SizedBox(width: 4.w),
                 TextApp(
-                  text: '4.0',
+                  text: product.rating.toString(),
                   theme: MarketiTextStyles.textStyle12,
                 ),
               ],
@@ -69,14 +67,15 @@ class ProductInfo extends StatelessWidget {
         ),
         SizedBox(height: 8.h),
         TextApp(
-          text: 'Pampers Swaddlers',
+          // text: 'Pampers Swaddlers',
+          text: product.title,
           theme: MarketiTextStyles.textStyle24.copyWith(
             fontWeight: FontWeight.bold,
           ),
         ),
         SizedBox(height: 8.h),
         TextApp(
-          text: 'Product Value',
+          text: 'Description',
           theme: MarketiTextStyles.textStyle16.copyWith(
             fontWeight: FontWeight.bold,
           ),
@@ -86,8 +85,7 @@ class ProductInfo extends StatelessWidget {
           text: TextSpan(
             children: [
               TextSpan(
-                text:
-                    '''Fear no leaks with new and improved Pampers Swaddlers Pampers Swaddlers helps prevent up to 100% of leaks, even blowouts Plus, Dual Leak-Guard Barriers at the legs help protect where leaks happen most With Swaddlers, you can rest assured that you have superior leak protection* while keeping baby’s skin healthy ''',
+                text: ''' ${product.description} ''',
                 style: MarketiTextStyles.textStyle12.copyWith(
                   color: Colors.grey,
                   fontWeight: FontWeight.w500,

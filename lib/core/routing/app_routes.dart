@@ -17,7 +17,6 @@ import 'package:marketi/features/cart/presentation/view/cart_checkout.dart';
 import 'package:marketi/features/cart/presentation/view/cart_view.dart';
 import 'package:marketi/features/cart/presentation/view_model/cart_cubit.dart';
 import 'package:marketi/features/favorites/presentation/view/favorites_view.dart';
-import 'package:marketi/features/favorites/presentation/view_model/favorite_cubit.dart';
 import 'package:marketi/features/home/presentation/view/best_products.dart';
 import 'package:marketi/features/home/presentation/view/brands.dart';
 import 'package:marketi/features/home/presentation/view/buy_again.dart';
@@ -30,6 +29,8 @@ import 'package:marketi/features/home/presentation/view_model/products/products_
 import 'package:marketi/features/main/presentation/view/main_view.dart';
 import 'package:marketi/features/menu/presentation/view/menu_view.dart';
 import 'package:marketi/features/onboarding/presentation/view/onboarding.dart';
+import 'package:marketi/features/product_details/presentation/view/product_details.dart';
+import 'package:marketi/features/product_details/presentation/view_model/product_details_cubit.dart';
 import 'package:marketi/features/profile/presentation/view/profile_view.dart';
 import 'package:marketi/features/search/presentation/views/search_view.dart';
 
@@ -58,10 +59,9 @@ class AppRoutes {
   static const String cartCheckout = '/cart-checkout';
   static const String profile = '/profile';
   static const String search = '/search';
+  static const String productDetails = '/product-details';
 
   static Route<void> onGenerateRoute(RouteSettings settings) {
-    //
-    //ignore: unused_local_variable
     final args = settings.arguments;
     switch (settings.name) {
       case onboarding:
@@ -109,17 +109,7 @@ class AppRoutes {
         );
       case main:
         return BaseRoutes(
-          page: MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (_) => sl<CartCubit>(),
-              ),
-              BlocProvider(
-                create: (_) => sl<FavoriteCubit>(),
-              ),
-            ],
-            child: const MainView(),
-          ),
+          page: const MainView(),
         );
       case cart:
         return BaseRoutes(
@@ -186,6 +176,16 @@ class AppRoutes {
       case search:
         return BaseRoutes(
           page: const SearchView(),
+        );
+      case productDetails:
+        final productId = args! as int;
+        return BaseRoutes(
+          page: BlocProvider(
+            create: (_) =>
+                sl<ProductDetailsCubit>()
+                  ..getProductDetails(productId: productId),
+            child: ProductDetails(productId: productId),
+          ),
         );
       default:
         return kDebugMode

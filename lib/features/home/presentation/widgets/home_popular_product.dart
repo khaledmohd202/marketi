@@ -3,9 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/core/common/widgets/loading/loading_shimmer.dart';
 import 'package:marketi/core/common/widgets/product_card.dart';
+import 'package:marketi/core/extensions/navigation_extensions.dart';
+import 'package:marketi/core/routing/app_routes.dart';
 import 'package:marketi/features/favorites/presentation/view_model/favorite_cubit.dart';
 import 'package:marketi/features/home/presentation/view_model/products/products_cubit.dart';
-import 'package:marketi/features/product_details/presentation/view/product_details.dart';
 
 class HomePopularProduct extends StatelessWidget {
   const HomePopularProduct({super.key});
@@ -48,14 +49,10 @@ class HomePopularProduct extends StatelessWidget {
                       return ProductCard(
                         discount: products[index].discountPercentage.toString(),
                         image: products[index].thumbnail,
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute<void>(
-                              builder: (context) => const ProductDetails(),
-                            ),
-                          );
-                        },
+                        onTap: () => context.pushNamed(
+                          AppRoutes.productDetails,
+                          arguments: products[index].id,
+                        ),
                         name: products[index].title,
                         price: products[index].price.toString(),
                         rating: products[index].rating,

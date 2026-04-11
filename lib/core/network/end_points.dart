@@ -12,6 +12,7 @@ class EndPoint {
   static String getFavorites = 'user/getFavorite';
   static String addToFavorites = 'user/addFavorite';
   static String deleteFromFavorites = 'user/deleteFavorite';
+  static String productDetails = 'home/products';
 }
 
 class ApiKey {

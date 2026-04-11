@@ -6,7 +6,8 @@ import 'package:marketi/core/const/images/marketi_images.dart';
 import 'package:marketi/core/themes/colors/marketi_colors.dart';
 
 class ProductImagesSlider extends StatefulWidget {
-  const ProductImagesSlider({super.key});
+  const ProductImagesSlider({required this.image, super.key});
+  final String image;
 
   @override
   State<ProductImagesSlider> createState() => _ProductImagesSliderState();
@@ -67,9 +68,28 @@ class _ProductImagesSliderState extends State<ProductImagesSlider> {
               itemBuilder: (context, index) {
                 return ClipRRect(
                   borderRadius: BorderRadius.circular(15.r),
-                  child: Image.asset(
-                    _images[index],
-                    fit: BoxFit.contain,
+                  // child: Image.asset(
+                  //   _images[index],
+                  //   fit: BoxFit.contain,
+                  // ),
+                  child: Image.network(
+                    widget.image,
+                    fit: BoxFit.fill,
+                    scale: 0.8,
+                    width: double.infinity,
+                    errorBuilder: (context, error, stackTrace) => Center(
+                      child: Icon(
+                        Icons.image_not_supported_outlined,
+                        color: Colors.grey,
+                        size: 40.r,
+                      ),
+                    ),
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
                   ),
                 );
               },
@@ -109,9 +129,16 @@ class _ProductImagesSliderState extends State<ProductImagesSlider> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.r),
                       child: Image.asset(
-                        _images[index],
+                        widget.image,
                         width: 56.w,
                         fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) => Center(
+                          child: Icon(
+                            Icons.image_not_supported_outlined,
+                            color: Colors.grey,
+                            size: 56.r,
+                          ),
+                        ),
                       ),
                     ),
                   ),

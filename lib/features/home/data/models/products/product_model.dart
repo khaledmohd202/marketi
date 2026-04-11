@@ -16,15 +16,16 @@ class ProductModel {
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
-      id: json[ApiKey.id] as int,
-      title: json[ApiKey.title] as String,
-      description: json[ApiKey.description] as String,
-      category: json[ApiKey.category] as String,
-      price: (json[ApiKey.price] as num).toDouble(),
-      discountPercentage: (json[ApiKey.discountPercentage] as num).toDouble(),
-      rating: (json[ApiKey.rating] as num).toDouble(),
-      stock: json[ApiKey.stock] as int,
-      thumbnail: json[ApiKey.thumbnail] as String,
+      id: (json[ApiKey.id] as num?)?.toInt() ?? 0,
+      title: json[ApiKey.title] as String? ?? '',
+      description: json[ApiKey.description] as String? ?? '',
+      category: json[ApiKey.category] as String? ?? '',
+      price: (json[ApiKey.price] as num?)?.toDouble() ?? 0.0,
+      discountPercentage:
+          (json[ApiKey.discountPercentage] as num?)?.toDouble() ?? 0.0,
+      rating: (json[ApiKey.rating] as num?)?.toDouble() ?? 0.0,
+      stock: (json[ApiKey.stock] as num?)?.toInt() ?? 0,
+      thumbnail: json[ApiKey.thumbnail] as String? ?? '',
     );
   }
 

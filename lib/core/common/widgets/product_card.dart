@@ -68,7 +68,7 @@ class ProductCard extends StatelessWidget {
                         fit: BoxFit.fill,
                         scale: 0.8,
                         width: double.infinity,
-                         errorBuilder: (context, error, stackTrace) => Center(
+                        errorBuilder: (context, error, stackTrace) => Center(
                           child: Icon(
                             Icons.image_not_supported_outlined,
                             color: Colors.grey,
@@ -78,7 +78,9 @@ class ProductCard extends StatelessWidget {
                         loadingBuilder: (context, child, loadingProgress) {
                           if (loadingProgress == null) return child;
                           return const Center(
-                            child: CircularProgressIndicator(),
+                            child: CircularProgressIndicator(
+                              color: MarketiColors.darkBlue500Color,
+                            ),
                           );
                         },
                       ),
@@ -112,7 +114,7 @@ class ProductCard extends StatelessWidget {
                     top: 8.h,
                     right: 8.w,
                     child: FavoritesIcon(
-                      onTap: onFavoriteTap ?? (){},
+                      onTap: onFavoriteTap ?? () {},
                       iconWidget: Icon(
                         selectedIcon,
                         size: 20.r,
