@@ -2,6 +2,7 @@ import 'package:marketi/core/network/end_points.dart';
 
 class ProductModel {
   ProductModel({
+    required this.images,
     required this.id,
     required this.title,
     required this.description,
@@ -12,7 +13,6 @@ class ProductModel {
     required this.stock,
     required this.thumbnail,
   });
-
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
@@ -26,6 +26,11 @@ class ProductModel {
       rating: (json[ApiKey.rating] as num?)?.toDouble() ?? 0.0,
       stock: (json[ApiKey.stock] as num?)?.toInt() ?? 0,
       thumbnail: json[ApiKey.thumbnail] as String? ?? '',
+      images:
+          (json[ApiKey.images] as List?)
+              ?.map((e) => e as String? ?? '')
+              .toList() ??
+          [],
     );
   }
 
@@ -38,4 +43,5 @@ class ProductModel {
   final double rating;
   final int stock;
   final String thumbnail;
+  final List<String> images;
 }

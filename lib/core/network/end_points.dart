@@ -26,6 +26,7 @@ class ApiKey {
 
   static String role = 'role';
   static String image = 'image';
+  static String images = 'images';
   static String token = 'token';
   static String authorization = 'Authorization';
   static String message = 'message';

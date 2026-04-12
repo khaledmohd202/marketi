@@ -13,16 +13,23 @@ class ProductDetailsRepo {
     required int productId,
   }) async {
     try {
+      // final response = await api.get(
+      //   EndPoint.productDetails,
+      //   queryParameters: {
+      //     ApiKey.id: productId,
+      //   },
+      // );
+
       final response = await api.get(
-        EndPoint.productDetails,
-        queryParameters: {
-          ApiKey.id: productId,
-        },
+        '${EndPoint.products}/$productId',
       );
 
       if (response == null) return const Left('No data received');
 
-      return Right(ProductModel.fromJson(response as Map<String, dynamic>));
+      final json = response as Map<String, dynamic>;
+      json[ApiKey.id] = productId;
+
+      return Right(ProductModel.fromJson(json));
     } on ServerException catch (e) {
       return Left(e.errModel.errorMessage);
     }

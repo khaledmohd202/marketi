@@ -2,12 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:marketi/core/const/images/marketi_images.dart';
 import 'package:marketi/core/themes/colors/marketi_colors.dart';
 
 class ProductImagesSlider extends StatefulWidget {
-  const ProductImagesSlider({required this.image, super.key});
-  final String image;
+  const ProductImagesSlider({required this.images, super.key});
+  final List<String> images;
 
   @override
   State<ProductImagesSlider> createState() => _ProductImagesSliderState();
@@ -18,12 +17,30 @@ class _ProductImagesSliderState extends State<ProductImagesSlider> {
   final PageController _pageController = PageController();
   Timer? _timer;
 
-  final List<String> _images = [
-    MarketiImages.pampers,
-    MarketiImages.pampers,
-    MarketiImages.pampers,
-    MarketiImages.pampers,
-  ];
+  List<String> get _displayImages =>
+      widget.images.isNotEmpty ? widget.images : [];
+
+  @override
+  void initState() {
+    super.initState();
+    if (_displayImages.length > 1) {
+      _timer = Timer.periodic(
+        const Duration(seconds: 5),
+        (timer) {
+          if (_currentIndex < _displayImages.length - 1) {
+            _currentIndex++;
+          } else {
+            _currentIndex = 0;
+          }
+          _pageController.animateToPage(
+            _currentIndex,
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.easeInOut,
+          );
+        },
+      );
+    }
+  }
 
   @override
   void dispose() {
@@ -33,28 +50,19 @@ class _ProductImagesSliderState extends State<ProductImagesSlider> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    _timer = Timer.periodic(
-      const Duration(seconds: 5),
-      (timer) {
-        if (_currentIndex < _images.length - 1) {
-          _currentIndex++;
-        } else {
-          _currentIndex = 0;
-        }
-
-        _pageController.animateToPage(
-          _currentIndex,
-          duration: const Duration(milliseconds: 500),
-          curve: Curves.easeInOut,
-        );
-      },
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
+    if (_displayImages.isEmpty) {
+      return SizedBox(
+        height: 250.h,
+        child: Center(
+          child: Icon(
+            Icons.image_not_supported_outlined,
+            color: Colors.grey,
+            size: 60.r,
+          ),
+        ),
+      );
+    }
     return Column(
       children: [
         SizedBox(
@@ -64,16 +72,12 @@ class _ProductImagesSliderState extends State<ProductImagesSlider> {
             child: PageView.builder(
               controller: _pageController,
               onPageChanged: (index) => setState(() => _currentIndex = index),
-              itemCount: _images.length,
+              itemCount: widget.images.length,
               itemBuilder: (context, index) {
                 return ClipRRect(
                   borderRadius: BorderRadius.circular(15.r),
-                  // child: Image.asset(
-                  //   _images[index],
-                  //   fit: BoxFit.contain,
-                  // ),
                   child: Image.network(
-                    widget.image,
+                    widget.images[index],
                     fit: BoxFit.fill,
                     scale: 0.8,
                     width: double.infinity,
@@ -104,7 +108,7 @@ class _ProductImagesSliderState extends State<ProductImagesSlider> {
             child: ListView.builder(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
-              itemCount: _images.length,
+              itemCount: widget.images.length,
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
@@ -128,17 +132,25 @@ class _ProductImagesSliderState extends State<ProductImagesSlider> {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.r),
-                      child: Image.asset(
-                        widget.image,
+                      child: Image.network(
+                        _displayImages[index],
                         width: 56.w,
+                        height: 56.h,
                         fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) => Center(
-                          child: Icon(
-                            Icons.image_not_supported_outlined,
-                            color: Colors.grey,
-                            size: 56.r,
-                          ),
+                        errorBuilder: (_, _, _) => Icon(
+                          Icons.image_not_supported_outlined,
+                          size: 30.r,
                         ),
+                        loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress == null) return child;
+                          return SizedBox(
+                            width: 56.w,
+                            height: 56.h,
+                            child: const Center(
+                              child: CircularProgressIndicator(strokeWidth: 2),
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ),
