@@ -145,6 +145,7 @@ class _CartViewState extends State<CartView> {
 
 
                       return CartProductCard(
+                        productId: product.id,
                         image: product.thumbnail,
                         productTitle: product.title,
                         description: product.description,

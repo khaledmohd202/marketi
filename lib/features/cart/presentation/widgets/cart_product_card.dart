@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/core/common/widgets/favorites_icon.dart';
 import 'package:marketi/core/common/widgets/text_app.dart';
 import 'package:marketi/core/themes/colors/marketi_colors.dart';
 import 'package:marketi/core/themes/styles/marketi_text_styles.dart';
+import 'package:marketi/features/favorites/presentation/view_model/favorite_cubit.dart';
 
-class CartProductCard extends StatefulWidget {
+class CartProductCard extends StatelessWidget {
   const CartProductCard({
-    required this.onDecrement,
+    required this.productId, required this.onDecrement,
     required this.onDelete,
     required this.onIncrement,
     required this.quantity,
@@ -20,7 +22,7 @@ class CartProductCard extends StatefulWidget {
     super.key,
   });
   final String image;
-
+  final int productId;
   final String productTitle;
   final String description;
   final String price;
@@ -31,12 +33,7 @@ class CartProductCard extends StatefulWidget {
   final VoidCallback onIncrement;
   final VoidCallback onDecrement;
 
-  @override
-  State<CartProductCard> createState() => _CartProductCardState();
-}
-
-class _CartProductCardState extends State<CartProductCard> {
-  bool _isFavorite = false;
+  // bool _isFavorite = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -58,7 +55,7 @@ class _CartProductCardState extends State<CartProductCard> {
           ClipRRect(
             borderRadius: BorderRadius.circular(10.r),
             child: Image.network(
-              widget.image,
+              image,
               width: 100.w,
               height: 115.h,
               fit: BoxFit.fill,
@@ -75,7 +72,7 @@ class _CartProductCardState extends State<CartProductCard> {
                     // Product Tile
                     Expanded(
                       child: TextApp(
-                        text: widget.productTitle,
+                        text: productTitle,
                         theme: MarketiTextStyles.textStyle16.copyWith(
                           fontWeight: FontWeight.bold,
                           color: MarketiColors.darkBlue900Color,
@@ -83,25 +80,52 @@ class _CartProductCardState extends State<CartProductCard> {
                       ),
                     ),
                     // Favorite Icon
-                    FavoritesIcon(
-                      onTap: () {
-                        setState(() {
-                          _isFavorite = !_isFavorite;
-                        });
+                    // FavoritesIcon(
+                    //   onTap: () {
+                    //     setState(() {
+                    //       _isFavorite = !_isFavorite;
+                    //     });
+                    //   },
+                    //   iconWidget: Icon(
+                    //     widget.selectedIcon,
+                    //     size: 20.r,
+                    //     color: _isFavorite
+                    //         ? MarketiColors.lightBlue900Color
+                    //         : MarketiColors.greyColor.withValues(alpha: 0.3),
+                    //   ),
+                    // ),
+                    BlocBuilder<FavoriteCubit, FavoriteState>(
+                      builder: (context, state) {
+                        final favCubit = context.read<FavoriteCubit>();
+                        final isFav = favCubit.isInFavorites(
+                          productId: productId,
+                        );
+
+                        return FavoritesIcon(
+                          onTap: () => isFav
+                              ? favCubit.deleteFromFavorites(
+                                  productId: productId.toString(),
+                                )
+                              : favCubit.addToFavorites(
+                                  productId: productId.toString(),
+                                ),
+                          iconWidget: Icon(
+                            Icons.favorite,
+                            size: 20.r,
+                            color: isFav
+                                ? MarketiColors.lightBlue900Color
+                                : MarketiColors.greyColor.withValues(
+                                    alpha: 0.3,
+                                  ),
+                          ),
+                        );
                       },
-                      iconWidget: Icon(
-                        widget.selectedIcon,
-                        size: 20.r,
-                        color: _isFavorite
-                            ? MarketiColors.lightBlue900Color
-                            : MarketiColors.greyColor.withValues(alpha: 0.3),
-                      ),
                     ),
                   ],
                 ),
                 // Quantity of the product
                 TextApp(
-                  text: widget.description,
+                  text: description,
                   theme: MarketiTextStyles.textStyle10.copyWith(
                     color: MarketiColors.greyColor,
                   ),
@@ -112,7 +136,7 @@ class _CartProductCardState extends State<CartProductCard> {
                   children: [
                     // Price
                     TextApp(
-                      text: 'Price:${widget.price} EGP',
+                      text: 'Price:$price EGP',
                       theme: MarketiTextStyles.textStyle12.copyWith(
                         fontWeight: FontWeight.bold,
                         color: MarketiColors.darkBlue900Color,
@@ -123,7 +147,7 @@ class _CartProductCardState extends State<CartProductCard> {
                     Icon(Icons.star, size: 14.r, color: Colors.amber),
                     SizedBox(width: 4.w),
                     TextApp(
-                      text: widget.rating,
+                      text: rating,
                       theme: MarketiTextStyles.textStyle12.copyWith(
                         color: MarketiColors.greyColor,
                       ),
@@ -136,24 +160,20 @@ class _CartProductCardState extends State<CartProductCard> {
                   children: [
                     // Decrease Button
                     GestureDetector(
-                      onTap: widget.quantity == 1
-                          ? widget.onDelete
-                          : widget.onDecrement,
+                      onTap: quantity == 1 ? onDelete : onDecrement,
                       child: Container(
                         height: 40.h,
                         width: 40.w,
                         decoration: BoxDecoration(
-                          color: widget.quantity == 1
+                          color: quantity == 1
                               ? Colors.red.withValues(alpha: 0.5)
                               : MarketiColors.greyColor.withValues(alpha: 0.2),
                           borderRadius: BorderRadius.circular(10.r),
                         ),
                         child: Icon(
-                          widget.quantity == 1
-                              ? Icons.delete_outline
-                              : Icons.remove,
+                          quantity == 1 ? Icons.delete_outline : Icons.remove,
                           size: 16.r,
-                          color: widget.quantity == 1
+                          color: quantity == 1
                               ? Colors.red
                               : MarketiColors.greyColor,
                         ),
@@ -172,7 +192,7 @@ class _CartProductCardState extends State<CartProductCard> {
                         ),
                       ),
                       child: TextApp(
-                        text: widget.quantity.toString(),
+                        text: quantity.toString(),
                         theme: MarketiTextStyles.textStyle14.copyWith(
                           fontWeight: FontWeight.bold,
                           color: MarketiColors.darkBlue900Color,
@@ -182,7 +202,7 @@ class _CartProductCardState extends State<CartProductCard> {
                     SizedBox(width: 15.w),
                     // Plus
                     GestureDetector(
-                      onTap: widget.onIncrement,
+                      onTap: onIncrement,
                       child: Container(
                         height: 40.h,
                         width: 40.w,
