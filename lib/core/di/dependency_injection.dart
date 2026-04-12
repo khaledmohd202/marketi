@@ -20,6 +20,8 @@ import 'package:marketi/features/home/presentation/view_model/categories/categor
 import 'package:marketi/features/home/presentation/view_model/products/products_cubit.dart';
 import 'package:marketi/features/product_details/data/repo/product_details_repo.dart';
 import 'package:marketi/features/product_details/presentation/view_model/product_details_cubit.dart';
+import 'package:marketi/features/search/data/repo/search_repo.dart';
+import 'package:marketi/features/search/presentation/view_model/search_cubit.dart';
 
 final GetIt sl = GetIt.instance;
 
@@ -34,6 +36,7 @@ Future<void> setupInjector() async {
   await _initCart();
   await _initFavorites();
   await _initProductDetails();
+  await _initSearch();
 }
 
 Future<void> _initCore() async {
@@ -94,4 +97,10 @@ Future<void> _initProductDetails() async {
   sl
     ..registerLazySingleton(() => ProductDetailsRepo(sl()))
     ..registerFactory(() => ProductDetailsCubit(sl()));
+}
+
+Future<void> _initSearch() async {
+  sl
+    ..registerLazySingleton(() => SearchRepo(sl()))
+    ..registerFactory(() => SearchCubit(sl()));
 }

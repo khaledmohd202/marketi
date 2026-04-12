@@ -143,7 +143,6 @@ class _CartViewState extends State<CartView> {
                     itemBuilder: (context, index) {
                       final product = cart.list[index];
 
-
                       return CartProductCard(
                         productId: product.id,
                         image: product.thumbnail,

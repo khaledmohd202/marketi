@@ -41,6 +41,7 @@ class HomeSearchBar extends StatelessWidget {
                 SizedBox(width: 10.w),
                 Expanded(
                   child: TextField(
+                    controller: controller,
                     textAlignVertical: TextAlignVertical.center,
                     decoration: InputDecoration(
                       hintText: 'What are you looking for ?',

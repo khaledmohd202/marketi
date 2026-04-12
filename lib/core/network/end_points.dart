@@ -13,6 +13,7 @@ class EndPoint {
   static String addToFavorites = 'user/addFavorite';
   static String deleteFromFavorites = 'user/deleteFavorite';
   static String productDetails = 'home/products';
+  static String search = 'home/productsFilter';
 }
 
 class ApiKey {
@@ -53,4 +54,6 @@ class ApiKey {
   static String profilePic = 'profilePic';
 
   static String productId = 'productId';
+
+  static String search = 'search';
 }

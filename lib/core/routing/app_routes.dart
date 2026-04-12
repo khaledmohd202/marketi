@@ -32,6 +32,7 @@ import 'package:marketi/features/onboarding/presentation/view/onboarding.dart';
 import 'package:marketi/features/product_details/presentation/view/product_details.dart';
 import 'package:marketi/features/product_details/presentation/view_model/product_details_cubit.dart';
 import 'package:marketi/features/profile/presentation/view/profile_view.dart';
+import 'package:marketi/features/search/presentation/view_model/search_cubit.dart';
 import 'package:marketi/features/search/presentation/views/search_view.dart';
 
 class AppRoutes {
@@ -175,7 +176,10 @@ class AppRoutes {
         );
       case search:
         return BaseRoutes(
-          page: const SearchView(),
+          page: BlocProvider(
+            create: (context) => sl<SearchCubit>(),
+            child: const SearchView(),
+          ),
         );
       case productDetails:
         final productId = args! as int;

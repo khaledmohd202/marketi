@@ -54,7 +54,7 @@ class _HomeBannerState extends State<HomeBanner> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10.h),
+      padding: EdgeInsets.only(bottom: 10.h),
       child: Column(
         children: [
           SizedBox(
@@ -68,12 +68,15 @@ class _HomeBannerState extends State<HomeBanner> {
               },
               itemCount: _bannerImages.length,
               itemBuilder: (context, index) {
-                return ClipRRect(
-                  borderRadius: BorderRadius.circular(15.r),
-                  child: Image.asset(
-                    _bannerImages[index],
-                    fit: BoxFit.cover,
-                    width: double.infinity,
+                return Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 5.w),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15.r),
+                    child: Image.asset(
+                      _bannerImages[index],
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                    ),
                   ),
                 );
               },
