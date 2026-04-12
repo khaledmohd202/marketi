@@ -46,6 +46,9 @@ class ProfileListTile extends StatelessWidget {
           icon: Icons.logout,
           title: 'Log Out',
           color: Colors.red,
+          // onTap: () async {
+          //   await AppLogout().logout();
+          // },
           onTap: () {},
           isToggle: false,
         ),

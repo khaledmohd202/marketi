@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:marketi/core/network/api_consumer.dart';
 import 'package:marketi/core/network/dio_consumer.dart';
@@ -40,9 +41,11 @@ Future<void> setupInjector() async {
 }
 
 Future<void> _initCore() async {
+  final navigatorKey = GlobalKey<NavigatorState>();
   sl
     ..registerLazySingleton(Dio.new)
-    ..registerLazySingleton<ApiConsumer>(() => DioConsumer(dio: sl()));
+    ..registerLazySingleton<ApiConsumer>(() => DioConsumer(dio: sl()))
+    ..registerSingleton<GlobalKey<NavigatorState>>(navigatorKey);
 }
 
 Future<void> _initSignUp() async {
