@@ -5,7 +5,7 @@ import 'package:marketi/features/cart/presentation/view/cart_view.dart';
 import 'package:marketi/features/favorites/presentation/view/favorites_view.dart';
 import 'package:marketi/features/home/presentation/view/home_view.dart';
 import 'package:marketi/features/main/presentation/widgets/bottom_nav_item.dart';
-import 'package:marketi/features/menu/presentation/view/menu_view.dart';
+import 'package:marketi/features/profile/presentation/view/profile_view.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key});
@@ -19,7 +19,8 @@ class _MainViewState extends State<MainView> {
     const HomeView(),
     const CartView(),
     const FavoritesView(),
-    const MenuView(),
+    // const MenuView(),
+    const ProfileView(showAppBar: false),
   ];
 
   int _currentIndex = 0;

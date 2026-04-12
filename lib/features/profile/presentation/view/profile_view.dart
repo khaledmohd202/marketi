@@ -4,14 +4,11 @@ import 'package:marketi/features/product_details/presentation/widgets/product_ap
 import 'package:marketi/features/profile/presentation/widgets/profile_header.dart';
 import 'package:marketi/features/profile/presentation/widgets/profile_list_tile.dart';
 
-class ProfileView extends StatefulWidget {
-  const ProfileView({super.key});
+class ProfileView extends StatelessWidget {
+  const ProfileView({this.showAppBar = true, super.key});
 
-  @override
-  State<ProfileView> createState() => _ProfileViewState();
-}
+  final bool showAppBar;
 
-class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,6 +18,7 @@ class _ProfileViewState extends State<ProfileView> {
             padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 10.h),
             child: Column(
               children: [
+                if(showAppBar)
                 const ProductAppBar(title: 'Profile'),
                 // SizedBox(height: 20.h),
                 const ProfileHeader(),
