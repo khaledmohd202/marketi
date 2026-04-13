@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:marketi/core/themes/colors/marketi_colors.dart';
+import 'package:marketi/core/theme/colors/marketi_colors.dart';
 
 class ProductImagesSlider extends StatefulWidget {
   const ProductImagesSlider({required this.images, super.key});

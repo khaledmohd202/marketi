@@ -3,13 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/core/common/widgets/favorites_icon.dart';
 import 'package:marketi/core/common/widgets/text_app.dart';
-import 'package:marketi/core/themes/colors/marketi_colors.dart';
-import 'package:marketi/core/themes/styles/marketi_text_styles.dart';
+import 'package:marketi/core/theme/colors/marketi_colors.dart';
+import 'package:marketi/core/theme/styles/marketi_text_styles.dart';
 import 'package:marketi/features/favorites/presentation/view_model/favorite_cubit.dart';
 
 class CartProductCard extends StatelessWidget {
   const CartProductCard({
-    required this.productId, required this.onDecrement,
+    required this.productId,
+    required this.onDecrement,
     required this.onDelete,
     required this.onIncrement,
     required this.quantity,
@@ -136,7 +137,7 @@ class CartProductCard extends StatelessWidget {
                   children: [
                     // Price
                     TextApp(
-                      text: 'Price:$price EGP',
+                      text: 'Price: $price EGP',
                       theme: MarketiTextStyles.textStyle12.copyWith(
                         fontWeight: FontWeight.bold,
                         color: MarketiColors.darkBlue900Color,

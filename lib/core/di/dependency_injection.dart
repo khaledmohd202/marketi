@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:marketi/core/network/api_consumer.dart';
 import 'package:marketi/core/network/dio_consumer.dart';
+import 'package:marketi/core/theme/cubit/theme_cubit.dart';
 import 'package:marketi/features/auth/data/repo/sign_in_repo.dart';
 import 'package:marketi/features/auth/data/repo/sign_up_repo.dart';
 import 'package:marketi/features/auth/data/repo/user_repo.dart';
@@ -45,6 +46,7 @@ Future<void> _initCore() async {
   sl
     ..registerLazySingleton(Dio.new)
     ..registerLazySingleton<ApiConsumer>(() => DioConsumer(dio: sl()))
+    ..registerLazySingleton<ThemeCubit>(ThemeCubit.new)
     ..registerSingleton<GlobalKey<NavigatorState>>(navigatorKey);
 }
 

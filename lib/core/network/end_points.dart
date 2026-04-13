@@ -56,4 +56,7 @@ class ApiKey {
   static String productId = 'productId';
 
   static String search = 'search';
+
+  static String isDarkMode = 'isDarkMode';
+  static String seenOnboarding = 'seenOnboarding';
 }

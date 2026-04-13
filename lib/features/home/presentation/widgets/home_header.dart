@@ -6,8 +6,8 @@ import 'package:marketi/core/const/icons/marketi_icons.dart';
 import 'package:marketi/core/const/images/marketi_images.dart';
 import 'package:marketi/core/extensions/navigation_extensions.dart';
 import 'package:marketi/core/routing/app_routes.dart';
-import 'package:marketi/core/themes/colors/marketi_colors.dart';
-import 'package:marketi/core/themes/styles/marketi_text_styles.dart';
+import 'package:marketi/core/theme/colors/marketi_colors.dart';
+import 'package:marketi/core/theme/styles/marketi_text_styles.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({super.key});

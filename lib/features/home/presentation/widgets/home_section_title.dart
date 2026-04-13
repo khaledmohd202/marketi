@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:marketi/core/common/widgets/text_app.dart';
-import 'package:marketi/core/themes/colors/marketi_colors.dart';
-import 'package:marketi/core/themes/styles/marketi_text_styles.dart';
+import 'package:marketi/core/theme/colors/marketi_colors.dart';
+import 'package:marketi/core/theme/styles/marketi_text_styles.dart';
 
 class HomeSectionTitle extends StatelessWidget {
   const HomeSectionTitle({

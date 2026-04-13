@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/core/extensions/navigation_extensions.dart';
+import 'package:marketi/core/network/end_points.dart';
 import 'package:marketi/core/routing/app_routes.dart';
-import 'package:marketi/core/themes/colors/marketi_colors.dart';
-import 'package:marketi/core/themes/styles/marketi_text_styles.dart';
+import 'package:marketi/core/services/cache/cache_helper.dart';
+import 'package:marketi/core/theme/colors/marketi_colors.dart';
+import 'package:marketi/core/theme/styles/marketi_text_styles.dart';
 import 'package:marketi/features/onboarding/data/model/onboarding_model.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -89,6 +91,7 @@ class _OnboardingState extends State<Onboarding> {
     return ElevatedButton(
       onPressed: () {
         if (currentIndex == onboardingList.length - 1) {
+          CacheHelper().saveData(key: ApiKey.seenOnboarding, value: true);
           context.pushNamedAndRemoveUntil(AppRoutes.signIn);
         } else {
           _pageController.nextPage(

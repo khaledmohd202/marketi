@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/core/const/images/marketi_images.dart';
-import 'package:marketi/core/themes/colors/marketi_colors.dart';
+import 'package:marketi/core/theme/colors/marketi_colors.dart';
 
 class HomeBanner extends StatefulWidget {
   const HomeBanner({super.key});

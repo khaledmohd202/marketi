@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/core/common/widgets/text_app.dart';
 import 'package:marketi/core/extensions/navigation_extensions.dart';
 import 'package:marketi/core/routing/app_routes.dart';
-import 'package:marketi/core/themes/colors/marketi_colors.dart';
-import 'package:marketi/core/themes/styles/marketi_text_styles.dart';
+import 'package:marketi/core/theme/colors/marketi_colors.dart';
+import 'package:marketi/core/theme/styles/marketi_text_styles.dart';
 import 'package:marketi/features/home/presentation/widgets/custom_view_all_app_bar.dart';
 
 class SuccessfulOrder extends StatelessWidget {

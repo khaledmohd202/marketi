@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/core/common/widgets/custom_circle_avatar.dart';
 import 'package:marketi/core/const/icons/marketi_icons.dart';
 import 'package:marketi/core/const/images/marketi_images.dart';
-import 'package:marketi/core/themes/styles/marketi_text_styles.dart';
+import 'package:marketi/core/theme/styles/marketi_text_styles.dart';
 
 class SearchAppBar extends StatelessWidget {
   const SearchAppBar({super.key});

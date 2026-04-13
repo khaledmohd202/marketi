@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/core/common/widgets/loading/loading_shimmer.dart';
-import 'package:marketi/core/themes/colors/marketi_colors.dart';
+import 'package:marketi/core/theme/colors/marketi_colors.dart';
 import 'package:marketi/features/home/presentation/view_model/brands/brands_cubit.dart';
 
 class HomeBrands extends StatelessWidget {

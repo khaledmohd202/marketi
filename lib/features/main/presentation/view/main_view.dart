@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:marketi/core/themes/colors/marketi_colors.dart';
+import 'package:marketi/core/theme/colors/marketi_colors.dart';
 import 'package:marketi/features/cart/presentation/view/cart_view.dart';
 import 'package:marketi/features/favorites/presentation/view/favorites_view.dart';
 import 'package:marketi/features/home/presentation/view/home_view.dart';

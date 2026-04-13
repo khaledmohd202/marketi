@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class MarketiColors {
-
   // Light Blue Colors
   static const Color lightBlue100Color = Color(0xFFD9E6FF);
   static const Color lightBlue200Color = Color(0xFFB2CCFF);
@@ -29,4 +28,7 @@ class MarketiColors {
   static const Color greyColor = Color(0xFF8C99B2);
   static const Color whiteColor = Color(0xFFFFFFFF);
   static const Color blackColor = Color(0xFF000000);
+
+  // Theme Colors.
+  static const Color backgroundColorDarkTheme = Color(0xFF0A0E1A);
 }
