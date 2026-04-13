@@ -89,13 +89,13 @@ Future<void> _initBrands() async {
 Future<void> _initCart() async {
   sl
     ..registerLazySingleton(() => CartRepo(sl()))
-    ..registerFactory(() => CartCubit(sl()));
+    ..registerLazySingleton(() => CartCubit(sl()));
 }
 
 Future<void> _initFavorites() async {
   sl
     ..registerLazySingleton(() => FavoriteRepo(sl()))
-    ..registerFactory(() => FavoriteCubit(sl()));
+    ..registerLazySingleton(() => FavoriteCubit(sl()));
 }
 
 Future<void> _initProductDetails() async {
