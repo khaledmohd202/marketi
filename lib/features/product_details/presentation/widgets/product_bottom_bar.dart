@@ -43,23 +43,6 @@ class ProductBottomBar extends StatelessWidget {
           // make the button size fit the content
           // without using the
           // GestureDetector => Container => Row => Icon + Text.
-          // ElevatedButton.icon(
-          //   onPressed: () {},
-          //   style: ElevatedButton.styleFrom(
-          //     backgroundColor: MarketiColors.lightBlue900Color,
-          //     minimumSize: Size(230.w, 50.h),
-          //     shape: RoundedRectangleBorder(
-          //       borderRadius: BorderRadius.circular(14.r),
-          //     ),
-          //   ),
-          //   icon: const Icon(Icons.shopping_cart_outlined, color: Colors.white),
-          //   label: TextApp(
-          //     text: 'Add to Cart',
-          //     theme: MarketiTextStyles.textStyle18.copyWith(
-          //       color: Colors.white,
-          //     ),
-          //   ),
-          // ),
           BlocBuilder<CartCubit, CartState>(
             builder: (context, cartState) {
               final cartCubit = context.read<CartCubit>();

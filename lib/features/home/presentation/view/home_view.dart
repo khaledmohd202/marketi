@@ -26,6 +26,20 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   final TextEditingController _controller = TextEditingController();
+
+  late final ProductsCubit productsCubit;
+  late final CategoriesCubit categoriesCubit;
+  late final BrandsCubit brandsCubit;
+
+  @override
+  void initState() {
+    super.initState();
+
+    productsCubit = sl<ProductsCubit>()..getAllProducts(limit: 9);
+    categoriesCubit = sl<CategoriesCubit>()..getAllCategories();
+    brandsCubit = sl<BrandsCubit>()..getAllBrands();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -48,83 +62,11 @@ class _HomeViewState extends State<HomeView> {
             const SliverToBoxAdapter(
               child: HomeBanner(),
             ),
-            // the first solution
-            // Popular Products
-            // SliverToBoxAdapter(
-            //   child: BlocProvider(
-            //     create: (context) =>
-            //         sl<ProductsCubit>()..getAllProducts(limit: 9),
-            //     child: Column(
-            //       children: [
-            //         // Popular Products
-            //         HomeSectionTitle(
-            //           sectionTitle: 'Popular Products',
-            //           onPressed: () =>
-            //               context.pushNamed(AppRoutes.popularProducts),
-            //         ),
-            //         const HomePopularProduct(),
-            //         // Categories
-            //         BlocProvider(
-            //         create: (_) => sl<CategoriesCubit>()..getAllCategories(),
-            //           child: Column(
-            //             children: [
-            //               HomeSectionTitle(
-            //                 sectionTitle: 'Categories',
-            //                 onPressed: () =>
-            //                     context.pushNamed(AppRoutes.categories),
-            //               ),
-            //               const HomeCategories(),
-            //             ],
-            //           ),
-            //         ),
-            //         // Best Product
-            //         HomeSectionTitle(
-            //           sectionTitle: 'Best For You',
-            //           onPressed: () =>
-            //               // context.pushNamed(AppRoutes.bestProducts),
-            //               context.pushNamed(AppRoutes.popularProducts),
-            //         ),
-            //         const HomeBestProduct(),
-
-            //         // Brands
-            //         BlocProvider(
-            //           create: (_) => sl<BrandsCubit>()..getAllBrands(),
-            //           child: Column(
-            //             children: [
-            //               HomeSectionTitle(
-            //                 sectionTitle: 'Brands',
-            //                 onPressed: () =>
-            //                     context.pushNamed(AppRoutes.brands),
-            //               ),
-            //               const HomeBrands(),
-            //             ],
-            //           ),
-            //         ),
-            //         // Buy Again
-            //         HomeSectionTitle(
-            //           sectionTitle: 'Buy Again',
-            //           onPressed: () =>
-            //               context.pushNamed(AppRoutes.popularProducts),
-            //           // context.pushNamed(AppRoutes.buyAgain),
-            //         ),
-            //         const HomeBuyAgain(),
-            //       ],
-            //     ),
-            //   ),
-            // ),
-
-
             // Popular Products
             // the second solution but we continued
             SliverToBoxAdapter(
-              child: BlocProvider(
-                create: (context) {
-                  final cubit = sl<ProductsCubit>();
-                  if (cubit.products.isEmpty) {
-                    cubit.getAllProducts(limit: 9);
-                  }
-                  return cubit;
-                },
+              child: BlocProvider.value(
+                value: productsCubit,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -141,14 +83,8 @@ class _HomeViewState extends State<HomeView> {
 
             // Categories
             SliverToBoxAdapter(
-              child: BlocProvider(
-                create: (context) {
-                  final cubit = sl<CategoriesCubit>();
-                  if (cubit.state is CategoriesInitial) {
-                    cubit.getAllCategories();
-                  }
-                  return cubit;
-                },
+              child: BlocProvider.value(
+                value: categoriesCubit,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -173,14 +109,8 @@ class _HomeViewState extends State<HomeView> {
                     onPressed: () =>
                         context.pushNamed(AppRoutes.popularProducts),
                   ),
-                  BlocProvider(
-                    create: (context) {
-                      final cubit = sl<ProductsCubit>();
-                      if (cubit.products.isEmpty) {
-                        cubit.getAllProducts(limit: 9);
-                      }
-                      return cubit;
-                    },
+                  BlocProvider.value(
+                    value: productsCubit,
                     child: const HomeBestProduct(),
                   ),
                 ],
@@ -189,14 +119,8 @@ class _HomeViewState extends State<HomeView> {
 
             // Brands
             SliverToBoxAdapter(
-              child: BlocProvider(
-                create: (context) {
-                  final cubit = sl<BrandsCubit>();
-                  if (cubit.state is BrandsInitial) {
-                    cubit.getAllBrands();
-                  }
-                  return cubit;
-                },
+              child: BlocProvider.value(
+                value: brandsCubit,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -220,14 +144,8 @@ class _HomeViewState extends State<HomeView> {
                     onPressed: () =>
                         context.pushNamed(AppRoutes.popularProducts),
                   ),
-                  BlocProvider(
-                    create: (context) {
-                      final cubit = sl<ProductsCubit>();
-                      if (cubit.products.isEmpty) {
-                        cubit.getAllProducts(limit: 9);
-                      }
-                      return cubit;
-                    },
+                  BlocProvider.value(
+                    value: productsCubit,
                     child: const HomeBuyAgain(),
                   ),
                 ],

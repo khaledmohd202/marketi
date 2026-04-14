@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/core/common/widgets/loading/loading_shimmer.dart';
-import 'package:marketi/core/const/images/marketi_images.dart';
 import 'package:marketi/core/extensions/navigation_extensions.dart';
 import 'package:marketi/core/routing/app_routes.dart';
 import 'package:marketi/features/cart/presentation/view_model/cart_cubit.dart';
@@ -189,52 +188,3 @@ class _CartViewState extends State<CartView> {
     );
   }
 }
-
-double get totalPrice {
-  return productPrices.fold(0, (sum, price) => sum + double.parse(price));
-}
-
-final List<String> productImages = [
-  MarketiImages.pampersCart1,
-  MarketiImages.pampersCart2,
-  MarketiImages.pampersCart3,
-  MarketiImages.pampersCart1,
-  MarketiImages.pampersCart2,
-  MarketiImages.pampersCart3,
-];
-
-final List<String> productNames = [
-  'Pampers Swaddlers Diapers',
-  'Seventh Generation Diapers',
-  'Pampers Swaddlers Diapers',
-  'Pampers Swaddlers Diapers',
-  'Seventh Generation Diapers',
-  'Pampers Swaddlers Diapers',
-];
-
-final List<String> productDescriptions = [
-  '84 Diapers',
-  '24 Diapers',
-  '152 Diapers',
-  '84 Diapers',
-  '24 Diapers',
-  '152 Diapers',
-];
-
-final List<String> productPrices = [
-  '345.00',
-  '88.00',
-  '599.00',
-  '345.00',
-  '88.00',
-  '599.00',
-];
-
-final List<String> productRatings = [
-  '4.9',
-  '4.6',
-  '4.6',
-  '4.9',
-  '4.6',
-  '4.6',
-];
