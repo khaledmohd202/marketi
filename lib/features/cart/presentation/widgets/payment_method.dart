@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/core/common/widgets/text_app.dart';
 import 'package:marketi/core/const/icons/marketi_icons.dart';
+import 'package:marketi/core/services/stripe/stripe_manager.dart';
 import 'package:marketi/core/theme/colors/marketi_colors.dart';
 import 'package:marketi/core/theme/styles/marketi_text_styles.dart';
 
@@ -31,7 +32,33 @@ class PaymentMethod extends StatelessWidget {
           ),
           const Spacer(),
           TextButton(
-            onPressed: () {},
+            onPressed: () async {
+              final result = await StripeManager.makePayment(
+                amount: 100,
+                currency: 'USD',
+              );
+
+              if (!context.mounted) return;
+
+              switch (result) {
+                case PaymentStatus.success:
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('✅ Payment Successful')),
+                  );
+                  return;
+                case PaymentStatus.canceled:
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('⚠️ Payment Canceled')),
+                  );
+                  return;
+
+                case PaymentStatus.failed:
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('❌ Payment Failed')),
+                  );
+                  return;
+              }
+            },
             child: TextApp(
               text: 'Change',
               theme: MarketiTextStyles.textStyle14.copyWith(

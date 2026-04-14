@@ -1,5 +1,6 @@
 class EndPoint {
   static String baseUrl = 'https://supermarket-dan1.onrender.com/api/v1/';
+  static String stripeBaseUrl = 'https://api.stripe.com/v1/payment_intents';
   static String signIn = 'auth/signIn';
   static String signUp = 'auth/signUp';
   static String userData = 'portfoilo/userData';
@@ -59,4 +60,10 @@ class ApiKey {
 
   static String isDarkMode = 'isDarkMode';
   static String seenOnboarding = 'seenOnboarding';
+  //
+  // ignore: lines_longer_than_80_chars
+  static String publishableKey = 'pk_test_51RwcgOJFVc1ydcS5DHyc6YyNneu9w6x0aHXDX1BvsfatOsdsutjWk0tNOwN2Lctad0uxNDGO3ZeJ6EqNdg1Nv2e400DYqIoEgu';
+  //
+  // ignore: lines_longer_than_80_chars
+  static String secretKey = 'sk_test_51RwcgOJFVc1ydcS5NHh9YatDfws5QhZbjlXaDngR635843GH3giGQd4gbYfB6Cfo5pRRDF2mWy5B59lUzQdM8KZo00PtiNU6zK';
 }

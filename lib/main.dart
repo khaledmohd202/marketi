@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:marketi/core/di/dependency_injection.dart';
 import 'package:marketi/core/network/end_points.dart';
 import 'package:marketi/core/routing/app_routes.dart';
@@ -14,6 +15,8 @@ void main() async {
   await CacheHelper().init();
 
   await setupInjector();
+
+  Stripe.publishableKey = ApiKey.publishableKey;
 
   final token = CacheHelper().getData(key: ApiKey.token);
 
@@ -34,8 +37,8 @@ void main() async {
     DeviceOrientation.portraitUp,
   ]).then((_) {
     runApp(
-       BlocProvider(
-        create:(_) => sl<ThemeCubit>(),
+      BlocProvider(
+        create: (_) => sl<ThemeCubit>(),
         child: MarketiApp(
           startRoute: startRoute,
         ),
