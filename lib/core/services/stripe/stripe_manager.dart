@@ -27,9 +27,9 @@ abstract class StripeManager {
 
       debugPrint('Stripe Error: ${e.error.localizedMessage}');
       return PaymentStatus.failed;
-      
+    //
+    // ignore: avoid_catches_without_on_clauses
     } catch (e) {
-
       debugPrint('Unexpected Error: $e');
       return PaymentStatus.failed;
     }

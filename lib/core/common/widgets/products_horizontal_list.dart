@@ -31,6 +31,7 @@ class ProductsHorizontalList extends StatelessWidget {
           return BlocBuilder<FavoriteCubit, FavoriteState>(
             builder: (context, state) {
               final favoriteCubit = context.read<FavoriteCubit>();
+
               final isFavorite = favoriteCubit.isInFavorites(
                 productId: products[index].id,
               );
@@ -54,38 +55,24 @@ class ProductsHorizontalList extends StatelessWidget {
                     : favoriteCubit.addToFavorites(
                         productId: products[index].id.toString(),
                       ),
-                // bottomAddWidget: _addButton(products, index),
                 bottomAddWidget: showAddToCartButton
-                    ? BlocConsumer<CartCubit, CartState>(
-                        listener: (context, cartState) {
-                          if (cartState is AddToCartSuccess) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(cartState.message),
-                                backgroundColor: Colors.green,
-                              ),
-                            );
-                          }
-                          if (cartState is AddToCartFailure) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(cartState.errorMessage),
-                                backgroundColor: Colors.red,
-                              ),
-                            );
-                          }
-                        },
+                    ? BlocBuilder<CartCubit, CartState>(
                         builder: (context, cartState) {
                           final cartCubit = context.read<CartCubit>();
                           final inCart = cartCubit.isInCart(
                             productId: products[index].id,
                           );
-                          final isLoading = cartState is AddToCartLoading;
+                          // final isLoading = cartState is AddToCartLoading;
+                          final isLoading =
+                              cartCubit.loadingProductId ==
+                              products[index].id.toString();
 
                           return Center(
                             child: ElevatedButton(
                               onPressed: (isLoading || inCart)
-                                  ? null
+                                  ? () => cartCubit.deleteFromCart(
+                                      productId: products[index].id.toString(),
+                                    )
                                   : () => cartCubit.addToCart(
                                       productId: products[index].id.toString(),
                                     ),
@@ -93,13 +80,13 @@ class ProductsHorizontalList extends StatelessWidget {
                                 minimumSize: Size(double.infinity, 35.h),
                                 foregroundColor: Colors.white,
                                 backgroundColor: inCart
-                                    ? Colors.grey
+                                    ? Colors.grey.withValues(alpha: 0.2)
                                     : MarketiColors.lightBlue700Color,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20.r),
                                   side: BorderSide(
                                     color: inCart
-                                        ? Colors.grey
+                                        ? Colors.grey.withValues(alpha: 0.2)
                                         : MarketiColors.lightBlue700Color,
                                     width: 2.w,
                                   ),

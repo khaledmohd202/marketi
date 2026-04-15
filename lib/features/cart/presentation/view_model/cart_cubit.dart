@@ -12,6 +12,8 @@ class CartCubit extends Cubit<CartState> {
 
   CartModel? cartModel;
 
+  String? loadingProductId;
+
   // Get all products in Cart.
   Future<void> getCart() async {
     emit(CartLoading());
@@ -33,22 +35,29 @@ class CartCubit extends Cubit<CartState> {
 
   // Add Product To Cart
   Future<void> addToCart({required String productId}) async {
+    loadingProductId = productId;
     emit(AddToCartLoading());
 
     final result = await repo.addToCart(productId: productId);
 
-    result.fold(
-      (errorMessage) => emit(
-        AddToCartFailure(errorMessage),
-      ),
-      (message) async {
-        emit(
-          AddToCartSuccess(message),
-        );
+    var isSuccess = false;
 
-        await getCart();
+    result.fold(
+      (errorMessage) {
+        loadingProductId = null;
+        emit(AddToCartFailure(errorMessage));
+      },
+      (message) {
+        loadingProductId = null;
+        emit(AddToCartSuccess(message));
+
+        isSuccess = true;
       },
     );
+
+    if (isSuccess) {
+      await getCart();
+    }
   }
 
   // Delete Product From Cart
