@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:marketi/core/common/toast/show_toast.dart';
 import 'package:marketi/core/common/widgets/loading/loading_shimmer.dart';
 import 'package:marketi/features/cart/presentation/widgets/cart_header.dart';
 import 'package:marketi/features/favorites/presentation/view_model/favorite_cubit.dart';
@@ -28,21 +29,11 @@ class _FavoritesViewState extends State<FavoritesView> {
         child: BlocConsumer<FavoriteCubit, FavoriteState>(
           listener: (context, state) {
             if (state is DeleteFromFavoritesSuccess) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.message),
-                  backgroundColor: Colors.green,
-                ),
-              );
+              ShowToast.showToastSuccessTop(message: state.message);
             }
 
             if (state is DeleteFromFavoritesFailure) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.errorMessage),
-                  backgroundColor: Colors.red,
-                ),
-              );
+              ShowToast.showToastErrorTop(message: state.errorMessage);
             }
           },
           builder: (context, state) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:marketi/core/common/toast/show_toast.dart';
 import 'package:marketi/features/cart/presentation/view_model/cart_cubit.dart';
 import 'package:marketi/features/product_details/presentation/view_model/product_details_cubit.dart';
 import 'package:marketi/features/product_details/presentation/widgets/product_app_bar.dart';
@@ -19,20 +20,10 @@ class ProductDetails extends StatelessWidget {
     return BlocListener<CartCubit, CartState>(
       listener: (context, state) {
         if (state is AddToCartSuccess) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(state.message),
-              backgroundColor: Colors.green,
-            ),
-          );
+          ShowToast.showToastSuccessTop(message: state.message);
         }
         if (state is AddToCartFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(state.errorMessage),
-              backgroundColor: Colors.red,
-            ),
-          );
+          ShowToast.showToastErrorTop(message: state.errorMessage);
         }
       },
       child: Scaffold(

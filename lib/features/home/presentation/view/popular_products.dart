@@ -121,25 +121,7 @@ class _PopularProductsState extends State<PopularProducts> {
                                     ),
                               //
                               // ignore: lines_longer_than_80_chars
-                              bottomAddWidget: BlocConsumer<CartCubit, CartState>(
-                                listener: (context, cartState) {
-                                  if (cartState is AddToCartSuccess) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(cartState.message),
-                                        backgroundColor: Colors.green,
-                                      ),
-                                    );
-                                  }
-                                  if (cartState is AddToCartFailure) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(cartState.errorMessage),
-                                        backgroundColor: Colors.red,
-                                      ),
-                                    );
-                                  }
-                                },
+                              bottomAddWidget: BlocBuilder<CartCubit, CartState>(
                                 builder: (context, cartState) {
                                   final cartCubit = context.read<CartCubit>();
                                   final inCart = cartCubit.isInCart(
@@ -151,7 +133,10 @@ class _PopularProductsState extends State<PopularProducts> {
                                   return Center(
                                     child: ElevatedButton(
                                       onPressed: (isLoading || inCart)
-                                          ? null
+                                          ? () => cartCubit.deleteFromCart(
+                                              productId: products[index].id
+                                                  .toString(),
+                                            )
                                           : () => cartCubit.addToCart(
                                               productId: products[index].id
                                                   .toString(),
@@ -162,17 +147,18 @@ class _PopularProductsState extends State<PopularProducts> {
                                           35.h,
                                         ),
                                         backgroundColor: inCart
-                                            ? Colors.grey
-                                            : Colors.white,
-                                        foregroundColor:
-                                            MarketiColors.lightBlue700Color,
+                                            ? Colors.grey.withValues(alpha: 0.2)
+                                            : MarketiColors.lightBlue700Color,
+                                        foregroundColor: Colors.white,
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(
                                             20.r,
                                           ),
                                           side: BorderSide(
                                             color: inCart
-                                                ? Colors.grey
+                                                ? Colors.grey.withValues(
+                                                    alpha: 0.2,
+                                                  )
                                                 : MarketiColors
                                                       .lightBlue700Color,
                                             width: 1.w,
@@ -184,7 +170,7 @@ class _PopularProductsState extends State<PopularProducts> {
                                               height: 18.h,
                                               width: 18.w,
                                               child:
-                                              const CircularProgressIndicator(
+                                                  const CircularProgressIndicator(
                                                     strokeWidth: 2,
                                                     color: Colors.white,
                                                   ),
@@ -220,6 +206,4 @@ class _PopularProductsState extends State<PopularProducts> {
       ),
     );
   }
-
-  
 }

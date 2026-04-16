@@ -2,18 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/core/common/widgets/loading/loading_shimmer.dart';
-import 'package:marketi/core/common/widgets/product_card.dart';
 import 'package:marketi/core/common/widgets/text_app.dart';
-import 'package:marketi/core/extensions/navigation_extensions.dart';
-import 'package:marketi/core/routing/app_routes.dart';
-import 'package:marketi/core/theme/colors/marketi_colors.dart';
 import 'package:marketi/core/theme/styles/marketi_text_styles.dart';
-import 'package:marketi/features/cart/presentation/view_model/cart_cubit.dart';
-import 'package:marketi/features/favorites/presentation/view_model/favorite_cubit.dart';
-import 'package:marketi/features/home/data/models/products/product_model.dart';
 import 'package:marketi/features/home/presentation/widgets/home_search_bar.dart';
 import 'package:marketi/features/search/presentation/view_model/search_cubit.dart';
 import 'package:marketi/features/search/presentation/widgets/search_app_bar.dart';
+import 'package:marketi/features/search/presentation/widgets/search_grid_view.dart';
 import 'package:marketi/features/search/presentation/widgets/search_text_field.dart';
 
 class SearchView extends StatefulWidget {
@@ -138,51 +132,7 @@ class _SearchViewState extends State<SearchView> {
                     if (state is SearchSuccess) {
                       final products = state.products.productsList;
 
-                      return GridView.builder(
-                        itemCount: products.length,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 5.w,
-                          crossAxisSpacing: 10.h,
-                          mainAxisExtent: 250.h,
-                        ),
-                        itemBuilder: (context, index) {
-                          return BlocBuilder<FavoriteCubit, FavoriteState>(
-                            builder: (context, favState) {
-                              final favCubit = context.read<FavoriteCubit>();
-                              final isFav = favCubit.isInFavorites(
-                                productId: products[index].id,
-                              );
-
-                              return ProductCard(
-                                name: products[index].title,
-                                price: products[index].price.toString(),
-                                rating: products[index].rating,
-                                image: products[index].thumbnail,
-                                selectedIcon: Icons.favorite,
-                                isFavorite: isFav,
-                                onFavoriteTap: () => isFav
-                                    ? favCubit.deleteFromFavorites(
-                                        productId: products[index].id
-                                            .toString(),
-                                      )
-                                    : favCubit.addToFavorites(
-                                        productId: products[index].id
-                                            .toString(),
-                                      ),
-                                onTap: () => context.pushNamed(
-                                  AppRoutes.productDetails,
-                                  arguments: products[index].id,
-                                ),
-                                bottomAddWidget: _addToCartButton(
-                                  products,
-                                  index,
-                                ),
-                              );
-                            },
-                          );
-                        },
-                      );
+                      return SearchGridView(products: products);
                     }
 
                     return const SizedBox.shrink();
@@ -193,78 +143,6 @@ class _SearchViewState extends State<SearchView> {
           ),
         ),
       ),
-    );
-  }
-
-  BlocConsumer<CartCubit, CartState> _addToCartButton(
-    List<ProductModel> products,
-    int index,
-  ) {
-    return BlocConsumer<CartCubit, CartState>(
-      listener: (context, cartState) {
-        if (cartState is AddToCartSuccess) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(
-            SnackBar(
-              content: Text(cartState.message),
-              backgroundColor: Colors.green,
-            ),
-          );
-        }
-        if (cartState is AddToCartFailure) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(
-            SnackBar(
-              content: Text(cartState.errorMessage),
-              backgroundColor: Colors.red,
-            ),
-          );
-        }
-      },
-      builder: (context, cartState) {
-        final cartCubit = context.read<CartCubit>();
-        final inCart = cartCubit.isInCart(
-          productId: products[index].id,
-        );
-        final isLoading = cartState is AddToCartLoading;
-
-        return Center(
-          child: ElevatedButton(
-            onPressed: (isLoading || inCart)
-                ? null
-                : () => cartCubit.addToCart(
-                    productId: products[index].id.toString(),
-                  ),
-            style: ElevatedButton.styleFrom(
-              minimumSize: Size(double.infinity, 35.h),
-              backgroundColor: inCart ? Colors.grey : Colors.white,
-              foregroundColor: MarketiColors.lightBlue700Color,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.r),
-                side: BorderSide(
-                  color: inCart ? Colors.grey : MarketiColors.lightBlue700Color,
-                  width: 1.w,
-                ),
-              ),
-            ),
-            child: isLoading
-                ? SizedBox(
-                    height: 18.h,
-                    width: 18.w,
-                    child: const CircularProgressIndicator(
-                      strokeWidth: 2,
-                      color: Colors.white,
-                    ),
-                  )
-                : TextApp(
-                    text: inCart ? 'Added ✓' : 'Add',
-                    theme: MarketiTextStyles.textStyle16,
-                  ),
-          ),
-        );
-      },
     );
   }
 }

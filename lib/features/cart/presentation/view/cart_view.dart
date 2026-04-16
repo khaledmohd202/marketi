@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:marketi/core/common/toast/show_toast.dart';
 import 'package:marketi/core/common/widgets/loading/loading_shimmer.dart';
 import 'package:marketi/core/extensions/navigation_extensions.dart';
 import 'package:marketi/core/routing/app_routes.dart';
@@ -51,21 +52,11 @@ class _CartViewState extends State<CartView> {
         child: BlocConsumer<CartCubit, CartState>(
           listener: (context, state) {
             if (state is DeleteFromCartSuccess) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.message),
-                  backgroundColor: Colors.green,
-                ),
-              );
+              ShowToast.showToastSuccessTop(message: state.message);
             }
 
             if (state is DeleteFromCartFailure) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.errorMessage),
-                  backgroundColor: Colors.red,
-                ),
-              );
+              ShowToast.showToastErrorTop(message: state.errorMessage);
             }
           },
           builder: (context, state) {

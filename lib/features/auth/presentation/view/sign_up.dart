@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:marketi/core/common/toast/show_toast.dart';
 import 'package:marketi/core/common/widgets/custom_elevated_button.dart';
 import 'package:marketi/core/common/widgets/text_app.dart';
 import 'package:marketi/core/const/icons/marketi_icons.dart';
@@ -58,14 +59,12 @@ class _SignUpState extends State<SignUp> {
     return BlocConsumer<SignUpCubit, SignUpState>(
       listener: (context, state) {
         if (state is SignUpSuccess) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            _successSnackBar(state, context),
+          ShowToast.showToastSuccessTop(
+            message: state.signUpResponseModel.message,
           );
           context.pushNamedAndRemoveUntil(AppRoutes.signIn);
         } else if (state is SignUpFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            _errorSnackBar(state, context),
-          );
+          ShowToast.showToastErrorTop(message: state.errorMessage);
         }
       },
       builder: (context, state) {
@@ -167,42 +166,6 @@ class _SignUpState extends State<SignUp> {
           ),
         );
       },
-    );
-  }
-
-  SnackBar _errorSnackBar(SignUpFailure state, BuildContext context) {
-    return SnackBar(
-      content: Text(
-        state.errorMessage,
-        style: const TextStyle(
-          color: Colors.red,
-        ),
-      ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20.r),
-      ),
-      margin: EdgeInsets.only(
-        bottom: MediaQuery.of(context).size.height - 150.h,
-        left: 50.w,
-        right: 50.w,
-      ),
-      backgroundColor: Colors.white,
-    );
-  }
-
-  SnackBar _successSnackBar(SignUpSuccess state, BuildContext context) {
-    return SnackBar(
-      content: Text(
-        state.signUpResponseModel.message,
-        style: const TextStyle(
-          color: Colors.white,
-        ),
-      ),
-      behavior: SnackBarBehavior.floating,
-      margin: EdgeInsets.only(
-        top: MediaQuery.of(context).size.height - 100.h,
-      ),
-      backgroundColor: MarketiColors.darkBlue100Color,
     );
   }
 

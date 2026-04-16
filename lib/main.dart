@@ -7,6 +7,8 @@ import 'package:marketi/core/network/end_points.dart';
 import 'package:marketi/core/routing/app_routes.dart';
 import 'package:marketi/core/services/cache/cache_helper.dart';
 import 'package:marketi/core/theme/cubit/theme_cubit.dart';
+import 'package:marketi/features/cart/presentation/view_model/cart_cubit.dart';
+import 'package:marketi/features/favorites/presentation/view_model/favorite_cubit.dart';
 import 'package:marketi/marketi.dart';
 
 void main() async {
@@ -37,8 +39,12 @@ void main() async {
     DeviceOrientation.portraitUp,
   ]).then((_) {
     runApp(
-      BlocProvider(
-        create: (_) => sl<ThemeCubit>(),
+      MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (_) => sl<ThemeCubit>()),
+          BlocProvider.value(value: sl<CartCubit>()),
+          BlocProvider.value(value: sl<FavoriteCubit>()),
+        ],
         child: MarketiApp(
           startRoute: startRoute,
         ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:marketi/core/common/toast/show_toast.dart';
 import 'package:marketi/core/common/widgets/text_app.dart';
 import 'package:marketi/core/const/icons/marketi_icons.dart';
 import 'package:marketi/core/services/stripe/stripe_manager.dart';
@@ -42,19 +43,26 @@ class PaymentMethod extends StatelessWidget {
 
               switch (result) {
                 case PaymentStatus.success:
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('✅ Payment Successful')),
+                  // ScaffoldMessenger.of(context).showSnackBar(
+                  //   const SnackBar(content: Text('✅ Payment Successful')),
+                  // );
+                  ShowToast.showToastSuccessTop(
+                    message: '✅ Payment Successful',
                   );
                   return;
                 case PaymentStatus.canceled:
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('⚠️ Payment Canceled')),
-                  );
+                  // ScaffoldMessenger.of(context).showSnackBar(
+                  //   const SnackBar(content: Text('⚠️ Payment Canceled')),
+                  // );
+                  ShowToast.showToastErrorTop(message: '⚠️ Payment Canceled');
                   return;
 
                 case PaymentStatus.failed:
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('❌ Payment Failed')),
+                  // ScaffoldMessenger.of(context).showSnackBar(
+                  //   const SnackBar(content: Text('❌ Payment Failed')),
+                  // );
+                  ShowToast.showToastErrorTop(
+                    message: '❌ Payment Failed',
                   );
                   return;
               }

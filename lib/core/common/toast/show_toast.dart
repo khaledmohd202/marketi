@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:marketi/core/theme/colors/marketi_colors.dart';
 
 class ShowToast {
   const ShowToast._();
@@ -28,7 +29,7 @@ class ShowToast {
     toastLength: Toast.LENGTH_LONG,
     gravity: ToastGravity.TOP,
     timeInSecForIosWeb: seconds ?? 3,
-    backgroundColor: Colors.green,
+    backgroundColor: MarketiColors.darkBlue100Color,
     textColor: Colors.white,
     fontSize: 16.sp,
   );
