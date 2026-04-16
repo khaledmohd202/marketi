@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:marketi/core/common/dialogs/custom_dialog.dart';
+import 'package:marketi/core/extensions/navigation_extensions.dart';
+import 'package:marketi/core/network/end_points.dart';
+import 'package:marketi/core/routing/app_routes.dart';
+import 'package:marketi/core/services/cache/cache_helper.dart';
 import 'package:marketi/features/profile/presentation/widgets/profile_tile_item.dart';
 
 class ProfileListTile extends StatelessWidget {
@@ -46,10 +51,28 @@ class ProfileListTile extends StatelessWidget {
           icon: Icons.logout,
           title: 'Log Out',
           color: Colors.red,
-          // onTap: () async {
-          //   await AppLogout().logout();
-          // },
-          onTap: () {},
+          onTap: () {
+            CustomDialog.twoButtonDialog(
+              context: context,
+              textBody: 'Are you sure to logout!!, We will miss you.',
+              textButton1: 'Yes',
+              textButton2: 'No',
+              onPressed: () async {
+                context.pop();
+
+                final navigator = Navigator.of(context);
+
+                await CacheHelper().removeData(key: ApiKey.token);
+
+                await navigator.pushNamedAndRemoveUntil(
+                  AppRoutes.signIn,
+                  (route) => false,
+                );
+              },
+              isLoading: false,
+            );
+          },
+          // onTap: () {},
           isToggle: false,
         ),
       ],

@@ -14,10 +14,11 @@ extension NavigationExtensions on BuildContext {
   Future<dynamic> pushNamedAndRemoveUntil(
     String routeName, {
     Object? arguments,
+    bool Function(Route<dynamic>)? predicate,
   }) {
     return Navigator.of(this).pushNamedAndRemoveUntil(
       routeName,
-      (route) => false,
+      predicate ?? (route) => false,
       arguments: arguments,
     );
   }
