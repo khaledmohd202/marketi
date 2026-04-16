@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:marketi/core/common/toast/show_toast.dart';
 import 'package:marketi/core/const/icons/marketi_icons.dart';
 
 class AuthenticationWithSocialMedia extends StatelessWidget {
@@ -14,17 +15,29 @@ class AuthenticationWithSocialMedia extends StatelessWidget {
       children: [
         IconButton(
           icon: Image.asset(MarketiIcons.googleIcon, scale: 0.85),
-          onPressed: () {},
+          onPressed: () {
+            ShowToast.showToastErrorTop(
+              message: 'Working on it, thanks 😊',
+            );
+          },
         ),
         SizedBox(width: 10.w),
         IconButton(
           icon: Image.asset(MarketiIcons.facebookIcon, scale: 0.85),
-          onPressed: () {},
+          onPressed: () {
+            ShowToast.showToastErrorTop(
+              message: 'Working on it, thanks 😊',
+            );
+          },
         ),
         SizedBox(width: 10.w),
         IconButton(
           icon: Image.asset(MarketiIcons.appleIcon, scale: 0.85),
-          onPressed: () {},
+          onPressed: () {
+            ShowToast.showToastErrorTop(
+              message: 'Working on it, thanks 😊',
+            );
+          },
         ),
       ],
     );
