@@ -33,9 +33,9 @@ Marketi is a modern e-commerce app that lets you browse products by categories a
 <table>
 <tr>
   <td><img width="200" src="https://raw.githubusercontent.com/khaledmohd202/marketi/main/assets/screenshots/Splash_Screen.png"/></td>
-  <td><img width="200" src="https://raw.githubusercontent.com/khaledmohd202/marketi/main/assets/screenshots/Onboarding_Screen_1.png"/></td>
-  <td><img width="200" src="https://raw.githubusercontent.com/khaledmohd202/marketi/main/assets/screenshots/Onboarding_Screen_2.png"/></td>
-  <td><img width="200" src="https://raw.githubusercontent.com/khaledmohd202/marketi/main/assets/screenshots/Onboarding_Screen_3.png"/></td>
+  <td><img width="200" src="https://raw.githubusercontent.com/khaledmohd202/marketi/main/assets/screenshots/Onboarding_Screen%201.png"/></td>
+  <td><img width="200" src="https://raw.githubusercontent.com/khaledmohd202/marketi/main/assets/screenshots/Onboarding_Screen%202.png"/></td>
+  <td><img width="200" src="https://raw.githubusercontent.com/khaledmohd202/marketi/main/assets/screenshots/Onboarding_Screen%203.png"/></td>
 </tr>
 <tr>
   <td>Splash Screen</td>
@@ -59,8 +59,8 @@ Marketi is a modern e-commerce app that lets you browse products by categories a
 
 <tr>
   <td><img width="200" src="https://raw.githubusercontent.com/khaledmohd202/marketi/main/assets/screenshots/Home.png"/></td>
-  <td><img width="200" src="https://raw.githubusercontent.com/khaledmohd202/marketi/main/assets/screenshots/Search_Page.png"/></td>
-  <td><img width="200" src="https://raw.githubusercontent.com/khaledmohd202/marketi/main/assets/screenshots/Product_Page.png"/></td>
+  <td><img width="200" src="https://raw.githubusercontent.com/khaledmohd202/marketi/main/assets/screenshots/Search%20Page.png"/></td>
+  <td><img width="200" src="https://raw.githubusercontent.com/khaledmohd202/marketi/main/assets/screenshots/Product%20Page.png"/></td>
   <td><img width="200" src="https://raw.githubusercontent.com/khaledmohd202/marketi/main/assets/screenshots/Cart.png"/></td>
 </tr>
 <tr>
