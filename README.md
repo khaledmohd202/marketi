@@ -32,10 +32,10 @@ Marketi is a modern e-commerce app that lets you browse products by categories a
 
 <table>
 <tr>
-  <td><img width="200" src="screenshots/splash.png"/></td>
-  <td><img width="200" src="screenshots/onboarding1.png"/></td>
-  <td><img width="200" src="screenshots/onboarding2.png"/></td>
-  <td><img width="200" src="screenshots/onboarding3.png"/></td>
+  <td><img width="200" src="https://raw.githubusercontent.com/khaledmohd202/marketi/main/assets/screenshots/Splash_Screen.png"/></td>
+  <td><img width="200" src="https://raw.githubusercontent.com/khaledmohd202/marketi/main/assets/screenshots/Onboarding_Screen_1.png"/></td>
+  <td><img width="200" src="https://raw.githubusercontent.com/khaledmohd202/marketi/main/assets/screenshots/Onboarding_Screen_2.png"/></td>
+  <td><img width="200" src="https://raw.githubusercontent.com/khaledmohd202/marketi/main/assets/screenshots/Onboarding_Screen_3.png"/></td>
 </tr>
 <tr>
   <td>Splash Screen</td>
@@ -45,10 +45,10 @@ Marketi is a modern e-commerce app that lets you browse products by categories a
 </tr>
 
 <tr>
-  <td><img width="200" src="screenshots/login.png"/></td>
-  <td><img width="200" src="screenshots/signup.png"/></td>
-  <td><img width="200" src="screenshots/forgot_password_email.png"/></td>
-  <td><img width="200" src="screenshots/verification.png"/></td>
+  <td><img width="200" src="https://raw.githubusercontent.com/khaledmohd202/marketi/main/assets/screenshots/Log_In.png"/></td>
+  <td><img width="200" src="https://raw.githubusercontent.com/khaledmohd202/marketi/main/assets/screenshots/Sign_Up.png"/></td>
+  <td><img width="200" src="https://raw.githubusercontent.com/khaledmohd202/marketi/main/assets/screenshots/Forgot_Password_With_Email.png"/></td>
+  <td><img width="200" src="https://raw.githubusercontent.com/khaledmohd202/marketi/main/assets/screenshots/Verification_Code_With_Email_2.png"/></td>
 </tr>
 <tr>
   <td>Login</td>
@@ -58,10 +58,10 @@ Marketi is a modern e-commerce app that lets you browse products by categories a
 </tr>
 
 <tr>
-  <td><img width="200" src="screenshots/home.png"/></td>
-  <td><img width="200" src="screenshots/search.png"/></td>
-  <td><img width="200" src="screenshots/product_details.png"/></td>
-  <td><img width="200" src="screenshots/cart.png"/></td>
+  <td><img width="200" src="https://raw.githubusercontent.com/khaledmohd202/marketi/main/assets/screenshots/Home.png"/></td>
+  <td><img width="200" src="https://raw.githubusercontent.com/khaledmohd202/marketi/main/assets/screenshots/Search_Page.png"/></td>
+  <td><img width="200" src="https://raw.githubusercontent.com/khaledmohd202/marketi/main/assets/screenshots/Product_Page.png"/></td>
+  <td><img width="200" src="https://raw.githubusercontent.com/khaledmohd202/marketi/main/assets/screenshots/Cart.png"/></td>
 </tr>
 <tr>
   <td>Home</td>
@@ -71,10 +71,10 @@ Marketi is a modern e-commerce app that lets you browse products by categories a
 </tr>
 
 <tr>
-  <td><img width="200" src="screenshots/favorites.png"/></td>
-  <td><img width="200" src="screenshots/categories.png"/></td>
-  <td><img width="200" src="screenshots/brands.png"/></td>
-  <td><img width="200" src="screenshots/profile.png"/></td>
+  <td><img width="200" src="https://raw.githubusercontent.com/khaledmohd202/marketi/main/assets/screenshots/Favorites_Page.png"/></td>
+  <td><img width="200" src="https://raw.githubusercontent.com/khaledmohd202/marketi/main/assets/screenshots/All_Categories_Page.png"/></td>
+  <td><img width="200" src="https://raw.githubusercontent.com/khaledmohd202/marketi/main/assets/screenshots/All_Brands_Page.png"/></td>
+  <td><img width="200" src="https://raw.githubusercontent.com/khaledmohd202/marketi/main/assets/screenshots/Profile_Page.png"/></td>
 </tr>
 <tr>
   <td>Favorites</td>
