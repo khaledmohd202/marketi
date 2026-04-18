@@ -100,7 +100,7 @@ class _FavoritesViewState extends State<FavoritesView> {
                 ),
                 SizedBox(height: 10.h),
                 Expanded(
-                  child: FavoritesGridView(favorites: favorites, cubit: cubit),
+                  child: FavoritesGridView(favorites: favorites),
                 ),
               ],
             );
