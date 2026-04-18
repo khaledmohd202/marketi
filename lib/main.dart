@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:marketi/core/di/dependency_injection.dart';
 import 'package:marketi/core/network/end_points.dart';
 import 'package:marketi/core/routing/app_routes.dart';
@@ -10,6 +12,7 @@ import 'package:marketi/core/theme/cubit/theme_cubit.dart';
 import 'package:marketi/features/cart/presentation/view_model/cart_cubit.dart';
 import 'package:marketi/features/favorites/presentation/view_model/favorite_cubit.dart';
 import 'package:marketi/marketi.dart';
+import 'package:path_provider/path_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,6 +20,14 @@ void main() async {
   await CacheHelper().init();
 
   await setupInjector();
+
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: kIsWeb
+        ? HydratedStorageDirectory.web
+        : HydratedStorageDirectory(
+            (await getApplicationDocumentsDirectory()).path,
+          ),
+  );
 
   Stripe.publishableKey = ApiKey.publishableKey;
 
