@@ -14,9 +14,9 @@ class MarketiApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ThemeCubit(),
-      child: BlocBuilder<ThemeCubit, ThemeMode>(
+      child: BlocBuilder<ThemeCubit, bool>(
         buildWhen: (previous, current) => previous != current,
-        builder: (context, state) {
+        builder: (context, isDark) {
           return ScreenUtilInit(
             designSize: const Size(375, 812),
             minTextAdapt: true,
@@ -24,7 +24,7 @@ class MarketiApp extends StatelessWidget {
               return MaterialApp(
                 title: 'Marketi',
                 debugShowCheckedModeBanner: false,
-                themeMode: state,
+                themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
                 theme: AppTheme.light,
                 darkTheme: AppTheme.dark,
                 initialRoute: startRoute,
